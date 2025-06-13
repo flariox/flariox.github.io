@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lion Linux OS - Una distribución Linux potente y elegante para todos los usuarios">
+    <meta name="keywords" content="Lion Linux, distribución Linux, sistema operativo, Linux, open source">
+    <meta name="author" content="Lion Linux Team">
+    
+    <title>Lion Linux OS | Potente. Elegante y Libre.</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="./assets/webfonts/css/all.css">
+    
+    <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <header class="main-header">
+        <nav class="navbar">
+            <a href="#" class="logo">
+                <img src="./assets/images/logo/logo.png" alt="Logo Lion Linux OS" class="logo-img"> Lion Linux OS
+            </a>
+            <button class="sidebar-toggle" aria-expanded="false" aria-controls="sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-list">
+                <li><a href="#about" class="nav-link"><i class="fas fa-info-circle"></i> Acerca de</a></li>
+                <li><a href="#features" class="nav-link"><i class="fas fa-star"></i> Características</a></li>
+                <li><a href="#download" class="nav-link"><i class="fas fa-download"></i> Descargar</a></li>
+                <li><a href="#screenshots" class="nav-link"><i class="fas fa-image"></i> Capturas</a></li>
+                <li><a href="#community" class="nav-link"><i class="fas fa-users"></i> Comunidad</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="sidebar-overlay"></div>
+    <aside id="sidebar" class="sidebar" aria-hidden="true">
+        <button class="close-sidebar"><i class="fas fa-times"></i></button>
+        <nav class="sidebar-nav">
+            <ul class="sidebar-list">
+                <li><a href="#about" class="sidebar-link"><i class="fas fa-info-circle"></i> Acerca de</a></li>
+                <li><a href="#features" class="sidebar-link"><i class="fas fa-star"></i> Características</a></li>
+                <li><a href="#download" class="sidebar-link"><i class="fas fa-download"></i> Descargar</a></li>
+                <li><a href="#screenshots" class="sidebar-link"><i class="fas fa-image"></i> Capturas</a></li>
+                <li><a href="#community" class="sidebar-link"><i class="fas fa-users"></i> Comunidad</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main>
+        <!-- Hero Section con Efectos y Botón de Scroll -->
+        <section class="hero">
+            <div class="particles" id="particles-js"></div>
+            <div class="container">
+                <h1>Lion Linux OS</h1>
+                <p class="subtitle">Potente. Elegante. Libre.</p>
+                <p class="hero-text">Una distribución Linux moderna diseñada para ofrecer rendimiento, estabilidad y una experiencia de usuario excepcional.</p>
+                <div class="hero-buttons">
+                    <a href="#download" class="cta-button">Descargar Ahora</a>
+                    <a href="#features" class="cta-button secondary">Ver Características</a>
+                </div>
+            </div>
+            <!-- Botón de desplazamiento hacia abajo -->
+            <div class="scroll-down">
+                    <a href="#about" class="scroll-down-btn" aria-label="Desplazarse hacia abajo">
+                        <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+        </section>
+
+        <!-- Acerca de -->
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title">Acerca de Lion Linux OS</h2>
+                <div class="about-grid">
+                    <div class="about-content">
+                        <p>Lion Linux OS es una distribución Linux basada en Arch Linux que combina potencia y elegancia. Diseñada tanto para principiantes como para usuarios avanzados, ofrece un entorno estable y personalizable con un enfoque en la experiencia de usuario.</p>
+                        
+                        <div class="about-features">
+                            <div class="feature-item">
+                                <i class="fas fa-bolt feature-icon"></i>
+                                <h3>Rápido</h3>
+                                <p>Optimizado para un rendimiento excepcional incluso en hardware modesto.</p>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-shield-alt feature-icon"></i>
+                                <h3>Seguro</h3>
+                                <p>Actualizaciones de seguridad regulares y protección integrada.</p>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-heart feature-icon"></i>
+                                <h3>Libre</h3>
+                                <p>Software de código abierto que respeta tu libertad.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-image">
+                        <img src="./assets/images/logo/logo.png" alt="Escritorio de Lion Linux OS">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Características -->
+        <section id="features" class="section services-section">
+            <div class="container">
+                <h2 class="section-title">Características Principales</h2>
+                <p class="section-subtitle">Descubre lo que hace especial a Lion Linux OS</p>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-desktop"></i>
+                        </div>
+                        <h3>Entorno de Escritorio</h3>
+                        <p>GNOME personalizado con extensiones útiles y un diseño limpio y moderno.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-box-open"></i>
+                        </div>
+                        <h3>Software Preinstalado</h3>
+                        <p>Todas las aplicaciones esenciales para productividad, multimedia y desarrollo.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <h3>Actualizaciones</h3>
+                        <p>Soporte a largo plazo con actualizaciones regulares de software y seguridad.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h3>Personalización</h3>
+                        <p>Temas, iconos y ajustes para adaptar el sistema a tu estilo.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-plug"></i>
+                        </div>
+                        <h3>Compatibilidad</h3>
+                        <p>Soporte para una amplia gama de hardware y controladores.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h3>Soporte</h3>
+                        <p>Comunidad activa y documentación detallada para ayudarte.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Equipo de Trabajo -->
+        <section id="team" class="section team-section">
+            <div class="container">
+                <h2 class="section-title">Nuestro Equipo</h2>
+                <p class="section-subtitle">Conoce a las personas detrás de Lion Linux OS</p>
+                
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-image">
+                            <img src="./assets/images/team/leonardo.jpg" alt="Miembro del equipo 1">
+                            <div class="member-social">
+                                <a href="#"><i class="fab fa-github"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <h3>Leonardo Gilberto Muñoz </h3>
+                        <p class="member-role">Líder del Proyecto</p>
+                        <p class="member-bio">Desarrollador principal con más de 10 años de experiencia en sistemas Linux y desarrollo de software.</p>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="member-image">
+                            <img src="./assets/images/team/edisbel.jpg" alt="Miembro del equipo 2">
+                            <div class="member-social">
+                                <a href="#"><i class="fab fa-github"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <h3>Edisbel Ramirez Lovatos</h3>
+                        <p class="member-role">Desarrollador, Diseñador UX/UI</p>
+                        <p class="member-bio">Especialista en experiencia de usuario e interfaces, encargada de hacer que Lion Linux sea intuitivo y hermoso.</p>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="member-image">
+                            <img src="./assets/images/team/kenneth.jpg" alt="Miembro del equipo 3">
+                            <div class="member-social">
+                                <a href="#"><i class="fab fa-github"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <h3>Kenneth Medina</h3>
+                        <p class="member-role">Desarollador</p>
+                        <p class="member-bio">Experto en optimización de sistemas y gestión de paquetes, asegurando que Lion Linux funcione perfectamente.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Descargas -->
+        <section id="download" class="section technologies-section">
+            <div class="container">
+                <h2 class="section-title">Descargar Lion Linux OS</h2>
+                <p class="section-subtitle">Elige la versión adecuada para ti</p>
+                
+                <div class="download-options">
+                    <div class="download-card">
+                        <div class="download-header">
+                            <h3>Lion Linux OS Standard</h3>
+                            <p>Para la mayoría de usuarios</p>
+                        </div>
+                        <div class="download-body">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Entorno GNOME completo</li>
+                                <li><i class="fas fa-check"></i> Suite de oficina</li>
+                                <li><i class="fas fa-check"></i> Navegador web</li>
+                                <li><i class="fas fa-check"></i> Reproductores multimedia</li>
+                                <li><i class="fas fa-check"></i> Herramientas gráficas</li>
+                            </ul>
+                        </div>
+                        <div class="download-footer">
+                            <a href="#" class="download-button">Descargar (64-bit)</a>
+                            <p>Tamaño: 2.8 GB</p>
+                        </div>
+                    </div>
+                    
+                    <div class="download-card featured">
+                        <div class="download-header">
+                            <h3>Lion Linux OS Minimal</h3>
+                            <p>Para usuarios que prefieren personalizar</p>
+                        </div>
+                        <div class="download-body">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Entorno GNOME básico</li>
+                                <li><i class="fas fa-check"></i> Navegador web</li>
+                                <li><i class="fas fa-check"></i> Gestor de archivos</li>
+                                <li><i class="fas fa-check"></i> Terminal</li>
+                                <li><i class="fas fa-check"></i> Gestor de paquetes</li>
+                            </ul>
+                        </div>
+                        <div class="download-footer">
+                            <a href="#" class="download-button">Descargar (64-bit)</a>
+                            <p>Tamaño: 1.5 GB</p>
+                        </div>
+                    </div>
+                    
+                    <div class="download-card">
+                        <div class="download-header">
+                            <h3>Lion Linux OS Developer</h3>
+                            <p>Para programadores y creadores</p>
+                        </div>
+                        <div class="download-body">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Todas las herramientas de Standard</li>
+                                <li><i class="fas fa-check"></i> IDEs y editores de código</li>
+                                <li><i class="fas fa-check"></i> Git y herramientas de control de versiones</li>
+                                <li><i class="fas fa-check"></i> Docker y contenedores</li>
+                                <li><i class="fas fa-check"></i> Compiladores y bibliotecas</li>
+                            </ul>
+                        </div>
+                        <div class="download-footer">
+                            <a href="#" class="download-button">Descargar (64-bit)</a>
+                            <p>Tamaño: 3.5 GB</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="system-requirements">
+                    <h3>Requisitos del sistema</h3>
+                    <ul>
+                        <li><i class="fas fa-microchip"></i> Procesador: 64-bit de 2 GHz o superior</li>
+                        <li><i class="fas fa-memory"></i> RAM: 2 GB mínimo (4 GB recomendado)</li>
+                        <li><i class="fas fa-hdd"></i> Almacenamiento: 25 GB de espacio libre</li>
+                        <li><i class="fas fa-tv"></i> Pantalla: 1024×768 resolución mínima</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Capturas de pantalla -->
+        <section id="screenshots" class="section projects-section">
+            <div class="container">
+                <h2 class="section-title">Capturas de Pantalla</h2>
+                <p class="section-subtitle">Echa un vistazo a Lion Linux OS en acción</p>
+                
+                <div class="screenshots-grid">
+                    <div class="screenshot-item">
+                        <img src="./assets/images/screenshots/desktop.png" alt="Escritorio Lion Linux">
+                        <p>Escritorio principal</p>
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="./assets/images/screenshots/desktop.png" alt="Aplicaciones Lion Linux">
+                        <p>Menú de aplicaciones</p>
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="./assets/images/screenshots/desktop.png" alt="Terminal Lion Linux">
+                        <p>Terminal personalizada</p>
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="./assets/images/screenshots/desktop.png" alt="Ajustes Lion Linux">
+                        <p>Centro de control</p>
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="./assets/images/screenshots/desktop.png" alt="Modo oscuro Lion Linux">
+                        <p>Modo oscuro</p>
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="./assets/images/screenshots/desktop.png" alt="Espacios de trabajo Lion Linux">
+                        <p>Espacios de trabajo</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comunidad -->
+        <section id="community" class="section contact-section">
+            <div class="container">
+                <h2 class="section-title">Únete a Nuestra Comunidad</h2>
+                <p class="section-subtitle">Conecta con otros usuarios y contribuidores</p>
+                
+                <div class="community-grid">
+                    <div class="community-info">
+                        <div class="info-item">
+                            <i class="fab fa-discord"></i>
+                            <div>
+                                <h3>Discord</h3>
+                                <p>Únete a nuestro servidor para chat en tiempo real</p>
+                                <a href="#" class="community-link">Unirse al Discord</a>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class="fab fa-github"></i>
+                            <div>
+                                <h3>GitHub</h3>
+                                <p>Contribuye al desarrollo del proyecto</p>
+                                <a href="#" class="community-link">Visitar GitHub</a>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class="fab fa-forumbee"></i>
+                            <div>
+                                <h3>Foro</h3>
+                                <p>Participa en discusiones y obtén ayuda</p>
+                                <a href="#" class="community-link">Visitar el Foro</a>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class="fab fa-wikipedia-w"></i>
+                            <div>
+                                <h3>Wiki</h3>
+                                <p>Documentación y guías para usuarios</p>
+                                <a href="#" class="community-link">Visitar la Wiki</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="newsletter-form">
+                        <h3>Suscríbete a nuestro boletín</h3>
+                        <p>Recibe las últimas noticias y actualizaciones sobre Lion Linux OS</p>
+                        <form id="newsletterForm">
+                            <div class="form-group">
+                                <input type="text" id="newsletter-name" name="name" placeholder="Tu nombre" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="email" id="newsletter-email" name="email" placeholder="Tu correo electrónico" required>
+                            </div>
+                            
+                            <button type="submit" class="submit-button"> Suscribirse <i class="fas fa-envelope"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <img src="./assets/images/logo/logo.png" alt="Lion Linux OS" class="footer-logo">
+                    <p>Una distribución Linux potente y elegante para todos los usuarios.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-reddit"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Lion Linux OS</h3>
+                    <ul>
+                        <li><a href="#about">Acerca de</a></li>
+                        <li><a href="#features">Características</a></li>
+                        <li><a href="#download">Descargar</a></li>
+                        <li><a href="#screenshots">Capturas</a></li>
+                        <li><a href="#community">Comunidad</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-resources">
+                    <h3>Recursos</h3>
+                    <ul>
+                        <li><a href="#">Documentación</a></li>
+                        <li><a href="#">Guía de instalación</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Roadmap</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-legal">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Licencia</a></li>
+                        <li><a href="#">Política de privacidad</a></li>
+                        <li><a href="#">Términos de uso</a></li>
+                        <li><a href="#">Código de conducta</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; <?php echo $current_year; ?> 2025 Lion Linux OS. Todos los derechos reservados.</p>
+                <p>Lion Linux OS ® es una marca registrada de Lion Linux OS Community.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón flotante de Telegram -->
+    <a href="https://t.me/lionosarch" class="telegram-float" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-telegram-plane"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="./assets/js/main.js"></script>
+</body>
+</html>
