@@ -1,4 +1,4 @@
-// Control del sidebar
+// Control del sidebar - versión corregida
 const toggleBtn = document.querySelector('.sidebar-toggle');
 const sidebar = document.querySelector('.sidebar');
 const overlay = document.querySelector('.sidebar-overlay');
@@ -7,19 +7,19 @@ const closeBtn = document.querySelector('.close-sidebar');
 toggleBtn.addEventListener('click', () => {
     const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
     toggleBtn.setAttribute('aria-expanded', !isExpanded);
-    sidebar.setAttribute('aria-hidden', isExpanded);
+    sidebar.classList.toggle('active', !isExpanded);
     overlay.classList.toggle('active', !isExpanded);
 });
 
 closeBtn.addEventListener('click', () => {
     toggleBtn.setAttribute('aria-expanded', 'false');
-    sidebar.setAttribute('aria-hidden', 'true');
+    sidebar.classList.remove('active');
     overlay.classList.remove('active');
 });
 
 overlay.addEventListener('click', () => {
     toggleBtn.setAttribute('aria-expanded', 'false');
-    sidebar.setAttribute('aria-hidden', 'true');
+    sidebar.classList.remove('active');
     overlay.classList.remove('active');
 });
 
@@ -27,7 +27,7 @@ overlay.addEventListener('click', () => {
 document.querySelectorAll('.sidebar-link').forEach(link => {
     link.addEventListener('click', () => {
         toggleBtn.setAttribute('aria-expanded', 'false');
-        sidebar.setAttribute('aria-hidden', 'true');
+        sidebar.classList.remove('active');
         overlay.classList.remove('active');
     });
 });
