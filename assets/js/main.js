@@ -31,6 +31,7 @@ document.querySelectorAll('.sidebar-link').forEach(link => {
         overlay.classList.remove('active');
     });
 });
+
 // Año actual
 document.getElementById('current-year').textContent = new Date().getFullYear();
 
