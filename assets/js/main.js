@@ -1,46 +1,34 @@
-// Control del sidebar - versión optimizada
 document.addEventListener('DOMContentLoaded', function() {
     const toggleBtn = document.querySelector('.sidebar-toggle');
     const sidebar = document.querySelector('.sidebar');
     const overlay = document.querySelector('.sidebar-overlay');
-    const closeBtn = document.querySelector('.close-sidebar');
-    const body = document.body;
     
-    // Función para abrir el sidebar
-    function openSidebar() {
-        sidebar.classList.add('active');
-        overlay.classList.add('active');
-        body.classList.add('sidebar-open');
-    }
-    
-    // Función para cerrar el sidebar
-    function closeSidebar() {
-        sidebar.classList.remove('active');
-        overlay.classList.remove('active');
-        body.classList.remove('sidebar-open');
+    // Función para alternar el sidebar
+    function toggleSidebar() {
+        sidebar.classList.toggle('active');
+        overlay.classList.toggle('active');
+        
+        // Bloquear el scroll del body cuando el sidebar está abierto
+        if (sidebar.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
     }
     
     // Event listeners
-    toggleBtn.addEventListener('click', openSidebar);
-    closeBtn.addEventListener('click', closeSidebar);
-    overlay.addEventListener('click', closeSidebar);
+    toggleBtn.addEventListener('click', toggleSidebar);
     
-    // Cerrar al hacer clic en enlaces del sidebar
+    // Cerrar sidebar al hacer clic en overlay o enlaces
+    overlay.addEventListener('click', toggleSidebar);
     document.querySelectorAll('.sidebar-link').forEach(link => {
-        link.addEventListener('click', closeSidebar);
+        link.addEventListener('click', toggleSidebar);
     });
     
     // Cerrar con la tecla ESC
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && sidebar.classList.contains('active')) {
-            closeSidebar();
-        }
-    });
-    
-    // Asegurar que se cierre al redimensionar (opcional)
-    window.addEventListener('resize', function() {
-        if (window.innerWidth > 768 && sidebar.classList.contains('active')) {
-            closeSidebar();
+            toggleSidebar();
         }
     });
 });
