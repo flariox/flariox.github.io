@@ -1,17 +1,19 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Control del sidebar
     const toggleBtn = document.querySelector('.sidebar-toggle');
     const sidebar = document.querySelector('.sidebar');
     const overlay = document.querySelector('.sidebar-overlay');
     const body = document.body;
     
-    // Función para abrir/cerrar el sidebar
+    // Función para alternar el sidebar
     function toggleSidebar() {
-        sidebar.classList.toggle('active');
+        const isOpen = sidebar.classList.toggle('active');
         overlay.classList.toggle('active');
         body.classList.toggle('sidebar-open');
+        toggleBtn.setAttribute('aria-expanded', isOpen);
         
         // Bloquear scroll cuando el sidebar está abierto
-        if (sidebar.classList.contains('active')) {
+        if (isOpen) {
             document.body.style.overflow = 'hidden';
         } else {
             document.body.style.overflow = '';
@@ -22,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
     toggleBtn.addEventListener('click', toggleSidebar);
     overlay.addEventListener('click', toggleSidebar);
     
-    // Cerrar sidebar al hacer clic en enlaces
+    // Cerrar al hacer clic en enlaces del sidebar
     document.querySelectorAll('.sidebar-link').forEach(link => {
         link.addEventListener('click', toggleSidebar);
     });
@@ -34,17 +36,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Cerrar sidebar al redimensionar la pantalla
+    // Cerrar sidebar al redimensionar si se vuelve a vista de escritorio
     window.addEventListener('resize', function() {
         if (window.innerWidth > 768 && sidebar.classList.contains('active')) {
             toggleSidebar();
         }
     });
+    
+    // Año actual
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    
+    // Mostrar botón WhatsApp después de 5 segundos
+    setTimeout(() => {
+        const whatsappBtn = document.querySelector('.whatsapp-float');
+        if (whatsappBtn) {
+            whatsappBtn.style.display = 'flex';
+        }
+    }, 5000);
 });
-// Año actual
-document.getElementById('current-year').textContent = new Date().getFullYear();
-
-// Mostrar botón WhatsApp después de 5 segundos
-setTimeout(() => {
-    document.querySelector('.whatsapp-float').style.display = 'flex';
-}, 5000);
