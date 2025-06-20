@@ -161,16 +161,6 @@ ul {
   color: var(--secondary-color);
 }
 
-.sidebar-toggle {
-  background: none;
-  border: none;
-  color: var(--text-color);
-  font-size: 1.5rem;
-  cursor: pointer;
-  display: none;
-  padding: 0.5rem;
-}
-
 /* Sidebar */
 
 /* Sidebar Styles */
