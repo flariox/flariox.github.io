@@ -2,13 +2,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const toggleBtn = document.querySelector('.sidebar-toggle');
     const sidebar = document.querySelector('.sidebar');
     const overlay = document.querySelector('.sidebar-overlay');
+    const body = document.body;
     
-    // Función para alternar el sidebar
+    // Función para abrir/cerrar el sidebar
     function toggleSidebar() {
         sidebar.classList.toggle('active');
         overlay.classList.toggle('active');
+        body.classList.toggle('sidebar-open');
         
-        // Bloquear el scroll del body cuando el sidebar está abierto
+        // Bloquear scroll cuando el sidebar está abierto
         if (sidebar.classList.contains('active')) {
             document.body.style.overflow = 'hidden';
         } else {
@@ -18,9 +20,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Event listeners
     toggleBtn.addEventListener('click', toggleSidebar);
-    
-    // Cerrar sidebar al hacer clic en overlay o enlaces
     overlay.addEventListener('click', toggleSidebar);
+    
+    // Cerrar sidebar al hacer clic en enlaces
     document.querySelectorAll('.sidebar-link').forEach(link => {
         link.addEventListener('click', toggleSidebar);
     });
@@ -28,6 +30,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Cerrar con la tecla ESC
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+            toggleSidebar();
+        }
+    });
+    
+    // Cerrar sidebar al redimensionar la pantalla
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768 && sidebar.classList.contains('active')) {
             toggleSidebar();
         }
     });
