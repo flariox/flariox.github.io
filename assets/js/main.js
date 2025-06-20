@@ -1,22 +1,20 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Control del sidebar
     const toggleBtn = document.querySelector('.sidebar-toggle');
     const sidebar = document.querySelector('.sidebar');
     const overlay = document.querySelector('.sidebar-overlay');
     const body = document.body;
     
+    // Función para abrir/cerrar el sidebar
     function toggleSidebar() {
         sidebar.classList.toggle('active');
         overlay.classList.toggle('active');
-        
-        // Alternar clase en el body
         body.classList.toggle('sidebar-open');
         
         // Bloquear scroll cuando el sidebar está abierto
         if (sidebar.classList.contains('active')) {
-            body.style.overflow = 'hidden';
+            document.body.style.overflow = 'hidden';
         } else {
-            body.style.overflow = '';
+            document.body.style.overflow = '';
         }
     }
     
@@ -24,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
     toggleBtn.addEventListener('click', toggleSidebar);
     overlay.addEventListener('click', toggleSidebar);
     
-    // Cerrar al hacer clic en enlaces del sidebar
+    // Cerrar sidebar al hacer clic en enlaces
     document.querySelectorAll('.sidebar-link').forEach(link => {
         link.addEventListener('click', toggleSidebar);
     });
@@ -36,12 +34,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Inicializar partículas (si es necesario)
-    if (typeof particlesJS !== 'undefined') {
-        particlesJS('particles-js', {
-            /* configuración de partículas */
-        });
-    }
+    // Cerrar sidebar al redimensionar la pantalla
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768 && sidebar.classList.contains('active')) {
+            toggleSidebar();
+        }
+    });
 });
 // Año actual
 document.getElementById('current-year').textContent = new Date().getFullYear();
