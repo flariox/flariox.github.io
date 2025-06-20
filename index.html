@@ -21,7 +21,7 @@
             <a href="#" class="logo">
                 <img src="./assets/images/logo/logo.png" alt="FlarioX" class="logo-img"> FlarioX
             </a>
-            <button class="sidebar-toggle" aria-label="Menú" aria-expanded="false">
+            <button class="sidebar-toggle" aria-expanded="false" aria-controls="sidebar">
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-list">
@@ -37,9 +37,7 @@
     <!-- Sidebar -->
     <div class="sidebar-overlay"></div>
     <aside id="sidebar" class="sidebar" aria-hidden="true">
-        <button class="close-sidebar" aria-label="Cerrar menú">
-            <i class="fas fa-times"></i>
-        </button>
+        <button class="close-sidebar"><i class="fas fa-times"></i></button>
         <nav class="sidebar-nav">
             <ul class="sidebar-list">
                 <li><a href="#about" class="sidebar-link"><i class="fas fa-info-circle"></i> Acerca de</a></li>
@@ -67,12 +65,12 @@
             </div>
             <!-- Botón de desplazamiento hacia abajo -->
             <div class="scroll-down">
-                <a href="#about" class="scroll-down-btn" aria-label="Desplazarse hacia abajo">
-                    <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </a>
-            </div>
+                    <a href="#about" class="scroll-down-btn" aria-label="Desplazarse hacia abajo">
+                        <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
         </section>
 
         <!-- Acerca de -->
@@ -172,62 +170,66 @@
                 <h2 class="section-title">Nuestro Equipo</h2>
                 <p class="section-subtitle">Conoce a las personas detrás de FlarioX</p>
                 
-                <div class="team-grid">
-                    <div class="team-member">
-                        <div class="member-image">
-                            <img src="./assets/images/team/leonardo.jpg" alt="Miembro del equipo 1">
-                            <div class="member-social">
-                                <a href="#"><i class="fab fa-github"></i></a>
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                <a href="#"><i class="fab fa-linkedin"></i></a>
-                            </div>
-                        </div>
-                        <h3>🇻🇪 Leonardo Gilberto Muñoz</h3>
-                        <p class="member-role">Líder del Proyecto</p>
-                        <p class="member-bio">Desarrollador principal con más de 10 años de experiencia en sistemas Linux y desarrollo de software.</p>
-                    </div>
+  <div class="team-grid">
+    <div class="team-member">
+        <div class="member-image">
+            <img src="./assets/images/team/leonardo.jpg" alt="Miembro del equipo 1">
+            <div class="member-social">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+        <h3>🇻🇪 Leonardo Gilberto Muñoz</h3>
+        <p class="member-role">Líder del Proyecto</p>
+        <p class="member-bio">Desarrollador principal con más de 10 años de experiencia en sistemas Linux y desarrollo de software.</p>
+    </div>
 
-                    <div class="team-member">
-                        <div class="member-image">
-                            <img src="./assets/images/team/edisbel.jpg" alt="Miembro del equipo 2">
-                            <div class="member-social">
-                                <a href="#"><i class="fab fa-github"></i></a>
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                <a href="#"><i class="fab fa-linkedin"></i></a>
-                            </div>
-                        </div>
-                        <h3>🇨🇺 Edisbel Ramirez Lovatos</h3>
-                        <p class="member-role">Desarrollador, Diseñador UX/UI</p>
-                        <p class="member-bio">Especialista en experiencia de usuario e interfaces, encargada de hacer que FlarioX sea intuitivo y hermoso.</p>
-                    </div>
+    <div class="team-member">
+        <div class="member-image">
+            <img src="./assets/images/team/edisbel.jpg" alt="Miembro del equipo 2">
+            <div class="member-social">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+        <h3>🇨🇺 Edisbel Ramirez Lovatos</h3>
+        <p class="member-role">Desarrollador, Diseñador UX/UI</p>
+        <p class="member-bio">Especialista en experiencia de usuario e interfaces, encargada de hacer que FlarioX sea intuitivo y hermoso.</p>
+    </div>
 
-                    <div class="team-member">
-                        <div class="member-image">
-                            <img src="./assets/images/team/kenneth.jpg" alt="Miembro del equipo 3">
-                            <div class="member-social">
-                                <a href="#"><i class="fab fa-github"></i></a>
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                <a href="#"><i class="fab fa-linkedin"></i></a>
-                            </div>
-                        </div>
-                        <h3>🇵🇷 Kenneth Medina</h3>
-                        <p class="member-role">Desarrollador</p>
-                        <p class="member-bio">Experto en optimización de sistemas y gestión de paquetes, asegurando que FlarioX funcione perfectamente.</p>
-                    </div>
+    <div class="team-member">
+        <div class="member-image">
+            <img src="./assets/images/team/kenneth.jpg" alt="Miembro del equipo 3">
+            <div class="member-social">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+        <h3>🇵🇷 Kenneth Medina</h3>
+        <p class="member-role">Desarrollador</p>
+        <p class="member-bio">Experto en optimización de sistemas y gestión de paquetes, asegurando que FlarioX funcione perfectamente.</p>
+    </div>
 
-                    <div class="team-member">
-                        <div class="member-image">
-                            <img src="./assets/images/team/williams.jpg" alt="Miembro del equipo 4">
-                            <div class="member-social">
-                                <a href="#"><i class="fab fa-github"></i></a>
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                <a href="#"><i class="fab fa-linkedin"></i></a>
-                            </div>
-                        </div>
-                        <h3>🇻🇪 Williams Alfredo Fandiño Gómez</h3>
-                        <p class="member-role">Desarrollador</p>
-                        <p class="member-bio">Especialista en experiencia de usuario e interfaces. Actualmente, ETE se encarga de la documentación del proyecto.</p>
-                    </div>
+    <div class="team-member">
+        <div class="member-image">
+            <img src="./assets/images/team/williams.jpg" alt="Miembro del equipo 4">
+            <div class="member-social">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+        <h3>🇻🇪 Williams Alfredo Fandiño Gómez</h3>
+        <p class="member-role">Desarrollador</p>
+        <p class="member-bio">Especialista en experiencia de usuario e interfaces. Actualmente, ETE se encarga de la documentación del proyecto.</p>
+    </div>
+</div>
+
+
+                    
                 </div>
             </div>
         </section>
@@ -461,7 +463,7 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; <span id="current-year">2025</span> FlarioX. Todos los derechos reservados.</p>
+                <p>&copy; <?php echo $current_year; ?> 2025 FlarioX. Todos los derechos reservados.</p>
                 <p>FlarioX ® es una marca registrada de FlarioX Community.</p>
             </div>
         </div>
