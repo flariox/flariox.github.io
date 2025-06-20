@@ -4,23 +4,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const sidebar = document.querySelector('.sidebar');
     const overlay = document.querySelector('.sidebar-overlay');
     const closeBtn = document.querySelector('.close-sidebar');
+    const body = document.body;
     
     // Función para abrir el sidebar
     function openSidebar() {
         sidebar.classList.add('active');
         overlay.classList.add('active');
-        toggleBtn.setAttribute('aria-expanded', 'true');
-        sidebar.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden'; // Previene el scroll del body
+        body.classList.add('sidebar-open');
     }
     
     // Función para cerrar el sidebar
     function closeSidebar() {
         sidebar.classList.remove('active');
         overlay.classList.remove('active');
-        toggleBtn.setAttribute('aria-expanded', 'false');
-        sidebar.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = ''; // Restaura el scroll del body
+        body.classList.remove('sidebar-open');
     }
     
     // Event listeners
@@ -36,6 +33,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Cerrar con la tecla ESC
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+            closeSidebar();
+        }
+    });
+    
+    // Asegurar que se cierre al redimensionar (opcional)
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768 && sidebar.classList.contains('active')) {
             closeSidebar();
         }
     });
