@@ -1,35 +1,39 @@
-// Control del sidebar
-const toggleBtn = document.querySelector('.sidebar-toggle');
-const sidebar = document.querySelector('.sidebar');
-const overlay = document.querySelector('.sidebar-overlay');
-const closeBtn = document.querySelector('.close-sidebar');
+document.addEventListener('DOMContentLoaded', function() {
+  const sidebar = document.querySelector('.sidebar');
+  const sidebarOverlay = document.querySelector('.sidebar-overlay');
+  const sidebarToggle = document.querySelector('.sidebar-toggle');
+  const closeSidebar = document.querySelector('.close-sidebar');
 
-toggleBtn.addEventListener('click', () => {
-    const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
-    toggleBtn.setAttribute('aria-expanded', !isExpanded);
-    sidebar.setAttribute('aria-hidden', isExpanded);
-    overlay.classList.toggle('active', !isExpanded);
-});
+  // Abrir sidebar
+  sidebarToggle.addEventListener('click', function() {
+    sidebar.classList.add('active');
+    sidebarOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevenir scroll
+  });
 
-closeBtn.addEventListener('click', () => {
-    toggleBtn.setAttribute('aria-expanded', 'false');
-    sidebar.setAttribute('aria-hidden', 'true');
-    overlay.classList.remove('active');
-});
+  // Cerrar sidebar
+  closeSidebar.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    sidebarOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+  });
 
-overlay.addEventListener('click', () => {
-    toggleBtn.setAttribute('aria-expanded', 'false');
-    sidebar.setAttribute('aria-hidden', 'true');
-    overlay.classList.remove('active');
-});
+  // Cerrar al hacer clic en overlay
+  sidebarOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    sidebarOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+  });
 
-// Cerrar al hacer clic en enlaces
-document.querySelectorAll('.sidebar-link').forEach(link => {
-    link.addEventListener('click', () => {
-        toggleBtn.setAttribute('aria-expanded', 'false');
-        sidebar.setAttribute('aria-hidden', 'true');
-        overlay.classList.remove('active');
+  // Cerrar al hacer clic en enlaces del sidebar
+  const sidebarLinks = document.querySelectorAll('.sidebar-link');
+  sidebarLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      sidebar.classList.remove('active');
+      sidebarOverlay.classList.remove('active');
+      document.body.style.overflow = '';
     });
+  });
 });
 
 // Año actual
