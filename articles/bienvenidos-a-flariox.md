@@ -5,7 +5,8 @@ date: "2025-06-25"
 author: "Williams Fandiño"
 ---
 
-# 👋 Bienvenidos a Flariox
+# 👋 Bienvenidos a Flariox :
+🎱
 
 Actualizar tu sistema operativo no solo te da acceso a nuevas funciones: también mejora la seguridad 🔒 y el rendimiento ⚡.  
 **Flariox** hace este proceso simple, ya sea visualmente o desde la terminal, según lo prefieras.
