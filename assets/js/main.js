@@ -45,6 +45,23 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+
+    //Cartel de aceptación de cookies
+    const cookieBanner = document.getElementById('cookie-banner');
+const acceptCookiesBtn = document.getElementById('accept-cookies');
+
+if (!localStorage.getItem('cookiesAccepted')) {
+  cookieBanner.classList.add('show');
+  cookieBanner.setAttribute('aria-hidden', 'false');
+}
+
+acceptCookiesBtn?.addEventListener('click', () => {
+  localStorage.setItem('cookiesAccepted', 'true');
+  cookieBanner.classList.remove('show');
+  cookieBanner.setAttribute('aria-hidden', 'true');
+});
+
+
     // Año dinámico en el footer
     const yearEl = document.getElementById('current-year');
     if (yearEl) {
