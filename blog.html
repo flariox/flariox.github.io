@@ -83,7 +83,6 @@
           if (!md.trim()) {
             blogContent.innerHTML = '<p style="color:orange">El artículo está vacío.</p>';
           } else {
-            console.log('Contenido cargado:', md);
             blogContent.innerHTML = marked.parse(md);
           }
           blogCards.style.display = 'none';
@@ -91,7 +90,6 @@
           window.scrollTo({ top: blogContent.offsetTop, behavior: 'smooth' });
         })
         .catch(err => {
-          console.error('Error al cargar el artículo:', err);
           blogContent.innerHTML = `<p style="color:red">Error: ${err.message}</p>`;
           blogContent.style.display = 'block';
         });
@@ -113,8 +111,7 @@
           });
         }
       } catch (error) {
-        console.error(error);
-        blogCards.innerHTML = `<p style="color:red">No se pudieron cargar las entradas del blog.</p>`;
+        blogCards.innerHTML = `<p style="color:red">Error al cargar entradas: ${error.message}</p>`;
       }
     }
 
@@ -180,7 +177,6 @@
   </style>
 </body>
 </html>
-
 
 
 
