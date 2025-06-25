@@ -1,3 +1,10 @@
+---
+title: "Bienvendios a Flariox"
+description: "Actualizar tu sistema operativo no solo te da acceso a nuevas funciones: también mejora la seguridad y el rendimiento."
+date: "2025-06-25"
+author: "Williams"
+---
+
 # Bienvendios a Flariox
 Actualizar tu sistema operativo no solo te da acceso a nuevas funciones: también mejora la seguridad y el rendimiento. Flariox hace este proceso simple, visual o por terminal, según lo prefieras.
 
