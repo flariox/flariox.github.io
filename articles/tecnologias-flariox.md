@@ -2,6 +2,7 @@
 title: "Tecnologías que dan vida a Flariox"
 description: "Explora el conjunto de herramientas y tecnologías que hacen posible el universo Flariox."
 date: "2025-06-30"
+author: "Edisbel Ramirez Lovatos"
 ---
 
 # Tecnologías que dan vida a Flariox
