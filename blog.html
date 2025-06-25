@@ -6,23 +6,23 @@
   <meta name="description" content="Blog de Flariox: Tutoriales, anuncios y novedades." />
   <title>Flariox | Blog</title>
 
-  <link rel="stylesheet" href="./assets/webfonts/css/all.css" />
-  <link rel="stylesheet" href="./assets/css/styles.css" />
+  <link rel="stylesheet" href="/assets/webfonts/css/all.css" />
+  <link rel="stylesheet" href="/assets/css/styles.css" />
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
   <header class="main-header">
     <nav class="navbar">
-      <a href="index.html" class="logo">
-        <img src="./assets/images/logo/logo.png" alt="Flariox" class="logo-img" />
+      <a href="/index.html" class="logo">
+        <img src="/assets/images/logo/logo.png" alt="Flariox" class="logo-img" />
         Flariox
       </a>
       <button class="sidebar-toggle"><i class="fas fa-bars"></i></button>
       <ul class="nav-list">
-        <li><a href="index.html#about" class="nav-link">Acerca de</a></li>
-        <li><a href="index.html#features" class="nav-link">Características</a></li>
-        <li><a href="index.html#download" class="nav-link">Descargar</a></li>
-        <li><a href="blog.html" class="nav-link active">Blog</a></li>
+        <li><a href="/index.html#about" class="nav-link">Acerca de</a></li>
+        <li><a href="/index.html#features" class="nav-link">Características</a></li>
+        <li><a href="/index.html#download" class="nav-link">Descargar</a></li>
+        <li><a href="/blog.html" class="nav-link active">Blog</a></li>
       </ul>
     </nav>
   </header>
@@ -44,7 +44,7 @@
   </footer>
 
   <script>
-    const ruta = './articles/';
+    const ruta = location.origin + '/articles/';
     const blogCards = document.getElementById('blog-cards');
     const blogContent = document.getElementById('blog-content');
 
@@ -177,6 +177,5 @@
   </style>
 </body>
 </html>
-
 
 
