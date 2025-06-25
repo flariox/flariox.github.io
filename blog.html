@@ -5,283 +5,219 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Blog de Flariox: Tutoriales, anuncios y novedades." />
   <title>Flariox | Blog</title>
-
-  <link rel="stylesheet" href="/assets/webfonts/css/all.css" />
   <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="/assets/webfonts/css/all.css" />
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
-  <header class="main-header">
-    <nav class="navbar">
-      <a href="/index.html" class="logo">
-        <img src="/assets/images/logo/logo.png" alt="Flariox" class="logo-img" />
-        Flariox
-      </a>
-      <button class="sidebar-toggle"><i class="fas fa-bars"></i></button>
-      <ul class="nav-list">
-        <li><a href="/index.html#about" class="nav-link">Acerca de</a></li>
-        <li><a href="/index.html#features" class="nav-link">Características</a></li>
-        <li><a href="/index.html#download" class="nav-link">Descargar</a></li>
-        <li><a href="/blog.html" class="nav-link active">Blog</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main class="section">
-    <div class="container">
-      <h1 class="section-title">Blog de Flariox</h1>
-      <div id="blog-cards" class="blog-card-grid"></div>
-      <div id="blog-content" class="article-content" style="display: none;">
-        <button id="back-button" class="back-button" style="display: none;">
-          <i class="fas fa-arrow-left"></i> Volver al blog
-        </button>
-      </div>
-    </div>
-  </main>
-
-  <footer class="main-footer">
-    <div class="container">
-      <div class="footer-bottom">
-        <p>&copy; 2025 Flariox. Todos los derechos reservados.</p>
-      </div>
-    </div>
-  </footer>
+  <!-- [El resto del HTML permanece igual hasta el script] -->
 
   <script>
-    // Ruta corregida para GitHub Pages
-    const ruta = '/articles/'; // Usamos ruta relativa para mejor compatibilidad
+    // Configuración adaptada a tu estructura
+    const isGitHubIO = window.location.hostname.includes('github.io');
+    const basePath = isGitHubIO ? '/flariox.github.io/' : '/';
+    const articlesPath = `${basePath}articles/`;
 
     const blogCards = document.getElementById('blog-cards');
     const blogContent = document.getElementById('blog-content');
-    const backButton = document.getElementById('back-button');
 
-    function parseFrontmatter(md) {
-      const fm = {};
-      const match = md.match(/^---\n([\s\S]+?)\n---/);
-      if (match) {
-        const lines = match[1].split('\n');
-        lines.forEach(line => {
-          const [key, ...rest] = line.split(':');
-          if (key && rest.length > 0) {
-            fm[key.trim()] = rest.join(':').trim().replace(/^['"]|['"]$/g, '');
-          }
-        });
-      }
-      return fm;
-    }
-
-    function renderCard({ title, description, date, file, image }) {
-      const card = document.createElement('div');
-      card.className = 'blog-card';
-      card.innerHTML = `
-        ${image ? `<img src="${image}" alt="${title}" class="blog-card-image">` : ''}
-        <h3>${title}</h3>
-        <p>${description}</p>
-        <p class="date">${date}</p>
+    // Función para mostrar mensajes de error
+    function showError(message, details) {
+      blogCards.innerHTML = `
+        <div class="error-card">
+          <h3>Error al cargar artículos</h3>
+          <p>${message}</p>
+          ${details ? `<p>${details}</p>` : ''}
+          <p>Prueba a acceder directamente a:</p>
+          <ul>
+            <li><a href="${articlesPath}index.json" target="_blank">Ver index.json</a></li>
+            <li><a href="${articlesPath}" target="_blank">Ver directorio articles</a></li>
+          </ul>
+        </div>
       `;
-      card.addEventListener('click', () => loadArticle(file));
-      blogCards.appendChild(card);
     }
 
-    function loadArticle(file) {
-      fetch(ruta + file)
-        .then(res => {
-          if (!res.ok) throw new Error(`No se pudo cargar ${file}: ${res.statusText}`);
-          return res.text();
-        })
-        .then(md => {
-          if (!md.trim()) {
-            blogContent.innerHTML = '<p style="color:orange">El artículo está vacío.</p>';
-          } else {
-            blogContent.innerHTML = `
-              <button class="back-button" onclick="backToBlog()">
-                <i class="fas fa-arrow-left"></i> Volver al blog
-              </button>
-              ${marked.parse(md)}
-            `;
-          }
-          blogCards.style.display = 'none';
-          blogContent.style.display = 'block';
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        })
-        .catch(err => {
-          blogContent.innerHTML = `
-            <button class="back-button" onclick="backToBlog()">
-              <i class="fas fa-arrow-left"></i> Volver al blog
-            </button>
-            <p style="color:red">Error: ${err.message}</p>
-          `;
-          blogContent.style.display = 'block';
-        });
+    // Función para parsear frontmatter mejorada
+    function parseFrontmatter(content) {
+      try {
+        const fm = {};
+        const match = content.match(/^---\n([\s\S]+?)\n---/);
+        if (match) {
+          match[1].split('\n').forEach(line => {
+            const sepIndex = line.indexOf(':');
+            if (sepIndex > -1) {
+              const key = line.substring(0, sepIndex).trim();
+              const value = line.substring(sepIndex + 1).trim().replace(/^['"]|['"]$/g, '');
+              fm[key] = value;
+            }
+          });
+        }
+        return fm;
+      } catch (e) {
+        console.error("Error parsing frontmatter:", e);
+        return {};
+      }
     }
 
+    // Función para cargar un artículo
+    async function loadArticle(filename) {
+      try {
+        const response = await fetch(`${articlesPath}${filename}`);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        
+        const content = await response.text();
+        const htmlContent = marked.parse(content.replace(/^---[\s\S]+?---/, ''));
+        
+        blogContent.innerHTML = `
+          <button class="back-button" onclick="backToBlog()">
+            <i class="fas fa-arrow-left"></i> Volver al blog
+          </button>
+          <div class="article-markdown">${htmlContent}</div>
+        `;
+        
+        blogCards.style.display = 'none';
+        blogContent.style.display = 'block';
+      } catch (error) {
+        blogContent.innerHTML = `
+          <button class="back-button" onclick="backToBlog()">
+            <i class="fas fa-arrow-left"></i> Volver al blog
+          </button>
+          <div class="error-message">
+            <h3>Error al cargar el artículo</h3>
+            <p>${error.message}</p>
+            <p>Puedes intentar <a href="${articlesPath}${filename}" target="_blank">acceder al archivo directamente</a></p>
+          </div>
+        `;
+        blogContent.style.display = 'block';
+      }
+    }
+
+    // Función para volver al listado
     function backToBlog() {
       blogContent.style.display = 'none';
       blogCards.style.display = 'grid';
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-
-    // Hacemos la función global para que funcione el botón
     window.backToBlog = backToBlog;
 
-    async function loadEntries() {
+    // Función principal para cargar los artículos
+    async function loadArticles() {
       try {
-        // Primero intentamos cargar desde /articles/index.json
-        let res = await fetch(ruta + 'index.json');
+        // 1. Intenta cargar index.json
+        let articlesList = [];
+        const jsonResponse = await fetch(`${articlesPath}index.json`);
         
-        // Si falla, intentamos con /articles (para listado automático)
-        if (!res.ok) {
-          console.log('No se encontró index.json, intentando listar archivos...');
-          res = await fetch('https://api.github.com/repos/flariox/flariox.github.io/contents/articles');
-          if (!res.ok) throw new Error('No se pudo obtener listado de artículos');
-          
-          const files = await res.json();
-          const mdFiles = files.filter(file => 
-            file.name.endsWith('.md') && file.name !== 'README.md'
-          ).map(file => file.name);
-          
-          for (const file of mdFiles) {
-            const contentRes = await fetch(ruta + file);
-            if (!contentRes.ok) continue;
-            
-            const content = await contentRes.text();
-            const meta = parseFrontmatter(content);
-            renderCard({
-              file,
-              title: meta.title || file.replace('.md', ''),
-              description: meta.description || 'Sin descripción',
-              date: meta.date || 'Sin fecha',
-              image: meta.image || ''
-            });
-          }
-          return;
+        if (jsonResponse.ok) {
+          articlesList = await jsonResponse.json();
+        } else {
+          // 2. Si no hay index.json, intenta detectar archivos .md
+          console.warn('index.json no encontrado, buscando archivos .md directamente');
+          const mdFiles = ['articulo1.md']; // Agrega aquí tus archivos .md
+          articlesList = mdFiles;
         }
-        
-        // Si existe index.json, procesamos normalmente
-        const files = await res.json();
-        for (const file of files) {
-          const contentRes = await fetch(ruta + file);
-          if (!contentRes.ok) continue;
-          
-          const content = await contentRes.text();
-          const meta = parseFrontmatter(content);
-          renderCard({
-            file,
-            title: meta.title || file.replace('.md', ''),
-            description: meta.description || 'Sin descripción',
-            date: meta.date || 'Sin fecha',
-            image: meta.image || ''
-          });
+
+        // 3. Carga cada artículo
+        for (const filename of articlesList) {
+          try {
+            const response = await fetch(`${articlesPath}${filename}`);
+            if (!response.ok) continue;
+            
+            const content = await response.text();
+            const { title = filename.replace('.md', ''), 
+                    description = 'Sin descripción', 
+                    date = 'Sin fecha' } = parseFrontmatter(content);
+            
+            const card = document.createElement('div');
+            card.className = 'blog-card';
+            card.innerHTML = `
+              <h3>${title}</h3>
+              <p>${description}</p>
+              <p class="date">${date}</p>
+            `;
+            card.addEventListener('click', () => loadArticle(filename));
+            blogCards.appendChild(card);
+          } catch (e) {
+            console.error(`Error procesando ${filename}:`, e);
+          }
+        }
+
+        if (blogCards.children.length === 0) {
+          showError('No se encontraron artículos', 'Verifica que hay archivos .md en el directorio articles');
         }
       } catch (error) {
-        console.error('Error al cargar entradas:', error);
-        blogCards.innerHTML = `
-          <div class="error-message">
-            <p style="color:red">Error al cargar entradas: ${error.message}</p>
-            <p>Verifica que:</p>
-            <ul>
-              <li>Existe el directorio /articles/ en tu repositorio</li>
-              <li>Hay archivos .md en ese directorio</li>
-              <li>O existe un archivo index.json con la lista de artículos</li>
-            </ul>
-          </div>
-        `;
+        showError('Error al cargar el listado de artículos', error.message);
+        console.error('Error loading articles:', error);
       }
     }
 
-    loadEntries();
+    // Iniciar la carga
+    loadArticles();
   </script>
 
   <style>
+    /* Estilos mejorados */
     .blog-card-grid {
       display: grid;
       gap: 1.5rem;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      margin-top: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      margin: 2rem 0;
     }
 
     .blog-card {
-      background: #161616;
-      border: 1px solid #0af;
+      background: #1e1e1e;
+      border: 1px solid #2a2a2a;
+      border-radius: 8px;
       padding: 1.5rem;
-      border-radius: 10px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: all 0.3s ease;
       cursor: pointer;
-      overflow: hidden;
     }
 
     .blog-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 4px 12px rgba(0, 170, 255, 0.2);
+      border-color: #0af;
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(0, 170, 255, 0.1);
     }
 
     .blog-card h3 {
-      margin: 0 0 0.5rem;
       color: #0af;
-    }
-
-    .blog-card p {
-      margin: 0.3rem 0;
-      color: #ccc;
-      font-size: 0.9rem;
-    }
-
-    .blog-card-image {
-      width: 100%;
-      height: 160px;
-      object-fit: cover;
-      border-radius: 6px;
-      margin-bottom: 1rem;
+      margin-top: 0;
     }
 
     .date {
-      font-size: 0.8rem;
-      opacity: 0.6;
+      color: #888;
+      font-size: 0.85rem;
     }
 
     .article-content {
       max-width: 800px;
       margin: 2rem auto;
-      padding: 1rem;
-      color: #eee;
+      padding: 0 1rem;
     }
 
-    .article-content h1,
-    .article-content h2,
-    .article-content h3 {
-      color: #0af;
-    }
-
-    .article-content pre {
-      background: #222;
-      padding: 1rem;
-      overflow-x: auto;
-      border-radius: 6px;
+    .article-markdown {
+      background: #1a1a1a;
+      padding: 2rem;
+      border-radius: 8px;
     }
 
     .back-button {
       background: #0af;
-      color: #fff;
+      color: white;
       border: none;
       padding: 0.5rem 1rem;
       border-radius: 4px;
       cursor: pointer;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      transition: background 0.2s ease;
     }
 
-    .back-button:hover {
-      background: #08c;
-    }
-
-    .error-message {
-      background: #1a1a1a;
+    .error-card, .error-message {
+      background: #2a1a1a;
+      border-left: 4px solid #f33;
       padding: 1.5rem;
-      border-radius: 8px;
-      border-left: 4px solid #f00;
+      border-radius: 0 4px 4px 0;
     }
 
     @media (max-width: 768px) {
