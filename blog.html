@@ -48,8 +48,9 @@
     const blogCards = document.getElementById('blog-cards');
     const blogContent = document.getElementById('blog-content');
     
-    // Cache para almacenar las tarjetas de artículos
-    let articlesCache = [];
+    // Cache para almacenar los datos de los artículos
+    let articlesData = [];
+    let currentArticle = null;
 
     // Mostrar estado de carga
     function showLoading() {
@@ -67,12 +68,9 @@
           <h3>Error al cargar los artículos</h3>
           <p>${message}</p>
           ${details && `<p>${details}</p>`}
-          <p>Puedes intentar:</p>
-          <ul>
-            <li>Recargar la página</li>
-            <li>Verificar tu conexión a internet</li>
-            <li><a href="${articlesPath}" target="_blank">Revisar los archivos en GitHub</a></li>
-          </ul>
+          <button onclick="loadArticles()" class="retry-button">
+            <i class="fas fa-sync-alt"></i> Reintentar
+          </button>
         </div>
       `;
     }
@@ -96,34 +94,39 @@
       return frontmatter;
     }
 
-    // Crear una tarjeta de artículo
-    function createArticleCard(article) {
-      const card = document.createElement('div');
-      card.className = 'blog-card';
-      card.innerHTML = `
-        <h3>${article.title}</h3>
-        <p>${article.description}</p>
-        <p class="date">${article.date}</p>
-      `;
-      card.addEventListener('click', () => loadArticle(article));
-      return card;
+    // Mostrar el listado de artículos
+    function showArticlesList() {
+      blogCards.innerHTML = '';
+      blogContent.style.display = 'none';
+      blogCards.style.display = 'grid';
+      
+      articlesData.forEach(article => {
+        const card = document.createElement('div');
+        card.className = 'blog-card';
+        card.innerHTML = `
+          <h3>${article.title}</h3>
+          <p>${article.description}</p>
+          <p class="date">${article.date}</p>
+        `;
+        card.addEventListener('click', () => showArticle(article.file));
+        blogCards.appendChild(card);
+      });
     }
 
-    // Cargar un artículo individual
-    async function loadArticle(article) {
+    // Mostrar un artículo específico
+    async function showArticle(filename) {
       try {
-        showLoading();
-        const response = await fetch(`${articlesPath}${article.file}`);
+        currentArticle = filename;
+        blogCards.innerHTML = '<div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> Cargando artículo...</div>';
         
-        if (!response.ok) {
-          throw new Error(`Error ${response.status}: ${response.statusText}`);
-        }
+        const response = await fetch(`${articlesPath}${filename}`);
+        if (!response.ok) throw new Error(`Error ${response.status}: ${response.statusText}`);
         
         const content = await response.text();
         const htmlContent = marked.parse(content.replace(/^---[\s\S]+?---/, ''));
         
         blogContent.innerHTML = `
-          <button class="back-button" onclick="backToBlog()">
+          <button class="back-button" onclick="showArticlesList()">
             <i class="fas fa-arrow-left"></i> Volver al blog
           </button>
           <div class="article-markdown">${htmlContent}</div>
@@ -134,34 +137,21 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } catch (error) {
         blogContent.innerHTML = `
-          <button class="back-button" onclick="backToBlog()">
+          <button class="back-button" onclick="showArticlesList()">
             <i class="fas fa-arrow-left"></i> Volver al blog
           </button>
           <div class="error-message">
             <h3>Error al cargar el artículo</h3>
             <p>${error.message}</p>
-            <p>Puedes intentar <a href="${articlesPath}${article.file}" target="_blank">acceder al artículo directamente</a></p>
+            <button onclick="showArticle('${filename}')" class="retry-button">
+              <i class="fas fa-sync-alt"></i> Reintentar
+            </button>
           </div>
         `;
+        blogCards.style.display = 'none';
         blogContent.style.display = 'block';
       }
     }
-
-    // Volver al listado de artículos
-    function backToBlog() {
-      blogContent.style.display = 'none';
-      blogCards.style.display = 'grid';
-      
-      // Restaurar las tarjetas desde la caché
-      if (articlesCache.length > 0) {
-        blogCards.innerHTML = '';
-        articlesCache.forEach(card => blogCards.appendChild(card));
-      } else {
-        // Si no hay caché, recargar los artículos
-        loadArticles();
-      }
-    }
-    window.backToBlog = backToBlog;
 
     // Cargar la lista de artículos
     async function loadArticles() {
@@ -188,9 +178,7 @@
         }
 
         // 3. Procesar cada artículo
-        blogCards.innerHTML = '';
-        articlesCache = [];
-        const loadedArticles = [];
+        articlesData = [];
         
         for (const filename of articlesList) {
           try {
@@ -200,30 +188,24 @@
             const content = await response.text();
             const frontmatter = parseFrontmatter(content);
             
-            const article = {
+            articlesData.push({
               file: filename,
               title: frontmatter.title || filename.replace('.md', ''),
               description: frontmatter.description || 'Sin descripción',
               date: frontmatter.date || 'Sin fecha'
-            };
-            
-            loadedArticles.push(article);
+            });
           } catch (e) {
             console.error(`Error procesando ${filename}:`, e);
           }
         }
 
         // Ordenar artículos por fecha (más reciente primero)
-        loadedArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
+        articlesData.sort((a, b) => new Date(b.date) - new Date(a.date));
         
-        // Crear y mostrar las tarjetas
-        loadedArticles.forEach(article => {
-          const card = createArticleCard(article);
-          blogCards.appendChild(card);
-          articlesCache.push(card.cloneNode(true)); // Guardar en caché
-        });
-
-        if (blogCards.children.length === 0) {
+        // Mostrar la lista de artículos
+        if (articlesData.length > 0) {
+          showArticlesList();
+        } else {
           showError('No se encontraron artículos', 'Verifica que hay archivos .md en el directorio articles');
         }
       } catch (error) {
@@ -232,8 +214,14 @@
       }
     }
 
-    // Iniciar la carga de artículos
-    loadArticles();
+    // Si estamos viendo un artículo al recargar la página
+    if (window.location.hash.startsWith('#article=')) {
+      const articleFile = window.location.hash.replace('#article=', '');
+      showArticle(articleFile);
+    } else {
+      // Iniciar la carga de artículos
+      loadArticles();
+    }
   </script>
 
   <style>
@@ -287,32 +275,6 @@
       line-height: 1.6;
     }
 
-    .article-markdown h1,
-    .article-markdown h2,
-    .article-markdown h3 {
-      color: #0af;
-      margin-top: 1.5em;
-      margin-bottom: 0.5em;
-    }
-
-    .article-markdown p {
-      margin-bottom: 1em;
-    }
-
-    .article-markdown pre {
-      background: #222;
-      padding: 1rem;
-      border-radius: 6px;
-      overflow-x: auto;
-    }
-
-    .article-markdown code {
-      font-family: monospace;
-      background: #222;
-      padding: 0.2em 0.4em;
-      border-radius: 3px;
-    }
-
     .back-button {
       background: #0af;
       color: white;
@@ -329,6 +291,24 @@
 
     .back-button:hover {
       background: #08c;
+    }
+
+    .retry-button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.2s ease;
+    }
+
+    .retry-button:hover {
+      background: #3e8e41;
     }
 
     .loading-spinner {
@@ -349,11 +329,6 @@
     .error-message h3 {
       color: #f77;
       margin-top: 0;
-    }
-
-    .error-message a {
-      color: #0af;
-      text-decoration: underline;
     }
 
     @media (max-width: 768px) {
