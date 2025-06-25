@@ -7,7 +7,7 @@ author: "Williams Fandiño"
 
 # 👋 Bienvenidos a Flariox
 
-Nunca a sido tan facil usar un sistema operativo Linux, tal como **Flariox** lo puede hacer 🤗 Y si estas leyendo esto quizas te estes preguntando ¿Y que es Flariox? **Flariox** es un sistema operativo basado en el nucleo Linu
+Nunca a sido tan facil usar un sistema operativo Linux, tal como **Flariox** lo puede hacer 🤗 Y si estas leyendo esto quizas te estes preguntando ¿Y que es Flariox? **Flariox** es un sistema operativo basado en el nucleo Linux
 ---
 
 ## 🖥️ Opción 1: Desde el centro de control
