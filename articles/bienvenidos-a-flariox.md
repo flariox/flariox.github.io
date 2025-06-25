@@ -1,4 +1,3 @@
-```markdown
 ---
 title: "Bienvenidos a Flariox"
 description: "Actualizar tu sistema operativo no solo te da acceso a nuevas funciones: también mejora la seguridad y el rendimiento."
