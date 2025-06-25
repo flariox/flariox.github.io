@@ -29,6 +29,20 @@
   <main class="section">
     <div class="container">
       <h1 class="section-title">Blog de Flariox</h1>
+      
+      <!-- Barra de búsqueda -->
+      <div class="search-container">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" id="search-input" placeholder="Buscar artículos..." />
+        </div>
+        <div class="search-filters">
+          <label><input type="checkbox" id="filter-title" checked /> Título</label>
+          <label><input type="checkbox" id="filter-description" checked /> Descripción</label>
+          <label><input type="checkbox" id="filter-date" /> Fecha</label>
+        </div>
+      </div>
+      
       <div id="blog-cards" class="blog-card-grid"></div>
       <div id="blog-content" class="article-content" style="display: none;"></div>
     </div>
@@ -47,6 +61,10 @@
     const articlesPath = 'https://raw.githubusercontent.com/flariox/flariox.github.io/main/articles/';
     const blogCards = document.getElementById('blog-cards');
     const blogContent = document.getElementById('blog-content');
+    const searchInput = document.getElementById('search-input');
+    const filterTitle = document.getElementById('filter-title');
+    const filterDescription = document.getElementById('filter-description');
+    const filterDate = document.getElementById('filter-date');
     
     // Cache para almacenar los datos de los artículos
     let articlesData = [];
@@ -94,13 +112,55 @@
       return frontmatter;
     }
 
-    // Mostrar el listado de artículos
+    // Filtrar artículos según la búsqueda
+    function filterArticles() {
+      const searchTerm = searchInput.value.toLowerCase();
+      const searchInTitle = filterTitle.checked;
+      const searchInDescription = filterDescription.checked;
+      const searchInDate = filterDate.checked;
+      
+      if (!searchTerm) {
+        return articlesData;
+      }
+      
+      return articlesData.filter(article => {
+        let matches = false;
+        
+        if (searchInTitle && article.title.toLowerCase().includes(searchTerm)) {
+          matches = true;
+        }
+        
+        if (!matches && searchInDescription && article.description.toLowerCase().includes(searchTerm)) {
+          matches = true;
+        }
+        
+        if (!matches && searchInDate && article.date.toLowerCase().includes(searchTerm)) {
+          matches = true;
+        }
+        
+        return matches;
+      });
+    }
+
+    // Mostrar el listado de artículos (filtrados o no)
     function showArticlesList() {
+      const filteredArticles = filterArticles();
+      
       blogCards.innerHTML = '';
       blogContent.style.display = 'none';
       blogCards.style.display = 'grid';
       
-      articlesData.forEach(article => {
+      if (filteredArticles.length === 0) {
+        blogCards.innerHTML = `
+          <div class="no-results">
+            <i class="fas fa-search"></i>
+            <p>No se encontraron artículos que coincidan con tu búsqueda</p>
+          </div>
+        `;
+        return;
+      }
+      
+      filteredArticles.forEach(article => {
         const card = document.createElement('div');
         card.className = 'blog-card';
         card.innerHTML = `
@@ -214,14 +274,14 @@
       }
     }
 
-    // Si estamos viendo un artículo al recargar la página
-    if (window.location.hash.startsWith('#article=')) {
-      const articleFile = window.location.hash.replace('#article=', '');
-      showArticle(articleFile);
-    } else {
-      // Iniciar la carga de artículos
-      loadArticles();
-    }
+    // Event listeners para el buscador
+    searchInput.addEventListener('input', showArticlesList);
+    filterTitle.addEventListener('change', showArticlesList);
+    filterDescription.addEventListener('change', showArticlesList);
+    filterDate.addEventListener('change', showArticlesList);
+
+    // Iniciar la carga de artículos
+    loadArticles();
   </script>
 
   <style>
@@ -273,6 +333,62 @@
       padding: 2rem;
       border-radius: 8px;
       line-height: 1.6;
+    }
+
+    .search-container {
+      margin: 2rem 0;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: #1e1e1e;
+      border-radius: 4px;
+      padding: 0.5rem 1rem;
+      border: 1px solid #2a2a2a;
+    }
+
+    .search-box i {
+      color: #888;
+      margin-right: 0.5rem;
+    }
+
+    .search-box input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: white;
+      outline: none;
+    }
+
+    .search-filters {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .search-filters label {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      cursor: pointer;
+      color: #ccc;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 2rem;
+      grid-column: 1 / -1;
+      color: #888;
+    }
+
+    .no-results i {
+      font-size: 2rem;
+      margin-bottom: 1rem;
     }
 
     .back-button {
@@ -338,6 +454,10 @@
       
       .article-markdown {
         padding: 1rem;
+      }
+      
+      .search-filters {
+        flex-wrap: wrap;
       }
     }
   </style>
