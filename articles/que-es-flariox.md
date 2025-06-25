@@ -2,6 +2,7 @@
 title: "¿Qué es Flariox?"
 description: "Una introducción clara al sistema operativo Flariox, su propósito y visión."
 date: "2025-06-26"
+author: "Edisbel Ramirez Lovatos"
 ---
 
 # ¿Qué es Flariox?
