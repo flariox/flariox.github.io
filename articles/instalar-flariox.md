@@ -2,6 +2,7 @@
 title: "Cómo instalar Flariox paso a paso"
 description: "Guía sencilla y visual para instalar Flariox en tu computadora."
 date: "2025-07-01"
+author: "Edisbel Ramirez Lovatos"
 ---
 
 # Cómo instalar Flariox paso a paso
