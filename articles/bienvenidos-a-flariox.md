@@ -1,8 +1,8 @@
 ---
 title: "Bienvenidos a Flariox"
-description: "Actualizar tu sistema operativo no solo te da acceso a nuevas funciones: también mejora la seguridad y el rendimiento."
+description: "Saludos a los nuevos usuarios de Flariox."
 date: "2025-06-25"
-author: "Williams"
+author: "Williams Fandiño"
 ---
 
 # 👋 Bienvenidos a Flariox
