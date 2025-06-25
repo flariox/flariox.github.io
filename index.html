@@ -412,75 +412,75 @@
         </section>
     </main>
 
-    <!-- Pie de página -->
-    <footer class="main-footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-about">
-                    <img src="./assets/images/logo/logo.png" alt="Lion Linux OS" class="footer-logo">
-                    <p>Una distribución Linux potente y elegante para todos los usuarios.</p>
-                    <div class="footer-social">
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-github"></i></a>
-                        <a href="#"><i class="fab fa-discord"></i></a>
-                        <a href="#"><i class="fab fa-reddit"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-links">
-                    <h3>Flariox</h3>
-                    <ul>
-                        <li><a href="#about">Acerca de</a></li>
-                        <li><a href="#features">Características</a></li>
-                        <li><a href="#download">Descargar</a></li>
-                        <li><a href="#screenshots">Capturas</a></li>
-                        <li><a href="#community">Comunidad</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-resources">
-                    <h3>Recursos</h3>
-                    <ul>
-                        <li><a href="#">Documentación</a></li>
-                        <li><a href="#">Guía de instalación</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Roadmap</a></li>
-                    </ul>
-                </div>
-    
-<div class="footer-legal" role="navigation" aria-label="Legal">
-  <h3>Legal</h3>
-  <ul>
-    <li><a href="#" data-modal="licencia" role="button">Licencia</a></li>
-    <li><a href="#" data-modal="privacidad" role="button">Política de privacidad</a></li>
-    <li><a href="#" data-modal="terminos" role="button">Términos de uso</a></li>
-    <li><a href="#" data-modal="conducta" role="button">Código de conducta</a></li>
-  </ul>
-</div>
-
-
-            
-            <div class="footer-bottom">
-                <p>&copy; <?php echo $current_year; ?> 2025 Flariox. Todos los derechos reservados.</p>
-                <p>Flariox ® es una marca registrada de Flariox Community.</p>
-            </div>
+<!-- Pie de página -->
+<footer class="main-footer">
+  <div class="container">
+    <div class="footer-grid">
+      
+      <div class="footer-about">
+        <img src="./assets/images/logo/logo.png" alt="Lion Linux OS" class="footer-logo">
+        <p>Una distribución Linux potente y elegante para todos los usuarios.</p>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-github"></i></a>
+          <a href="#"><i class="fab fa-discord"></i></a>
+          <a href="#"><i class="fab fa-reddit"></i></a>
         </div>
-    </footer>
+      </div>
 
-    <!-- Botón flotante de Telegram -->
-    <a href="https://t.me/flariox" class="telegram-float" target="_blank" rel="noopener noreferrer">
-        <i class="fab fa-telegram-plane"></i>
-    </a>
+      <div class="footer-links">
+        <h3>Flariox</h3>
+        <ul>
+          <li><a href="#about">Acerca de</a></li>
+          <li><a href="#features">Características</a></li>
+          <li><a href="#download">Descargar</a></li>
+          <li><a href="#screenshots">Capturas</a></li>
+          <li><a href="#community">Comunidad</a></li>
+        </ul>
+      </div>
 
-   
- <!-- Overlays -->
+      <div class="footer-resources">
+        <h3>Recursos</h3>
+        <ul>
+          <li><a href="#">Documentación</a></li>
+          <li><a href="#">Guía de instalación</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Roadmap</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-legal" role="navigation" aria-label="Legal">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="#" data-modal="licencia" role="button">Licencia</a></li>
+          <li><a href="#" data-modal="privacidad" role="button">Política de privacidad</a></li>
+          <li><a href="#" data-modal="terminos" role="button">Términos de uso</a></li>
+          <li><a href="#" data-modal="conducta" role="button">Código de conducta</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; <?php echo $current_year; ?> 2025 Flariox. Todos los derechos reservados.</p>
+      <p>Flariox ® es una marca registrada de Flariox Community.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Botón flotante de Telegram -->
+<a href="https://t.me/flariox" class="telegram-float" target="_blank" rel="noopener noreferrer">
+  <i class="fab fa-telegram-plane"></i>
+</a>
+
+<!-- Overlays -->
 <div class="modal-overlay" id="overlay-licencia"></div>
 <div class="modal-overlay" id="overlay-privacidad"></div>
 <div class="modal-overlay" id="overlay-terminos"></div>
 <div class="modal-overlay" id="overlay-conducta"></div>
 
-<!-- Modal: Licencia -->
+<!-- Modales Legales -->
 <div class="modal" id="modal-licencia">
   <div class="modal-content">
     <button class="modal-close" data-target="licencia">&times;</button>
@@ -489,7 +489,6 @@
   </div>
 </div>
 
-<!-- Modal: Política de Privacidad -->
 <div class="modal" id="modal-privacidad">
   <div class="modal-content">
     <button class="modal-close" data-target="privacidad">&times;</button>
@@ -498,7 +497,6 @@
   </div>
 </div>
 
-<!-- Modal: Términos de Uso -->
 <div class="modal" id="modal-terminos">
   <div class="modal-content">
     <button class="modal-close" data-target="terminos">&times;</button>
@@ -507,7 +505,6 @@
   </div>
 </div>
 
-<!-- Modal: Código de Conducta -->
 <div class="modal" id="modal-conducta">
   <div class="modal-content">
     <button class="modal-close" data-target="conducta">&times;</button>
@@ -515,15 +512,15 @@
     <p>Aquí va el contenido del código de conducta...</p>
   </div>
 </div>
-   
-     <!-- Scripts -->
-    <script src="./assets/js/main.js"></script>
 
-    <div id="cookie-banner" class="cookie-banner" aria-hidden="true">
+<!-- Banner de Cookies -->
+<div id="cookie-banner" class="cookie-banner" aria-hidden="true">
   <p>Este sitio utiliza cookies para mejorar tu experiencia. <a href="#">Saber más</a></p>
   <button id="accept-cookies" class="accept-button">Aceptar</button>
 </div>
 
+<!-- Scripts -->
+<script src="./assets/js/main.js"></script>
 </body>
 </html>
 
