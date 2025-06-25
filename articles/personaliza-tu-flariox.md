@@ -2,6 +2,7 @@
 title: "Personaliza tu Flariox"
 description: "Consejos y herramientas para adaptar Flariox a tu estilo personal"
 date: "2025-06-27"
+author: "Edisbel Ramirez Lovatos"
 ---
 
 # Personaliza tu Flariox
