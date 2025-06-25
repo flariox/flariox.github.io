@@ -1,10 +1,9 @@
 ---
-title: "Mi primer artículo"
-description: "Esta es una descripción del artículo"
-date: "2025-01-01"
-image: "/ruta/a/imagen.jpg"
+title: "Mi Primer Artículo"
+description: "Esta es una descripción de ejemplo"
+date: "2023-01-01"
 ---
 
-# Contenido del artículo
+# Título del Artículo
 
-Aquí va el contenido en markdown...
+Contenido en **Markdown** aquí...
