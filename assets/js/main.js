@@ -62,6 +62,52 @@ acceptCookiesBtn?.addEventListener('click', () => {
 });
 
 
+    // Abre el modal correspondiente
+function abrirModal(id) {
+  document.getElementById(`modal-${id}`).classList.add('show');
+  document.getElementById(`overlay-${id}`).classList.add('show');
+}
+
+// Cierra el modal correspondiente
+function cerrarModal(id) {
+  document.getElementById(`modal-${id}`).classList.remove('show');
+  document.getElementById(`overlay-${id}`).classList.remove('show');
+}
+
+// Listeners de los enlaces del footer
+document.querySelector('.footer-legal a[href*="Licencia"]')?.addEventListener('click', e => {
+  e.preventDefault();
+  abrirModal('licencia');
+});
+
+document.querySelector('.footer-legal a[href*="Política"]')?.addEventListener('click', e => {
+  e.preventDefault();
+  abrirModal('privacidad');
+});
+
+document.querySelector('.footer-legal a[href*="Términos"]')?.addEventListener('click', e => {
+  e.preventDefault();
+  abrirModal('terminos');
+});
+
+document.querySelector('.footer-legal a[href*="Código"]')?.addEventListener('click', e => {
+  e.preventDefault();
+  abrirModal('conducta');
+});
+
+// Cerrar modales al hacer clic en el botón de cierre o el overlay
+document.querySelectorAll('.modal-close').forEach(btn => {
+  btn.addEventListener('click', () => cerrarModal(btn.dataset.target));
+});
+
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', () => {
+    const id = overlay.id.replace('overlay-', '');
+    cerrarModal(id);
+  });
+});
+
+
     // Año dinámico en el footer
     const yearEl = document.getElementById('current-year');
     if (yearEl) {
