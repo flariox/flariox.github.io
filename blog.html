@@ -44,7 +44,8 @@
   </footer>
 
   <script>
-    const ruta = location.origin + '/articles/';
+    const ruta = location.origin + location.pathname.replace(/\/[^/]*$/, '') + '/articles/';
+
     const blogCards = document.getElementById('blog-cards');
     const blogContent = document.getElementById('blog-content');
 
