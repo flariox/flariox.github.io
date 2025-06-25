@@ -11,9 +11,9 @@
 </head>
 <body>
   <!-- Barra de navegación -->
-    <header class="main-header">
+  <header class="main-header">
     <nav class="navbar">
-        <a href="#" class="logo">
+        <a href="index.html" class="logo">
             <img src="./assets/images/logo/logo.png" alt="FlarioX" class="logo-img"> Flariox
         </a>
         <button class="sidebar-toggle" aria-expanded="false" aria-controls="sidebar">
@@ -25,14 +25,14 @@
             <li><a href="index.html#download" class="nav-link"><i class="fas fa-download"></i> Descargar</a></li>
             <li><a href="index.html#screenshots" class="nav-link"><i class="fas fa-image"></i> Capturas</a></li>
             <li><a href="index.html#community" class="nav-link"><i class="fas fa-users"></i> Comunidad</a></li>
-            <li><a href="blog.html" class="nav-link"><i class="fas fa-blog"></i> Blog</a></li>
+            <li><a href="blog.html" class="nav-link active"><i class="fas fa-blog"></i> Blog</a></li>
         </ul>
     </nav>
-</header>
+  </header>
 
-<!-- Sidebar -->
-<div class="sidebar-overlay"></div>
-<aside id="sidebar" class="sidebar" aria-hidden="true">
+  <!-- Sidebar -->
+  <div class="sidebar-overlay"></div>
+  <aside id="sidebar" class="sidebar" aria-hidden="true">
     <button class="close-sidebar"><i class="fas fa-times"></i></button>
     <nav class="sidebar-nav">
         <ul class="sidebar-list">
@@ -44,7 +44,7 @@
             <li><a href="blog.html" class="sidebar-link"><i class="fas fa-blog"></i> Blog</a></li>
         </ul>
     </nav>
-</aside>
+  </aside>
 
   <main class="section">
     <div class="container">
@@ -60,6 +60,7 @@
           <label><input type="checkbox" id="filter-title" checked /> Título</label>
           <label><input type="checkbox" id="filter-description" checked /> Descripción</label>
           <label><input type="checkbox" id="filter-date" /> Fecha</label>
+          <label><input type="checkbox" id="filter-author" /> Autor</label>
         </div>
       </div>
       
@@ -67,6 +68,7 @@
       <div id="blog-content" class="article-content" style="display: none;"></div>
     </div>
   </main>
+
   <script>
     // Configuración de rutas
     const articlesPath = 'https://raw.githubusercontent.com/flariox/flariox.github.io/main/articles/';
@@ -76,6 +78,7 @@
     const filterTitle = document.getElementById('filter-title');
     const filterDescription = document.getElementById('filter-description');
     const filterDate = document.getElementById('filter-date');
+    const filterAuthor = document.getElementById('filter-author');
     
     // Cache para almacenar los datos de los artículos
     let articlesData = [];
@@ -129,6 +132,7 @@
       const searchInTitle = filterTitle.checked;
       const searchInDescription = filterDescription.checked;
       const searchInDate = filterDate.checked;
+      const searchInAuthor = filterAuthor.checked;
       
       if (!searchTerm) {
         return articlesData;
@@ -146,6 +150,10 @@
         }
         
         if (!matches && searchInDate && article.date.toLowerCase().includes(searchTerm)) {
+          matches = true;
+        }
+        
+        if (!matches && searchInAuthor && article.author && article.author.toLowerCase().includes(searchTerm)) {
           matches = true;
         }
         
@@ -176,8 +184,14 @@
         card.className = 'blog-card';
         card.innerHTML = `
           <h3>${article.title}</h3>
-          <p>${article.description}</p>
-          <p class="date">${article.date}</p>
+          <p class="article-excerpt">${article.description}</p>
+          <div class="article-meta">
+            <span class="date"><i class="far fa-calendar-alt"></i> ${article.date}</span>
+            ${article.author ? `<span class="author"><i class="fas fa-user"></i> ${article.author}</span>` : ''}
+          </div>
+          <button class="read-more" onclick="event.stopPropagation(); showArticle('${article.file}')">
+            Leer más <i class="fas fa-arrow-right"></i>
+          </button>
         `;
         card.addEventListener('click', () => showArticle(article.file));
         blogCards.appendChild(card);
@@ -263,7 +277,8 @@
               file: filename,
               title: frontmatter.title || filename.replace('.md', ''),
               description: frontmatter.description || 'Sin descripción',
-              date: frontmatter.date || 'Sin fecha'
+              date: frontmatter.date || 'Sin fecha',
+              author: frontmatter.author || 'Equipo Flariox'
             });
           } catch (e) {
             console.error(`Error procesando ${filename}:`, e);
@@ -290,6 +305,7 @@
     filterTitle.addEventListener('change', showArticlesList);
     filterDescription.addEventListener('change', showArticlesList);
     filterDate.addEventListener('change', showArticlesList);
+    filterAuthor.addEventListener('change', showArticlesList);
 
     // Iniciar la carga de artículos
     loadArticles();
@@ -310,6 +326,8 @@
       padding: 1.5rem;
       transition: all 0.3s ease;
       cursor: pointer;
+      position: relative;
+      overflow: hidden;
     }
 
     .blog-card:hover {
@@ -321,16 +339,46 @@
     .blog-card h3 {
       color: #0af;
       margin-top: 0;
+      margin-bottom: 0.8rem;
     }
 
-    .blog-card p {
+    .article-excerpt {
       color: #ccc;
-      margin: 0.5rem 0;
+      margin: 0.5rem 0 1.2rem;
+      font-size: 0.95rem;
+      line-height: 1.5;
     }
 
-    .date {
-      color: #888;
+    .article-meta {
+      display: flex;
+      gap: 1rem;
+      margin: 1rem 0;
       font-size: 0.85rem;
+      color: #888;
+      flex-wrap: wrap;
+    }
+
+    .article-meta i {
+      margin-right: 0.3rem;
+    }
+
+    .read-more {
+      background: rgba(0, 170, 255, 0.1);
+      color: #0af;
+      border: 1px solid #0af;
+      border-radius: 4px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .read-more:hover {
+      background: rgba(0, 170, 255, 0.2);
+      transform: translateX(3px);
     }
 
     .article-content {
@@ -380,6 +428,7 @@
       gap: 1rem;
       margin-top: 0.5rem;
       font-size: 0.9rem;
+      flex-wrap: wrap;
     }
 
     .search-filters label {
@@ -473,276 +522,63 @@
     }
   </style>
 
-<!-- Pie de página -->
-<footer class="main-footer">
-  <div class="container">
-    <div class="footer-grid">
-      
-      <div class="footer-about">
-        <img src="./assets/images/logo/logo.png" alt="Lion Linux OS" class="footer-logo">
-        <p>Una distribución Linux potente y elegante para todos los usuarios.</p>
-        <div class="footer-social">
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="https://github.com/flariox/"><i class="fab fa-github"></i></a>
-          <a href="#"><i class="fab fa-discord"></i></a>
-          <a href="#"><i class="fab fa-reddit"></i></a>
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <div class="footer-about">
+          <img src="./assets/images/logo/logo.png" alt="FlarioX" class="footer-logo">
+          <p>Una distribución Linux potente y elegante para todos los usuarios.</p>
+          <div class="footer-social">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="https://github.com/flariox/"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-discord"></i></a>
+            <a href="#"><i class="fab fa-reddit"></i></a>
+          </div>
         </div>
+
+        <div class="footer-links">
+          <h3>Flariox</h3>
+          <ul>
+            <li><a href="index.html#about">Acerca de</a></li>
+            <li><a href="index.html#features">Características</a></li>
+            <li><a href="index.html#download">Descargar</a></li>
+            <li><a href="index.html#screenshots">Capturas</a></li>
+            <li><a href="index.html#community">Comunidad</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-resources">
+          <h3>Recursos</h3>
+          <ul>
+            <li><a href="#">Documentación</a></li>
+            <li><a href="#">Guía de instalación</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="#">Roadmap</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-legal" role="navigation" aria-label="Legal">
+          <h3>Legal</h3>
+          <ul>
+            <li><a href="#" data-modal="licencia" role="button">Licencia</a></li>
+            <li><a href="#" data-modal="privacidad" role="button">Política de privacidad</a></li>
+            <li><a href="#" data-modal="terminos" role="button">Términos de uso</a></li>
+            <li><a href="#" data-modal="conducta" role="button">Código de conducta</a></li>
+          </ul>
+        </div>
+
       </div>
 
-      <div class="footer-links">
-        <h3>Flariox</h3>
-        <ul>
-          <li><a href="index.html#about">Acerca de</a></li>
-          <li><a href="index.html#features">Características</a></li>
-          <li><a href="index.html#download">Descargar</a></li>
-          <li><a href="index.html#screenshots">Capturas</a></li>
-          <li><a href="index.html#community">Comunidad</a></li>
-        </ul>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Flariox. Todos los derechos reservados.</p>
+        <p>Flariox ® es una marca registrada de Flariox Community.</p>
       </div>
-
-      <div class="footer-resources">
-        <h3>Recursos</h3>
-        <ul>
-          <li><a href="#">Documentación</a></li>
-          <li><a href="#">Guía de instalación</a></li>
-          <li><a href="#">FAQ</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="#">Roadmap</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-legal" role="navigation" aria-label="Legal">
-        <h3>Legal</h3>
-        <ul>
-          <li><a href="#" data-modal="licencia" role="button">Licencia</a></li>
-          <li><a href="#" data-modal="privacidad" role="button">Política de privacidad</a></li>
-          <li><a href="#" data-modal="terminos" role="button">Términos de uso</a></li>
-          <li><a href="#" data-modal="conducta" role="button">Código de conducta</a></li>
-        </ul>
-      </div>
-
     </div>
+  </footer>
 
-    <div class="footer-bottom">
-      <p>&copy; <?php echo $current_year; ?> 2025 Flariox. Todos los derechos reservados.</p>
-      <p>Flariox ® es una marca registrada de Flariox Community.</p>
-    </div>
-  </div>
-</footer>
-
-<!-- Botón flotante de Telegram -->
-<a href="https://t.me/flariox" class="telegram-float" target="_blank" rel="noopener noreferrer">
-  <i class="fab fa-telegram-plane"></i>
-</a>
-
-<!-- Overlays -->
-<div class="modal-overlay" id="overlay-licencia"></div>
-<div class="modal-overlay" id="overlay-privacidad"></div>
-<div class="modal-overlay" id="overlay-terminos"></div>
-<div class="modal-overlay" id="overlay-conducta"></div>
-
-<!-- Modales Legales -->
-<div class="modal" id="modal-licencia">
-  <div class="modal-content">
-    <button class="modal-close" data-target="licencia">&times;</button>
-    <h2>Licencia</h2>
-    <div class="license-text">
-      <h3>LICENCIA PÚBLICA GENERAL GNU</h3>
-      <p><strong>Versión 3, 29 de junio de 2007</strong></p>
-
-      <p>Copyright © 2025 FlarioX Community<br>
-      Este programa es software libre: puede redistribuirlo y/o modificarlo<br>
-      bajo los términos de la Licencia Pública General GNU publicada por<br>
-      la Free Software Foundation, ya sea la versión 3 de la Licencia, o<br>
-      (a su elección) cualquier versión posterior.</p>
-
-      <h4>Preámbulo</h4>
-      <p>La Licencia Pública General GNU es una licencia de copyleft para software libre<br>
-      y otro tipo de trabajos. Esta versión ha sido actualizada para reflejar<br>
-      los estándares modernos de desarrollo de software libre y las necesidades<br>
-      específicas del proyecto FlarioX.</p>
-
-      <h4>Términos y Condiciones</h4>
-
-      <h5>1. Definiciones</h5>
-      <ul>
-        <li><strong>"Licencia"</strong> se refiere a la GNU GPL versión 3.</li>
-        <li><strong>"Programa"</strong> se refiere a cualquier trabajo con derechos de autor bajo esta licencia.</li>
-        <li><strong>"Versión modificada"</strong> significa cualquier trabajo derivado del Programa.</li>
-        <li><strong>"Distribuir"</strong> significa cualquier forma de hacer que el material esté disponible a terceros.</li>
-      </ul>
-
-      <h5>2. Derechos Básicos</h5>
-      <p>Usted tiene derecho a:</p>
-      <ul>
-        <li>Ejecutar el Programa sin restricciones</li>
-        <li>Estudiar y modificar el código fuente</li>
-        <li>Redistribuir copias exactas</li>
-        <li>Distribuir versiones modificadas</li>
-      </ul>
-
-      <h5>3. Requisitos para Distribución</h5>
-      <p>Al distribuir copias del Programa, debe:</p>
-      <ol type="a">
-        <li>Incluir el código fuente completo o ofrecer acceso al mismo</li>
-        <li>Mantener intactos todos los avisos de copyright</li>
-        <li>Proporcionar una copia de esta licencia</li>
-        <li>Preservar todos los avisos de ausencia de garantía</li>
-      </ol>
-
-      <h5>4. Versiones Modificadas</h5>
-      <p>Si modifica el Programa, debe:</p>
-      <ol type="a">
-        <li>Identificar claramente los cambios realizados</li>
-        <li>Licenciar el trabajo completo bajo los términos de esta licencia</li>
-        <li>Incluir un aviso destacado de las modificaciones y la fecha</li>
-        <li>Conservar los mecanismos de interoperabilidad con el software original</li>
-      </ol>
-
-      <h5>5. Compatibilidad con Otras Licencias</h5>
-      <p>FlarioX permite enlazado con:</p>
-      <ul>
-        <li>Bibliotecas licenciadas bajo GNU LGPL</li>
-        <li>Componentes bajo licencias Apache 2.0, MIT o BSD</li>
-        <li>Software con licencias compatibles con GPLv3</li>
-      </ul>
-
-      <h5>6. Limitación de Responsabilidad</h5>
-      <p>NO HAY GARANTÍA PARA EL PROGRAMA, EN LA MEDIDA PERMITIDA POR LA LEY<br>
-      APLICABLE. EL PROGRAMA SE PROPORCIONA "TAL CUAL" SIN GARANTÍAS DE NINGÚN TIPO,<br>
-      INCLUYENDO LAS GARANTÍAS IMPLÍCITAS DE COMERCIALIZACIÓN E IDONEIDAD PARA UN<br>
-      PROPÓSITO PARTICULAR.</p>
-
-      <h5>7. Cláusulas Específicas de FlarioX</h5>
-      <ol type="a">
-        <li><strong>Atribución:</strong> Las distribuciones deben reconocer adecuadamente a FlarioX Community</li>
-        <li><strong>Marcas Registradas:</strong> El nombre "FlarioX" es una marca registrada que no puede usarse para promocionar versiones modificadas sin permiso</li>
-        <li><strong>Integridad:</strong> Las modificaciones no deben comprometer la seguridad o estabilidad del sistema</li>
-        <li><strong>Documentación:</strong> Los cambios significativos deben documentarse en el archivo CHANGELOG</li>
-      </ol>
-
-      <h5>8. Aceptación de la Licencia</h5>
-      <p>Al usar, modificar o distribuir FlarioX, usted acepta los términos de esta licencia.<br>
-      Si no está de acuerdo con estos términos, no puede usar ni distribuir el software.</p>
-
-      <h4>Texto Completo</h4>
-      <p>Para consultar el texto legal completo de la GNU GPLv3 en español:<br>
-      <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank">https://www.gnu.org/licenses/gpl-3.0.html</a></p>
-
-      <h4>Contacto</h4>
-      <p>Para preguntas sobre esta licencia o permisos especiales:<br>
-      <a href="mailto:support@flariox.com">support@flariox.com</a></p>
-    </div>
-  </div>
-</div>
-
-<div class="modal" id="modal-privacidad">
-  <div class="modal-content">
-    <button class="modal-close" data-target="privacidad">&times;</button>
-    <h2>Política de Privacidad</h2>
-    <div class="policy-text">
-      <h3>Política de Privacidad de FlarioX</h3>
-      <p><strong>Última actualización:</strong> 25 de junio de 2025</p>
-      
-      <h4>1. Información que recopilamos</h4>
-      <p>Recopilamos información cuando:</p>
-      <ul>
-        <li>Te registras en nuestro sitio o foros</li>
-        <li>Descargas nuestras distribuciones</li>
-        <li>Participas en nuestra comunidad</li>
-        <li>Nos contactas directamente</li>
-      </ul>
-      
-      <h4>2. Uso de la información</h4>
-      <p>La información recopilada puede ser usada para:</p>
-      <ul>
-        <li>Personalizar tu experiencia</li>
-        <li>Mejorar nuestro sitio web</li>
-        <li>Responder a consultas y soporte</li>
-        <li>Enviar actualizaciones importantes</li>
-      </ul>
-      
-      <h4>3. Protección de datos</h4>
-      <p>Implementamos medidas de seguridad para proteger tu información personal.</p>
-      
-      <h4>4. Cookies</h4>
-      <p>Nuestro sitio utiliza cookies para mejorar la experiencia del usuario.</p>
-      
-      <h4>5. Consentimiento</h4>
-      <p>Al usar nuestro sitio, aceptas nuestra política de privacidad.</p>
-    </div>
-  </div>
-</div>
-
-<div class="modal" id="modal-terminos">
-  <div class="modal-content">
-    <button class="modal-close" data-target="terminos">&times;</button>
-    <h2>Términos de Uso</h2>
-    <div class="terms-text">
-      <h3>Términos de Uso de FlarioX</h3>
-      <p><strong>Vigente desde:</strong> 25 de junio de 2025</p>
-      
-      <h4>1. Aceptación de términos</h4>
-      <p>Al acceder y usar FlarioX, aceptas cumplir con estos términos.</p>
-      
-      <h4>2. Uso del software</h4>
-      <p>FlarioX se proporciona bajo licencia GPLv3. Debes cumplir con sus términos.</p>
-      
-      <h4>3. Limitaciones</h4>
-      <p>No puedes:</p>
-      <ul>
-        <li>Usar FlarioX para actividades ilegales</li>
-        <li>Modificar y redistribuir sin cumplir la licencia</li>
-        <li>Usar nuestra marca sin autorización</li>
-      </ul>
-      
-      <h4>4. Responsabilidad</h4>
-      <p>FlarioX se proporciona "tal cual" sin garantías explícitas.</p>
-      
-      <h4>5. Modificaciones</h4>
-      <p>Nos reservamos el derecho de modificar estos términos cuando sea necesario.</p>
-    </div>
-  </div>
-</div>
-
-<div class="modal" id="modal-conducta">
-  <div class="modal-content">
-    <button class="modal-close" data-target="conducta">&times;</button>
-    <h2>Código de Conducta</h2>
-    <div class="conduct-text">
-      <h3>Código de Conducta de la Comunidad FlarioX</h3>
-      <p><strong>Aplicable a:</strong> Foros, chats, eventos y cualquier espacio comunitario</p>
-      
-      <h4>1. Respeto mutuo</h4>
-      <p>Mantén siempre un trato respetuoso con todos los miembros.</p>
-      
-      <h4>2. Tolerancia cero</h4>
-      <p>No se permiten:</p>
-      <ul>
-        <li>Acoso o discriminación</li>
-        <li>Contenido ofensivo</li>
-        <li>Spam o autopromoción</li>
-      </ul>
-      
-      <h4>3. Colaboración</h4>
-      <p>Fomenta un ambiente de aprendizaje y ayuda mutua.</p>
-      
-      <h4>4. Cumplimiento</h4>
-      <p>El incumplimiento puede resultar en expulsión de la comunidad.</p>
-      
-      <h4>5. Reporte</h4>
-      <p>Reporta cualquier comportamiento inapropiado a los moderadores.</p>
-    </div>
-  </div>
-</div>
-<!-- Banner de Cookies -->
-<div id="cookie-banner" class="cookie-banner" aria-hidden="true">
-  <p>Este sitio utiliza cookies para mejorar tu experiencia. <a href="#">Saber más</a></p>
-  <button id="accept-cookies" class="accept-button">Aceptar</button>
-</div>
-
-<!-- Scripts -->
-<script src="./assets/js/main.js"></script>
-  
+  <!-- Resto de tu código HTML... -->
 </body>
 </html>
