@@ -2,6 +2,7 @@
 title: "Mantén tu Flariox actualizado"
 description: "Aprende cómo actualizar tu sistema de forma segura y sin complicaciones."
 date: "2025-07-03"
+author: "Edisbel Ramirez Lovatos"
 ---
 
 # Mantén tu Flariox actualizado
