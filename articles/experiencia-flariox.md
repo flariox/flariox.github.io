@@ -2,6 +2,7 @@
 title: "La experiencia de usar Flariox"
 description: "Una mirada a cómo se siente realmente trabajar en Flariox día a día."
 date: "2025-06-29"
+author: "Edisbel Ramirez Lovatos"
 ---
 
 # La experiencia de usar Flariox
