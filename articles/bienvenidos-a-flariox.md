@@ -1,6 +1,6 @@
 ---
 title: "Bienvenidos a Flariox"
-description: "Saludos a los nuevos usuarios de Flariox."
+description: "Te damos la bievenida a Flariox"
 date: "2025-06-25"
 author: "Williams Fandiño"
 ---
