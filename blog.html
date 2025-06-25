@@ -11,16 +11,13 @@
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
-  <!-- Encabezado -->
   <header class="main-header">
     <nav class="navbar">
       <a href="index.html" class="logo">
         <img src="./assets/images/logo/logo.png" alt="Flariox" class="logo-img" />
         Flariox
       </a>
-      <button class="sidebar-toggle" aria-expanded="false" aria-controls="sidebar">
-        <i class="fas fa-bars"></i>
-      </button>
+      <button class="sidebar-toggle"><i class="fas fa-bars"></i></button>
       <ul class="nav-list">
         <li><a href="index.html#about" class="nav-link">Acerca de</a></li>
         <li><a href="index.html#features" class="nav-link">Características</a></li>
@@ -30,21 +27,6 @@
     </nav>
   </header>
 
-  <!-- Sidebar -->
-  <div class="sidebar-overlay"></div>
-  <aside id="sidebar" class="sidebar" aria-hidden="true">
-    <button class="close-sidebar"><i class="fas fa-times"></i></button>
-    <nav class="sidebar-nav">
-      <ul class="sidebar-list">
-        <li><a href="index.html#about" class="sidebar-link">Acerca de</a></li>
-        <li><a href="index.html#features" class="sidebar-link">Características</a></li>
-        <li><a href="index.html#download" class="sidebar-link">Descargar</a></li>
-        <li><a href="blog.html" class="sidebar-link active">Blog</a></li>
-      </ul>
-    </nav>
-  </aside>
-
-  <!-- Contenido principal -->
   <main class="section">
     <div class="container">
       <h1 class="section-title">Blog de Flariox</h1>
@@ -53,7 +35,6 @@
     </div>
   </main>
 
-  <!-- Pie de página -->
   <footer class="main-footer">
     <div class="container">
       <div class="footer-bottom">
@@ -62,16 +43,14 @@
     </div>
   </footer>
 
-  <!-- Script principal -->
   <script>
     const ruta = './articles/';
-
     const blogCards = document.getElementById('blog-cards');
     const blogContent = document.getElementById('blog-content');
 
     function parseFrontmatter(md) {
       const fm = {};
-      const match = md.match(/^---\n([\s\S]*?)\n---/);
+      const match = md.match(/^---\n([\s\S]+?)\n---/);
       if (match) {
         const lines = match[1].split('\n');
         lines.forEach(line => {
@@ -90,43 +69,52 @@
         <p>${description}</p>
         <p class="date">${date}</p>
       `;
-      card.onclick = () => cargarArticulo(file);
+      card.addEventListener('click', () => cargarArticulo(file));
       blogCards.appendChild(card);
     }
 
     function cargarArticulo(file) {
       fetch(ruta + file)
         .then(res => {
-          if (!res.ok) throw new Error(`No se pudo cargar ${file}`);
+          if (!res.ok) throw new Error(`No se pudo cargar ${file}: ${res.statusText}`);
           return res.text();
         })
         .then(md => {
-          console.log('Contenido del archivo:', md);
+          if (!md.trim()) {
+            blogContent.innerHTML = '<p style="color:orange">El artículo está vacío.</p>';
+          } else {
+            console.log('Contenido cargado:', md);
+            blogContent.innerHTML = marked.parse(md);
+          }
           blogCards.style.display = 'none';
-          blogContent.innerHTML = marked.parse(md);
           blogContent.style.display = 'block';
           window.scrollTo({ top: blogContent.offsetTop, behavior: 'smooth' });
         })
         .catch(err => {
-          console.error(err);
+          console.error('Error al cargar el artículo:', err);
           blogContent.innerHTML = `<p style="color:red">Error: ${err.message}</p>`;
           blogContent.style.display = 'block';
         });
     }
 
     async function cargarEntradas() {
-      const res = await fetch(ruta + 'index.json');
-      const archivos = await res.json();
-
-      for (const file of archivos) {
-        const content = await fetch(ruta + file).then(r => r.text());
-        const meta = parseFrontmatter(content);
-        renderCard({
-          file,
-          title: meta.title || file.replace('.md', ''),
-          description: meta.description || 'Sin descripción',
-          date: meta.date || 'Sin fecha'
-        });
+      try {
+        const res = await fetch(ruta + 'index.json');
+        if (!res.ok) throw new Error('No se pudo cargar index.json');
+        const archivos = await res.json();
+        for (const file of archivos) {
+          const content = await fetch(ruta + file).then(r => r.text());
+          const meta = parseFrontmatter(content);
+          renderCard({
+            file,
+            title: meta.title || file.replace('.md', ''),
+            description: meta.description || 'Sin descripción',
+            date: meta.date || 'Sin fecha'
+          });
+        }
+      } catch (error) {
+        console.error(error);
+        blogCards.innerHTML = `<p style="color:red">No se pudieron cargar las entradas del blog.</p>`;
       }
     }
 
@@ -192,6 +180,7 @@
   </style>
 </body>
 </html>
+
 
 
 
