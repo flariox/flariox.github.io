@@ -5,9 +5,9 @@ date: "2025-06-25"
 author: "Williams Fandiño"
 ---
 
-# 👋 Bienvenidos a Flariox :
+# 👋 Bienvenidos a Flariox
 
-Nunca a sido tan facil usar un sistema operativo Linux, tal como **Flariox** lo puede hacer
+Nunca a sido tan facil usar un sistema operativo Linux, tal como **Flariox** lo puede hacer 🤗 Y si estas leyendo esto quizas te estes preguntando ¿Y que es Flariox?
 
 ---
 
