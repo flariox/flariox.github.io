@@ -6,10 +6,8 @@ author: "Williams Fandiño"
 ---
 
 # 👋 Bienvenidos a Flariox :
-🎱
 
-Actualizar tu sistema operativo no solo te da acceso a nuevas funciones: también mejora la seguridad 🔒 y el rendimiento ⚡.  
-**Flariox** hace este proceso simple, ya sea visualmente o desde la terminal, según lo prefieras.
+Nunca a sido tan facil usar un sistema operativo Linux, tal como **Flariox** lo puede hacer
 
 ---
 
