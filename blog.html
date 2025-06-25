@@ -43,61 +43,87 @@
   </footer>
 
   <script>
-    // Ruta directa a los archivos en GitHub RAW
+    // Configuración de rutas
     const articlesPath = 'https://raw.githubusercontent.com/flariox/flariox.github.io/main/articles/';
     const blogCards = document.getElementById('blog-cards');
     const blogContent = document.getElementById('blog-content');
+    
+    // Cache para almacenar las tarjetas de artículos
+    let articlesCache = [];
 
-    // Función para mostrar estado de carga
+    // Mostrar estado de carga
     function showLoading() {
-      blogCards.innerHTML = '<div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> Cargando artículos...</div>';
-    }
-
-    // Función para mostrar errores
-    function showError(message) {
       blogCards.innerHTML = `
-        <div class="error-message">
-          <h3>Error al cargar los artículos</h3>
-          <p>${message}</p>
-          <p>Por favor, verifica:</p>
-          <ul>
-            <li>Que los archivos existen en el repositorio</li>
-            <li>Que la estructura es correcta</li>
-            <li>O intenta recargar la página</li>
-          </ul>
-          <p>Puedes acceder directamente a los archivos:</p>
-          <a href="${articlesPath}" target="_blank">Ver directorio articles en GitHub</a>
+        <div class="loading-spinner">
+          <i class="fas fa-spinner fa-spin"></i> Cargando artículos...
         </div>
       `;
     }
 
-    // Función para parsear frontmatter
+    // Mostrar mensaje de error
+    function showError(message, details = '') {
+      blogCards.innerHTML = `
+        <div class="error-message">
+          <h3>Error al cargar los artículos</h3>
+          <p>${message}</p>
+          ${details && `<p>${details}</p>`}
+          <p>Puedes intentar:</p>
+          <ul>
+            <li>Recargar la página</li>
+            <li>Verificar tu conexión a internet</li>
+            <li><a href="${articlesPath}" target="_blank">Revisar los archivos en GitHub</a></li>
+          </ul>
+        </div>
+      `;
+    }
+
+    // Parsear el frontmatter de los artículos
     function parseFrontmatter(content) {
-      const fm = {};
+      const frontmatter = {};
       const match = content.match(/^---\n([\s\S]+?)\n---/);
+      
       if (match) {
         match[1].split('\n').forEach(line => {
-          const [key, ...value] = line.split(':');
-          if (key && value.length > 0) {
-            fm[key.trim()] = value.join(':').trim().replace(/^['"]|['"]$/g, '');
+          const separatorIndex = line.indexOf(':');
+          if (separatorIndex > -1) {
+            const key = line.substring(0, separatorIndex).trim();
+            const value = line.substring(separatorIndex + 1).trim().replace(/^['"]|['"]$/g, '');
+            frontmatter[key] = value;
           }
         });
       }
-      return fm;
+      
+      return frontmatter;
     }
 
-    // Función para cargar un artículo
-    async function loadArticle(filename) {
+    // Crear una tarjeta de artículo
+    function createArticleCard(article) {
+      const card = document.createElement('div');
+      card.className = 'blog-card';
+      card.innerHTML = `
+        <h3>${article.title}</h3>
+        <p>${article.description}</p>
+        <p class="date">${article.date}</p>
+      `;
+      card.addEventListener('click', () => loadArticle(article));
+      return card;
+    }
+
+    // Cargar un artículo individual
+    async function loadArticle(article) {
       try {
         showLoading();
-        const response = await fetch(`${articlesPath}${filename}`);
-        if (!response.ok) throw new Error(`No se pudo cargar ${filename}`);
+        const response = await fetch(`${articlesPath}${article.file}`);
+        
+        if (!response.ok) {
+          throw new Error(`Error ${response.status}: ${response.statusText}`);
+        }
         
         const content = await response.text();
         const htmlContent = marked.parse(content.replace(/^---[\s\S]+?---/, ''));
         
         blogContent.innerHTML = `
-          <button onclick="backToBlog()" class="back-button">
+          <button class="back-button" onclick="backToBlog()">
             <i class="fas fa-arrow-left"></i> Volver al blog
           </button>
           <div class="article-markdown">${htmlContent}</div>
@@ -105,76 +131,108 @@
         
         blogCards.style.display = 'none';
         blogContent.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       } catch (error) {
-        showError(`Error al cargar el artículo: ${error.message}`);
+        blogContent.innerHTML = `
+          <button class="back-button" onclick="backToBlog()">
+            <i class="fas fa-arrow-left"></i> Volver al blog
+          </button>
+          <div class="error-message">
+            <h3>Error al cargar el artículo</h3>
+            <p>${error.message}</p>
+            <p>Puedes intentar <a href="${articlesPath}${article.file}" target="_blank">acceder al artículo directamente</a></p>
+          </div>
+        `;
+        blogContent.style.display = 'block';
       }
     }
 
-    // Función para volver al listado
+    // Volver al listado de artículos
     function backToBlog() {
       blogContent.style.display = 'none';
       blogCards.style.display = 'grid';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+      // Restaurar las tarjetas desde la caché
+      if (articlesCache.length > 0) {
+        blogCards.innerHTML = '';
+        articlesCache.forEach(card => blogCards.appendChild(card));
+      } else {
+        // Si no hay caché, recargar los artículos
+        loadArticles();
+      }
     }
     window.backToBlog = backToBlog;
 
-    // Función principal para cargar los artículos
+    // Cargar la lista de artículos
     async function loadArticles() {
       showLoading();
       
       try {
-        // 1. Intenta cargar index.json
+        // 1. Intentar cargar index.json
         let articlesList = [];
         try {
           const response = await fetch(`${articlesPath}index.json`);
           if (response.ok) {
-            articlesList = await response.json();
+            const data = await response.json();
+            if (Array.isArray(data)) {
+              articlesList = data;
+            }
           }
         } catch (e) {
-          console.log('No se encontró index.json, usando lista predeterminada');
+          console.log('index.json no encontrado, usando lista predeterminada');
         }
 
-        // 2. Si no hay index.json, usa lista predeterminada
+        // 2. Si no hay index.json, usar lista predeterminada
         if (articlesList.length === 0) {
-          articlesList = ['articulo1.md']; // Agrega aquí tus archivos .md
+          articlesList = ['articulo1.md']; // Agrega aquí tus archivos Markdown
         }
 
-        // 3. Carga cada artículo
+        // 3. Procesar cada artículo
         blogCards.innerHTML = '';
+        articlesCache = [];
+        const loadedArticles = [];
+        
         for (const filename of articlesList) {
           try {
             const response = await fetch(`${articlesPath}${filename}`);
             if (!response.ok) continue;
             
             const content = await response.text();
-            const { title = filename.replace('.md', ''), 
-                    description = 'Sin descripción', 
-                    date = 'Sin fecha' } = parseFrontmatter(content);
+            const frontmatter = parseFrontmatter(content);
             
-            const card = document.createElement('div');
-            card.className = 'blog-card';
-            card.innerHTML = `
-              <h3>${title}</h3>
-              <p>${description}</p>
-              <p class="date">${date}</p>
-            `;
-            card.addEventListener('click', () => loadArticle(filename));
-            blogCards.appendChild(card);
+            const article = {
+              file: filename,
+              title: frontmatter.title || filename.replace('.md', ''),
+              description: frontmatter.description || 'Sin descripción',
+              date: frontmatter.date || 'Sin fecha'
+            };
+            
+            loadedArticles.push(article);
           } catch (e) {
             console.error(`Error procesando ${filename}:`, e);
           }
         }
 
+        // Ordenar artículos por fecha (más reciente primero)
+        loadedArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
+        
+        // Crear y mostrar las tarjetas
+        loadedArticles.forEach(article => {
+          const card = createArticleCard(article);
+          blogCards.appendChild(card);
+          articlesCache.push(card.cloneNode(true)); // Guardar en caché
+        });
+
         if (blogCards.children.length === 0) {
-          showError('No se encontraron artículos para mostrar');
+          showError('No se encontraron artículos', 'Verifica que hay archivos .md en el directorio articles');
         }
       } catch (error) {
-        showError(error.message);
+        showError('Error al cargar los artículos', error.message);
         console.error('Error loading articles:', error);
       }
     }
 
-    // Iniciar la carga
+    // Iniciar la carga de artículos
     loadArticles();
   </script>
 
@@ -206,6 +264,11 @@
       margin-top: 0;
     }
 
+    .blog-card p {
+      color: #ccc;
+      margin: 0.5rem 0;
+    }
+
     .date {
       color: #888;
       font-size: 0.85rem;
@@ -221,6 +284,33 @@
       background: #1a1a1a;
       padding: 2rem;
       border-radius: 8px;
+      line-height: 1.6;
+    }
+
+    .article-markdown h1,
+    .article-markdown h2,
+    .article-markdown h3 {
+      color: #0af;
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+    }
+
+    .article-markdown p {
+      margin-bottom: 1em;
+    }
+
+    .article-markdown pre {
+      background: #222;
+      padding: 1rem;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+
+    .article-markdown code {
+      font-family: monospace;
+      background: #222;
+      padding: 0.2em 0.4em;
+      border-radius: 3px;
     }
 
     .back-button {
@@ -230,10 +320,15 @@
       padding: 0.5rem 1rem;
       border-radius: 4px;
       cursor: pointer;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
+      transition: background 0.2s ease;
+    }
+
+    .back-button:hover {
+      background: #08c;
     }
 
     .loading-spinner {
@@ -248,11 +343,26 @@
       border-left: 4px solid #f33;
       padding: 1.5rem;
       border-radius: 0 4px 4px 0;
+      margin: 1rem 0;
+    }
+
+    .error-message h3 {
+      color: #f77;
+      margin-top: 0;
+    }
+
+    .error-message a {
+      color: #0af;
+      text-decoration: underline;
     }
 
     @media (max-width: 768px) {
       .blog-card-grid {
         grid-template-columns: 1fr;
+      }
+      
+      .article-markdown {
+        padding: 1rem;
       }
     }
   </style>
