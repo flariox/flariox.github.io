@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Blog oficial de Flariox: novedades, tutoriales y comunidad." />
+  <meta name="description" content="Blog de Flariox: Tutoriales, anuncios y novedades." />
   <title>Flariox | Blog</title>
 
   <!-- Estilos -->
@@ -13,7 +13,7 @@
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- Encabezado -->
   <header class="main-header">
     <nav class="navbar">
       <a href="index.html" class="logo">
@@ -46,118 +46,100 @@
     </nav>
   </aside>
 
-  <!-- Contenido del Blog -->
-  <main>
-    <section class="section" id="blog">
-      <div class="container">
-        <h1 class="section-title">Blog de Flariox</h1>
-        <p class="section-subtitle">Novedades, guías y contribuciones de la comunidad.</p>
-
-        <div id="blog-cards" class="blog-card-grid"></div>
-        <div id="blog-content" class="article-content" style="display: none;"></div>
-      </div>
-    </section>
+  <!-- Contenido -->
+  <main class="section">
+    <div class="container">
+      <h1 class="section-title">Blog de Flariox</h1>
+      <div id="blog-cards" class="blog-card-grid"></div>
+      <div id="blog-content" class="article-content" style="display: none;"></div>
+    </div>
   </main>
 
   <!-- Pie de página -->
   <footer class="main-footer">
+    <!-- Reutiliza el mismo footer que tienes en index.html -->
     <div class="container">
-      <div class="footer-grid">
-        <!-- footer-about, footer-links, footer-resources, footer-legal idénticos al index.html -->
-        <!-- Puedes copiar tu footer completo aquí -->
-      </div>
       <div class="footer-bottom">
         <p>&copy; 2025 Flariox. Todos los derechos reservados.</p>
-        <p>Flariox ® es una marca registrada de Flariox Community.</p>
       </div>
     </div>
   </footer>
 
-  <!-- Botón flotante de Telegram -->
-  <a href="https://t.me/flariox" class="telegram-float" target="_blank" rel="noopener noreferrer">
-    <i class="fab fa-telegram-plane"></i>
-  </a>
-
-  <!-- Banner de cookies -->
-  <div id="cookie-banner" class="cookie-banner" aria-hidden="true">
-    <p>Este sitio utiliza cookies para mejorar tu experiencia. <a href="#">Saber más</a></p>
-    <button id="accept-cookies" class="accept-button">Aceptar</button>
-  </div>
-
-  <!-- Scripts -->
+  <!-- Scripts principales -->
   <script src="./assets/js/main.js"></script>
 
-  <!-- Blog dinámico -->
+  <!-- Script del blog -->
   <script>
-    const repoOwner = 'TUNOMBREUSUARIO'; // ← Reemplaza por tu usuario
-    const repoName = 'NOMBREDELREPO';   // ← Reemplaza por tu repo
-    const branch = 'main';              // o 'master'
+    const ruta = './articles/';
+    const archivos = ['bienvenido.md', 'instalacion.md', 'personaliza.md']; // O genera esta lista dinámicamente desde un JSON
 
-    const articles = [
-      { file: 'bienvenido.md', title: 'Bienvenido a Flariox', description: 'Presentación del proyecto y primeros pasos.' },
-      { file: 'instalacion.md', title: 'Guía de Instalación', description: 'Aprende a instalar Flariox paso a paso.' },
-      { file: 'personaliza.md', title: 'Personaliza tu Escritorio', description: 'Tips de personalización visual en Flariox.' }
-    ];
-
-    const blogContainer = document.getElementById('blog-cards');
+    const blogCards = document.getElementById('blog-cards');
     const blogContent = document.getElementById('blog-content');
 
-    function formatDate(iso) {
-      return new Date(iso).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
+    function parseFrontmatter(md) {
+      const fm = {};
+      const match = md.match(/^---\n([\s\S]*?)\n---/);
+      if (match) {
+        const lines = match[1].split('\n');
+        lines.forEach(line => {
+          const [key, ...rest] = line.split(':');
+          fm[key.trim()] = rest.join(':').trim();
+        });
+      }
+      return fm;
     }
 
-    function renderCard({ file, title, description, date }) {
+    function renderCard({ title, description, date, file }) {
       const card = document.createElement('div');
       card.className = 'blog-card';
       card.innerHTML = `
         <h3>${title}</h3>
         <p>${description}</p>
-        <p class="date">Última actualización: ${date || 'Cargando...'}</p>
+        <p class="date">${date}</p>
       `;
-      card.onclick = () => loadArticle(file);
-      blogContainer.appendChild(card);
+      card.onclick = () => cargarArticulo(file);
+      blogCards.appendChild(card);
     }
 
-    function loadArticle(file) {
-      fetch(`./articles/${file}`)
-        .then(r => r.ok ? r.text() : Promise.reject())
+    function cargarArticulo(file) {
+      fetch(ruta + file)
+        .then(res => res.text())
         .then(md => {
-          blogContainer.style.display = 'none';
+          blogCards.style.display = 'none';
           blogContent.innerHTML = marked.parse(md);
           blogContent.style.display = 'block';
           window.scrollTo({ top: blogContent.offsetTop, behavior: 'smooth' });
         });
     }
 
-    async function fetchGitHubDate(filePath) {
-      const url = `https://api.github.com/repos/${repoOwner}/${repoName}/commits?path=articles/${filePath}&sha=${branch}&per_page=1`;
-      const res = await fetch(url);
-      const data = await res.json();
-      return formatDate(data[0]?.commit?.committer?.date || new Date());
+    async function cargarEntradas() {
+      for (const file of archivos) {
+        const content = await fetch(ruta + file).then(r => r.text());
+        const meta = parseFrontmatter(content);
+        renderCard({
+          file,
+          title: meta.title || file.replace('.md', ''),
+          description: meta.description || 'Sin descripción',
+          date: meta.date || 'Sin fecha'
+        });
+      }
     }
 
-    (async () => {
-      for (const article of articles) {
-        renderCard({ ...article, date: '...' });
-        const date = await fetchGitHubDate(article.file);
-        const lastCard = blogContainer.lastElementChild;
-        lastCard.querySelector('.date').textContent = `Última actualización: ${date}`;
-      }
-    })();
+    cargarEntradas();
   </script>
 
-  <!-- Estilos para blog -->
+  <!-- Estilos inline para blog -->
   <style>
     .blog-card-grid {
       display: grid;
-      gap: 2rem;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       margin-top: 2rem;
     }
 
     .blog-card {
-      background: var(--bg-color, #1a1a1a);
-      border: 1px solid var(--accent-color, #0af);
+      background: #161616;
+      border: 1px solid #0af;
       padding: 1.5rem;
       border-radius: 10px;
       transition: transform 0.3s ease;
@@ -169,34 +151,39 @@
     }
 
     .blog-card h3 {
-      margin-top: 0;
-      font-size: 1.3rem;
-      color: var(--accent-color, #0af);
+      margin: 0 0 0.5rem;
+      color: #0af;
     }
 
     .blog-card p {
-      margin-bottom: 0.4rem;
-      line-height: 1.6;
+      margin: 0.3rem 0;
+      color: #ccc;
+      font-size: 0.9rem;
     }
 
-    .blog-card .date {
+    .date {
       font-size: 0.8rem;
       opacity: 0.6;
     }
 
     .article-content {
       max-width: 800px;
-      margin: 4rem auto 2rem;
+      margin: 3rem auto;
       padding: 1rem;
+      color: #eee;
     }
 
-    .article-content h1, .article-content h2, .article-content h3 {
-      color: var(--accent-color, #0af);
+    .article-content h1,
+    .article-content h2,
+    .article-content h3 {
+      color: #0af;
     }
 
-    .article-content p {
-      line-height: 1.8;
-      margin-bottom: 1rem;
+    .article-content pre {
+      background: #222;
+      padding: 1rem;
+      overflow-x: auto;
+      border-radius: 6px;
     }
   </style>
 </body>
