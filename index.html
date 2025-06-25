@@ -7,115 +7,148 @@
     <meta name="keywords" content="Flariox, distribución Linux, sistema operativo, Linux, open source">
     <meta name="author" content="Flariox Team">
     
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://flariox.org/">
+    <meta property="og:title" content="Flariox | Potente. Elegante y Libre.">
+    <meta property="og:description" content="Una distribución Linux moderna diseñada para ofrecer rendimiento, estabilidad y una experiencia de usuario excepcional.">
+    <meta property="og:image" content="https://flariox.org/assets/images/logo/logo-social.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://flariox.org/">
+    <meta property="twitter:title" content="Flariox | Potente. Elegante y Libre.">
+    <meta property="twitter:description" content="Una distribución Linux moderna diseñada para ofrecer rendimiento, estabilidad y una experiencia de usuario excepcional.">
+    <meta property="twitter:image" content="https://flariox.org/assets/images/logo/logo-social.png">
+    
     <title>Flariox | Potente. Elegante y Libre.</title>
     
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="./assets/webfonts/css/all.css">
+    <!-- Preload recursos críticos -->
+    <link rel="preload" href="./assets/webfonts/css/all.css" as="style">
+    <link rel="preload" href="./assets/css/styles.css" as="style">
+    <link rel="preload" href="./assets/js/main.js" as="script">
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./assets/images/logo/favicon.png">
+    
+    <!-- Font Awesome con SRI -->
+    <link rel="stylesheet" href="./assets/webfonts/css/all.css" integrity="sha384-...">
+    
+    <!-- Estilos principales -->
     <link rel="stylesheet" href="./assets/css/styles.css">
+    
+    <!-- Preconnect para recursos externos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
 </head>
 <body>
-    <!-- Barra de navegación -->
+    <!-- Barra de navegación mejorada -->
     <header class="main-header">
-        <nav class="navbar">
-            <a href="#" class="logo">
-                <img src="./assets/images/logo/logo.png" alt="FlarioX" class="logo-img"> Flariox
+        <nav class="navbar" aria-label="Navegación principal">
+            <a href="#" class="logo" aria-label="Inicio - Flariox">
+                <img src="./assets/images/logo/logo.png" alt="Flariox" class="logo-img" width="40" height="40" loading="eager"> 
+                <span>Flariox</span>
             </a>
-            <button class="sidebar-toggle" aria-expanded="false" aria-controls="sidebar">
-                <i class="fas fa-bars"></i>
+            
+            <button class="sidebar-toggle" aria-expanded="false" aria-controls="sidebar" aria-label="Menú de navegación">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
             </button>
+            
             <ul class="nav-list">
-                <li><a href="#about" class="nav-link"><i class="fas fa-info-circle"></i> Acerca de</a></li>
-                <li><a href="#features" class="nav-link"><i class="fas fa-star"></i> Características</a></li>
-                <li><a href="#download" class="nav-link"><i class="fas fa-download"></i> Descargar</a></li>
-                <li><a href="#screenshots" class="nav-link"><i class="fas fa-image"></i> Capturas</a></li>
-                <li><a href="#community" class="nav-link"><i class="fas fa-users"></i> Comunidad</a></li>
+                <li><a href="#about" class="nav-link"><i class="fas fa-info-circle" aria-hidden="true"></i> <span>Acerca de</span></a></li>
+                <li><a href="#features" class="nav-link"><i class="fas fa-star" aria-hidden="true"></i> <span>Características</span></a></li>
+                <li><a href="#download" class="nav-link"><i class="fas fa-download" aria-hidden="true"></i> <span>Descargar</span></a></li>
+                <li><a href="#screenshots" class="nav-link"><i class="fas fa-image" aria-hidden="true"></i> <span>Capturas</span></a></li>
+                <li><a href="#community" class="nav-link"><i class="fas fa-users" aria-hidden="true"></i> <span>Comunidad</span></a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Sidebar -->
-    <div class="sidebar-overlay"></div>
-    <aside id="sidebar" class="sidebar" aria-hidden="true">
-        <button class="close-sidebar"><i class="fas fa-times"></i></button>
-        <nav class="sidebar-nav">
+    <!-- Sidebar accesible -->
+    <div class="sidebar-overlay" role="presentation"></div>
+    <aside id="sidebar" class="sidebar" aria-hidden="true" aria-label="Menú lateral">
+        <button class="close-sidebar" aria-label="Cerrar menú"><i class="fas fa-times" aria-hidden="true"></i></button>
+        <nav class="sidebar-nav" aria-label="Navegación móvil">
             <ul class="sidebar-list">
-                <li><a href="#about" class="sidebar-link"><i class="fas fa-info-circle"></i> Acerca de</a></li>
-                <li><a href="#features" class="sidebar-link"><i class="fas fa-star"></i> Características</a></li>
-                <li><a href="#download" class="sidebar-link"><i class="fas fa-download"></i> Descargar</a></li>
-                <li><a href="#screenshots" class="sidebar-link"><i class="fas fa-image"></i> Capturas</a></li>
-                <li><a href="#community" class="sidebar-link"><i class="fas fa-users"></i> Comunidad</a></li>
+                <li><a href="#about" class="sidebar-link"><i class="fas fa-info-circle" aria-hidden="true"></i> Acerca de</a></li>
+                <li><a href="#features" class="sidebar-link"><i class="fas fa-star" aria-hidden="true"></i> Características</a></li>
+                <li><a href="#download" class="sidebar-link"><i class="fas fa-download" aria-hidden="true"></i> Descargar</a></li>
+                <li><a href="#screenshots" class="sidebar-link"><i class="fas fa-image" aria-hidden="true"></i> Capturas</a></li>
+                <li><a href="#community" class="sidebar-link"><i class="fas fa-users" aria-hidden="true"></i> Comunidad</a></li>
             </ul>
         </nav>
     </aside>
 
     <!-- Contenido principal -->
     <main>
-        <!-- Hero Section con Efectos y Botón de Scroll -->
-        <section class="hero">
-            <div class="particles" id="particles-js"></div>
+        <!-- Hero Section mejorada -->
+        <section class="hero" aria-labelledby="hero-heading">
+            <div class="particles" id="particles-js" role="presentation"></div>
             <div class="container">
-                <h1>Flariox</h1>
+                <h1 id="hero-heading">Flariox</h1>
                 <p class="subtitle">Potente. Elegante. Libre.</p>
                 <p class="hero-text">Una distribución Linux moderna diseñada para ofrecer rendimiento, estabilidad y una experiencia de usuario excepcional.</p>
                 <div class="hero-buttons">
-                    <a href="#download" class="cta-button">Descargar Ahora</a>
-                    <a href="#features" class="cta-button secondary">Ver Características</a>
+                    <a href="#download" class="cta-button" aria-label="Descargar Flariox">Descargar Ahora</a>
+                    <a href="#features" class="cta-button secondary" aria-label="Ver características">Ver Características</a>
                 </div>
             </div>
-            <!-- Botón de desplazamiento hacia abajo -->
+            
             <div class="scroll-down">
-                    <a href="#about" class="scroll-down-btn" aria-label="Desplazarse hacia abajo">
-                        <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
-                </div>
+                <a href="#about" class="scroll-down-btn" aria-label="Desplazarse hacia abajo">
+                    <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="sr-only">Desplazarse hacia abajo</span>
+                </a>
+            </div>
         </section>
 
-        <!-- Acerca de -->
-        <section id="about" class="section">
+        <!-- Acerca de - Mejorado -->
+        <section id="about" class="section" aria-labelledby="about-heading">
             <div class="container">
-                <h2 class="section-title">Acerca de Flariox</h2>
+                <h2 id="about-heading" class="section-title">Acerca de Flariox</h2>
                 <div class="about-grid">
                     <div class="about-content">
                         <p>Flariox es una distribución Linux basada en Arch Linux que combina potencia y elegancia. Diseñada tanto para principiantes como para usuarios avanzados, ofrece un entorno estable y personalizable con un enfoque en la experiencia de usuario.</p>
                         
                         <div class="about-features">
                             <div class="feature-item">
-                                <i class="fas fa-bolt feature-icon"></i>
+                                <i class="fas fa-bolt feature-icon" aria-hidden="true"></i>
                                 <h3>Rápido</h3>
                                 <p>Optimizado para un rendimiento excepcional incluso en hardware modesto.</p>
                             </div>
                             <div class="feature-item">
-                                <i class="fas fa-shield-alt feature-icon"></i>
+                                <i class="fas fa-shield-alt feature-icon" aria-hidden="true"></i>
                                 <h3>Seguro</h3>
                                 <p>Actualizaciones de seguridad regulares y protección integrada.</p>
                             </div>
                             <div class="feature-item">
-                                <i class="fas fa-heart feature-icon"></i>
+                                <i class="fas fa-heart feature-icon" aria-hidden="true"></i>
                                 <h3>Libre</h3>
                                 <p>Software de código abierto que respeta tu libertad.</p>
                             </div>
                         </div>
                     </div>
                     <div class="about-image">
-                        <img src="./assets/images/logo/logo.png" alt="Escritorio de FlarioX">
+                        <img src="./assets/images/screenshots/desktop.png" alt="Escritorio de Flariox mostrando el entorno de usuario" width="800" height="450" loading="lazy">
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Características -->
-        <section id="features" class="section services-section">
+        <!-- Características - Mejorado -->
+        <section id="features" class="section services-section" aria-labelledby="features-heading">
             <div class="container">
-                <h2 class="section-title">Características Principales</h2>
-                <p class="section-subtitle">Descubre lo que hace especial a FlarioX</p>
+                <h2 id="features-heading" class="section-title">Características Principales</h2>
+                <p class="section-subtitle">Descubre lo que hace especial a Flariox</p>
                 
                 <div class="services-grid">
                     <div class="service-card">
                         <div class="service-icon">
-                            <i class="fas fa-desktop"></i>
+                            <i class="fas fa-desktop" aria-hidden="true"></i>
                         </div>
                         <h3>Entorno de Escritorio</h3>
                         <p>GNOME personalizado con extensiones útiles y un diseño limpio y moderno.</p>
@@ -123,7 +156,7 @@
                     
                     <div class="service-card">
                         <div class="service-icon">
-                            <i class="fas fa-box-open"></i>
+                            <i class="fas fa-box-open" aria-hidden="true"></i>
                         </div>
                         <h3>Software Preinstalado</h3>
                         <p>Todas las aplicaciones esenciales para productividad, multimedia y desarrollo.</p>
@@ -131,7 +164,7 @@
                     
                     <div class="service-card">
                         <div class="service-icon">
-                            <i class="fas fa-sync-alt"></i>
+                            <i class="fas fa-sync-alt" aria-hidden="true"></i>
                         </div>
                         <h3>Actualizaciones</h3>
                         <p>Soporte a largo plazo con actualizaciones regulares de software y seguridad.</p>
@@ -139,7 +172,7 @@
                     
                     <div class="service-card">
                         <div class="service-icon">
-                            <i class="fas fa-paint-brush"></i>
+                            <i class="fas fa-paint-brush" aria-hidden="true"></i>
                         </div>
                         <h3>Personalización</h3>
                         <p>Temas, iconos y ajustes para adaptar el sistema a tu estilo.</p>
@@ -147,7 +180,7 @@
                     
                     <div class="service-card">
                         <div class="service-icon">
-                            <i class="fas fa-plug"></i>
+                            <i class="fas fa-plug" aria-hidden="true"></i>
                         </div>
                         <h3>Compatibilidad</h3>
                         <p>Soporte para una amplia gama de hardware y controladores.</p>
@@ -155,7 +188,7 @@
                     
                     <div class="service-card">
                         <div class="service-icon">
-                            <i class="fas fa-hands-helping"></i>
+                            <i class="fas fa-hands-helping" aria-hidden="true"></i>
                         </div>
                         <h3>Soporte</h3>
                         <p>Comunidad activa y documentación detallada para ayudarte.</p>
@@ -164,78 +197,76 @@
             </div>
         </section>
 
-        <!-- Equipo de Trabajo -->
-        <section id="team" class="section team-section">
+        <!-- Equipo de Trabajo - Mejorado -->
+        <section id="team" class="section team-section" aria-labelledby="team-heading">
             <div class="container">
-                <h2 class="section-title">Nuestro Equipo</h2>
+                <h2 id="team-heading" class="section-title">Nuestro Equipo</h2>
                 <p class="section-subtitle">Conoce a las personas detrás de Flariox</p>
                 
-  <div class="team-grid">
-    <div class="team-member">
-        <div class="member-image">
-            <img src="./assets/images/team/leonardo.jpg" alt="Miembro del equipo 1">
-            <div class="member-social">
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-            </div>
-        </div>
-        <h3>🇻🇪 Leonardo Gilberto Muñoz</h3>
-        <p class="member-role">Líder del Proyecto</p>
-        <p class="member-bio">Desarrollador principal con más de 10 años de experiencia en sistemas Linux y desarrollo de software.</p>
-    </div>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-image">
+                            <img src="./assets/images/team/leonardo.jpg" alt="Leonardo Gilberto Muñoz - Líder del Proyecto" width="200" height="200" loading="lazy">
+                            <div class="member-social">
+                                <a href="#" aria-label="GitHub de Leonardo"><i class="fab fa-github" aria-hidden="true"></i></a>
+                                <a href="#" aria-label="Twitter de Leonardo"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                                <a href="#" aria-label="LinkedIn de Leonardo"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                        <h3>🇻🇪 Leonardo Gilberto Muñoz</h3>
+                        <p class="member-role">Líder del Proyecto</p>
+                        <p class="member-bio">Desarrollador principal con más de 10 años de experiencia en sistemas Linux y desarrollo de software.</p>
+                    </div>
 
-    <div class="team-member">
-        <div class="member-image">
-            <img src="./assets/images/team/edisbel.jpg" alt="Miembro del equipo 2">
-            <div class="member-social">
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-            </div>
-        </div>
-        <h3>🇨🇺 Edisbel Ramirez Lovatos</h3>
-        <p class="member-role">Desarrollador, Diseñador UX/UI</p>
-        <p class="member-bio">Especialista en experiencia de usuario e interfaces, encargada de hacer que Flariox sea intuitivo y hermoso.</p>
-    </div>
+                    <div class="team-member">
+                        <div class="member-image">
+                            <img src="./assets/images/team/edisbel.jpg" alt="Edisbel Ramirez Lovatos - Diseñador UX/UI" width="200" height="200" loading="lazy">
+                            <div class="member-social">
+                                <a href="#" aria-label="GitHub de Edisbel"><i class="fab fa-github" aria-hidden="true"></i></a>
+                                <a href="#" aria-label="Twitter de Edisbel"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                                <a href="#" aria-label="LinkedIn de Edisbel"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                        <h3>🇨🇺 Edisbel Ramirez Lovatos</h3>
+                        <p class="member-role">Desarrollador, Diseñador UX/UI</p>
+                        <p class="member-bio">Especialista en experiencia de usuario e interfaces, encargada de hacer que Flariox sea intuitivo y hermoso.</p>
+                    </div>
 
-    <div class="team-member">
-        <div class="member-image">
-            <img src="./assets/images/team/kenneth.jpg" alt="Miembro del equipo 3">
-            <div class="member-social">
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-            </div>
-        </div>
-        <h3>🇵🇷 Kenneth Medina</h3>
-        <p class="member-role">Desarrollador</p>
-        <p class="member-bio">Experto en optimización de sistemas y gestión de paquetes, asegurando que Flariox funcione perfectamente.</p>
-    </div>
+                    <div class="team-member">
+                        <div class="member-image">
+                            <img src="./assets/images/team/kenneth.jpg" alt="Kenneth Medina - Desarrollador" width="200" height="200" loading="lazy">
+                            <div class="member-social">
+                                <a href="#" aria-label="GitHub de Kenneth"><i class="fab fa-github" aria-hidden="true"></i></a>
+                                <a href="#" aria-label="Twitter de Kenneth"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                                <a href="#" aria-label="LinkedIn de Kenneth"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                        <h3>🇵🇷 Kenneth Medina</h3>
+                        <p class="member-role">Desarrollador</p>
+                        <p class="member-bio">Experto en optimización de sistemas y gestión de paquetes, asegurando que Flariox funcione perfectamente.</p>
+                    </div>
 
-    <div class="team-member">
-        <div class="member-image">
-            <img src="./assets/images/team/williams.jpg" alt="Miembro del equipo 4">
-            <div class="member-social">
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-            </div>
-        </div>
-        <h3>🇨🇴 Williams Alfredo Fandiño Gómez</h3>
-        <p class="member-role">Desarrollador</p>
-        <p class="member-bio">Especialista en experiencia de usuario e interfaces. Actualmente, ETE se encarga de la documentación del proyecto.</p>
-    </div>
-</div>
-           
+                    <div class="team-member">
+                        <div class="member-image">
+                            <img src="./assets/images/team/williams.jpg" alt="Williams Alfredo Fandiño Gómez - Desarrollador" width="200" height="200" loading="lazy">
+                            <div class="member-social">
+                                <a href="#" aria-label="GitHub de Williams"><i class="fab fa-github" aria-hidden="true"></i></a>
+                                <a href="#" aria-label="Twitter de Williams"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                                <a href="#" aria-label="LinkedIn de Williams"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                        <h3>🇨🇴 Williams Alfredo Fandiño Gómez</h3>
+                        <p class="member-role">Desarrollador</p>
+                        <p class="member-bio">Especialista en experiencia de usuario e interfaces. Actualmente, ETE se encarga de la documentación del proyecto.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Descargas -->
-        <section id="download" class="section technologies-section">
+        <!-- Descargas - Mejorado -->
+        <section id="download" class="section technologies-section" aria-labelledby="download-heading">
             <div class="container">
-                <h2 class="section-title">Descargar Flariox</h2>
+                <h2 id="download-heading" class="section-title">Descargar Flariox</h2>
                 <p class="section-subtitle">Elige la versión adecuada para ti</p>
                 
                 <div class="download-options">
@@ -246,36 +277,39 @@
                         </div>
                         <div class="download-body">
                             <ul>
-                                <li><i class="fas fa-check"></i> Entorno GNOME completo</li>
-                                <li><i class="fas fa-check"></i> Suite de oficina</li>
-                                <li><i class="fas fa-check"></i> Navegador web</li>
-                                <li><i class="fas fa-check"></i> Reproductores multimedia</li>
-                                <li><i class="fas fa-check"></i> Herramientas gráficas</li>
+                                <li><i class="fas fa-check" aria-hidden="true"></i> Entorno GNOME completo</li>
+                                <li><i class="fas fa-check" aria-hidden="true"></i> Suite de oficina</li>
+                                <li><i class="fas fa-check" aria-hidden="true"></i> Navegador web</li>
+                                <li><i class="fas fa-check" aria-hidden="true"></i> Reproductores multimedia</li>
+                                <li><i class="fas fa-check" aria-hidden="true"></i> Herramientas gráficas</li>
                             </ul>
                         </div>
                         <div class="download-footer">
-                            <a href="#" class="download-button">Descargar (64-bit)</a>
+                            <a href="#" class="download-button" aria-label="Descargar Flariox Standard">Descargar (64-bit)</a>
                             <p>Tamaño: 2.8 GB</p>
+                            <small>SHA256: a1b2c3...z9</small>
                         </div>
                     </div>
                     
                     <div class="download-card featured">
+                        <div class="download-badge">Recomendado</div>
                         <div class="download-header">
                             <h3>Flariox Minimal</h3>
                             <p>Para usuarios que prefieren personalizar</p>
                         </div>
                         <div class="download-body">
                             <ul>
-                                <li><i class="fas fa-check"></i> Entorno GNOME básico</li>
-                                <li><i class="fas fa-check"></i> Navegador web</li>
-                                <li><i class="fas fa-check"></i> Gestor de archivos</li>
-                                <li><i class="fas fa-check"></i> Terminal</li>
-                                <li><i class="fas fa-check"></i> Gestor de paquetes</li>
+                                <li><i class="fas fa-check" aria-hidden="true"></i> Entorno GNOME básico</li>
+                                <li><i class="fas fa-check" aria-hidden="true"></i> Navegador web</li>
+                                <li><i class="fas fa-check" aria-hidden="true"></i> Gestor de archivos</li>
+                                <li><i class="fas fa-check" aria-hidden="true"></i> Terminal</li>
+                                <li><i class="fas fa-check" aria-hidden="true"></i> Gestor de paquetes</li>
                             </ul>
                         </div>
                         <div class="download-footer">
-                            <a href="#" class="download-button">Descargar (64-bit)</a>
+                            <a href="#" class="download-button" aria-label="Descargar Flariox Minimal">Descargar (64-bit)</a>
                             <p>Tamaño: 1.5 GB</p>
+                            <small>SHA256: b2c3d4...a1</small>
                         </div>
                     </div>
                     
@@ -286,16 +320,17 @@
                         </div>
                         <div class="download-body">
                             <ul>
-                                <li><i class="fas fa-check"></i> Todas las herramientas de Standard</li>
-                                <li><i class="fas fa-check"></i> IDEs y editores de código</li>
-                                <li><i class="fas fa-check"></i> Git y herramientas de control de versiones</li>
-                                <li><i class="fas fa-check"></i> Docker y contenedores</li>
-                                <li><i class="fas fa-check"></i> Compiladores y bibliotecas</li>
+                                <li><i class="fas fa-check" aria-hidden="true"></i> Todas las herramientas de Standard</li>
+                                <li><i class="fas fa-check" aria-hidden="true"></i> IDEs y editores de código</li>
+                                <li><i class="fas fa-check" aria-hidden="true"></i> Git y herramientas de control de versiones</li>
+                                <li><i class="fas fa-check" aria-hidden="true"></i> Docker y contenedores</li>
+                                <li><i class="fas fa-check" aria-hidden="true"></i> Compiladores y bibliotecas</li>
                             </ul>
                         </div>
                         <div class="download-footer">
-                            <a href="#" class="download-button">Descargar (64-bit)</a>
+                            <a href="#" class="download-button" aria-label="Descargar Flariox Developer">Descargar (64-bit)</a>
                             <p>Tamaño: 3.5 GB</p>
+                            <small>SHA256: c3d4e5...b2</small>
                         </div>
                     </div>
                 </div>
@@ -303,91 +338,102 @@
                 <div class="system-requirements">
                     <h3>Requisitos del sistema</h3>
                     <ul>
-                        <li><i class="fas fa-microchip"></i> Procesador: 64-bit de 2 GHz o superior</li>
-                        <li><i class="fas fa-memory"></i> RAM: 2 GB mínimo (4 GB recomendado)</li>
-                        <li><i class="fas fa-hdd"></i> Almacenamiento: 25 GB de espacio libre</li>
-                        <li><i class="fas fa-tv"></i> Pantalla: 1024×768 resolución mínima</li>
+                        <li><i class="fas fa-microchip" aria-hidden="true"></i> Procesador: 64-bit de 2 GHz o superior</li>
+                        <li><i class="fas fa-memory" aria-hidden="true"></i> RAM: 2 GB mínimo (4 GB recomendado)</li>
+                        <li><i class="fas fa-hdd" aria-hidden="true"></i> Almacenamiento: 25 GB de espacio libre</li>
+                        <li><i class="fas fa-tv" aria-hidden="true"></i> Pantalla: 1024×768 resolución mínima</li>
+                        <li><i class="fas fa-network-wired" aria-hidden="true"></i> Conexión a Internet para instalación</li>
                     </ul>
+                    
+                    <div class="download-help">
+                        <h4>¿Necesitas ayuda?</h4>
+                        <p>Consulta nuestra <a href="#" aria-label="Guía de instalación">guía de instalación</a> o <a href="#community" aria-label="Soporte de la comunidad">pide ayuda a la comunidad</a>.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Capturas de pantalla -->
-        <section id="screenshots" class="section projects-section">
+        <!-- Capturas de pantalla - Mejorado -->
+        <section id="screenshots" class="section projects-section" aria-labelledby="screenshots-heading">
             <div class="container">
-                <h2 class="section-title">Capturas de Pantalla</h2>
+                <h2 id="screenshots-heading" class="section-title">Capturas de Pantalla</h2>
                 <p class="section-subtitle">Echa un vistazo a Flariox en acción</p>
                 
                 <div class="screenshots-grid">
                     <div class="screenshot-item">
-                        <img src="./assets/images/screenshots/desktop.png" alt="Escritorio Flariox">
+                        <img src="./assets/images/screenshots/desktop.png" alt="Escritorio principal de Flariox mostrando el fondo de pantalla y los iconos" width="800" height="450" loading="lazy">
                         <p>Escritorio principal</p>
                     </div>
                     <div class="screenshot-item">
-                        <img src="./assets/images/screenshots/desktop.png" alt="Aplicaciones Flariox">
+                        <img src="./assets/images/screenshots/app-menu.png" alt="Menú de aplicaciones de Flariox mostrando las categorías de software" width="800" height="450" loading="lazy">
                         <p>Menú de aplicaciones</p>
                     </div>
                     <div class="screenshot-item">
-                        <img src="./assets/images/screenshots/desktop.png" alt="Terminal Flariox">
+                        <img src="./assets/images/screenshots/terminal.png" alt="Terminal personalizada de Flariox con tema oscuro" width="800" height="450" loading="lazy">
                         <p>Terminal personalizada</p>
                     </div>
                     <div class="screenshot-item">
-                        <img src="./assets/images/screenshots/desktop.png" alt="Ajustes Flariox">
+                        <img src="./assets/images/screenshots/settings.png" alt="Centro de control de Flariox mostrando opciones de configuración" width="800" height="450" loading="lazy">
                         <p>Centro de control</p>
                     </div>
                     <div class="screenshot-item">
-                        <img src="./assets/images/screenshots/desktop.png" alt="Modo oscuro Flariox">
+                        <img src="./assets/images/screenshots/dark-mode.png" alt="Flariox en modo oscuro mostrando aplicaciones" width="800" height="450" loading="lazy">
                         <p>Modo oscuro</p>
                     </div>
                     <div class="screenshot-item">
-                        <img src="./assets/images/screenshots/desktop.png" alt="Espacios de trabajo Flariox">
+                        <img src="./assets/images/screenshots/workspaces.png" alt="Gestor de espacios de trabajo de Flariox" width="800" height="450" loading="lazy">
                         <p>Espacios de trabajo</p>
                     </div>
+                </div>
+                
+                <div class="screenshots-actions">
+                    <button class="screenshot-prev" aria-label="Captura anterior"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+                    <button class="screenshot-next" aria-label="Siguiente captura"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
                 </div>
             </div>
         </section>
 
-        <!-- Comunidad -->
-        <section id="community" class="section contact-section">
+        <!-- Comunidad - Mejorado -->
+        <section id="community" class="section contact-section" aria-labelledby="community-heading">
             <div class="container">
-                <h2 class="section-title">Únete a Nuestra Comunidad</h2>
+                <h2 id="community-heading" class="section-title">Únete a Nuestra Comunidad</h2>
                 <p class="section-subtitle">Conecta con otros usuarios y contribuidores</p>
                 
                 <div class="community-grid">
                     <div class="community-info">
                         <div class="info-item">
-                            <i class="fab fa-discord"></i>
+                            <i class="fab fa-discord" aria-hidden="true"></i>
                             <div>
                                 <h3>Discord</h3>
                                 <p>Únete a nuestro servidor para chat en tiempo real</p>
-                                <a href="#" class="community-link">Unirse al Discord</a>
+                                <a href="#" class="community-link" aria-label="Unirse al servidor de Discord">Unirse al Discord</a>
                             </div>
                         </div>
                         
                         <div class="info-item">
-                            <i class="fab fa-github"></i>
+                            <i class="fab fa-github" aria-hidden="true"></i>
                             <div>
                                 <h3>GitHub</h3>
                                 <p>Contribuye al desarrollo del proyecto</p>
-                                <a href="#" class="community-link">Visitar GitHub</a>
+                                <a href="#" class="community-link" aria-label="Visitar el repositorio en GitHub">Visitar GitHub</a>
                             </div>
                         </div>
                         
                         <div class="info-item">
-                            <i class="fab fa-forumbee"></i>
+                            <i class="fab fa-forumbee" aria-hidden="true"></i>
                             <div>
                                 <h3>Foro</h3>
                                 <p>Participa en discusiones y obtén ayuda</p>
-                                <a href="#" class="community-link">Visitar el Foro</a>
+                                <a href="#" class="community-link" aria-label="Visitar el foro de la comunidad">Visitar el Foro</a>
                             </div>
                         </div>
                         
                         <div class="info-item">
-                            <i class="fab fa-wikipedia-w"></i>
+                            <i class="fab fa-wikipedia-w" aria-hidden="true"></i>
                             <div>
                                 <h3>Wiki</h3>
                                 <p>Documentación y guías para usuarios</p>
-                                <a href="#" class="community-link">Visitar la Wiki</a>
+                                <a href="#" class="community-link" aria-label="Visitar la wiki de Flariox">Visitar la Wiki</a>
                             </div>
                         </div>
                     </div>
@@ -395,16 +441,34 @@
                     <div class="newsletter-form">
                         <h3>Suscríbete a nuestro boletín</h3>
                         <p>Recibe las últimas noticias y actualizaciones sobre Flariox</p>
-                        <form id="newsletterForm">
+                        <form id="newsletterForm" novalidate>
                             <div class="form-group">
-                                <input type="text" id="newsletter-name" name="name" placeholder="Tu nombre" required>
+                                <label for="newsletter-name" class="sr-only">Tu nombre</label>
+                                <input type="text" id="newsletter-name" name="name" placeholder="Tu nombre" required aria-required="true">
+                                <span class="error-message" id="name-error"></span>
                             </div>
                             
                             <div class="form-group">
-                                <input type="email" id="newsletter-email" name="email" placeholder="Tu correo electrónico" required>
+                                <label for="newsletter-email" class="sr-only">Tu correo electrónico</label>
+                                <input type="email" id="newsletter-email" name="email" placeholder="Tu correo electrónico" required aria-required="true">
+                                <span class="error-message" id="email-error"></span>
                             </div>
                             
-                            <button type="submit" class="submit-button"> Suscribirse <i class="fas fa-envelope"></i></button>
+                            <div class="form-group checkbox-group">
+                                <input type="checkbox" id="newsletter-privacy" name="privacy" required aria-required="true">
+                                <label for="newsletter-privacy">Acepto la política de privacidad</label>
+                                <span class="error-message" id="privacy-error"></span>
+                            </div>
+                            
+                            <button type="submit" class="submit-button">
+                                <span class="button-text">Suscribirse</span>
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                            </button>
+                            
+                            <div class="form-success" id="newsletter-success" hidden>
+                                <i class="fas fa-check-circle" aria-hidden="true"></i>
+                                <p>¡Gracias por suscribirte! Por favor revisa tu correo para confirmar.</p>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -412,23 +476,23 @@
         </section>
     </main>
 
-    <!-- Pie de página -->
-    <footer class="main-footer">
+    <!-- Pie de página mejorado -->
+    <footer class="main-footer" aria-labelledby="footer-heading">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-about">
-                    <img src="./assets/images/logo/logo.png" alt="Lion Linux OS" class="footer-logo">
+                    <img src="./assets/images/logo/logo-white.png" alt="Flariox" class="footer-logo" width="120" height="120" loading="lazy">
                     <p>Una distribución Linux potente y elegante para todos los usuarios.</p>
                     <div class="footer-social">
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-github"></i></a>
-                        <a href="#"><i class="fab fa-discord"></i></a>
-                        <a href="#"><i class="fab fa-reddit"></i></a>
+                        <a href="#" aria-label="Twitter de Flariox"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="GitHub de Flariox"><i class="fab fa-github" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="Discord de Flariox"><i class="fab fa-discord" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="Reddit de Flariox"><i class="fab fa-reddit" aria-hidden="true"></i></a>
                     </div>
                 </div>
                 
                 <div class="footer-links">
-                    <h3>Flariox</h3>
+                    <h3 id="footer-heading">Flariox</h3>
                     <ul>
                         <li><a href="#about">Acerca de</a></li>
                         <li><a href="#features">Características</a></li>
@@ -461,18 +525,65 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; <?php echo $current_year; ?> 2025 Flariox. Todos los derechos reservados.</p>
+                <p>&copy; <span id="current-year">2025</span> Flariox. Todos los derechos reservados.</p>
                 <p>Flariox ® es una marca registrada de Flariox Community.</p>
+                <div class="footer-lang">
+                    <button aria-label="Cambiar idioma a inglés" data-lang="en">English</button>
+                    <button aria-label="Cambiar idioma a español" data-lang="es" class="active">Español</button>
+                </div>
             </div>
         </div>
     </footer>
 
     <!-- Botón flotante de Telegram -->
-    <a href="https://t.me/flariox" class="telegram-float" target="_blank" rel="noopener noreferrer">
-        <i class="fab fa-telegram-plane"></i>
+    <a href="https://t.me/flariox" class="telegram-float" target="_blank" rel="noopener noreferrer" aria-label="Chat de Telegram de Flariox">
+        <i class="fab fa-telegram-plane" aria-hidden="true"></i>
+        <span class="sr-only">Telegram</span>
     </a>
 
+    <!-- Botón para volver arriba -->
+    <button class="back-to-top" aria-label="Volver arriba">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
     <!-- Scripts -->
-    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/particles.min.js"></script>
+    <script src="./assets/js/main.js" defer></script>
+    
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXX');
+        
+        // Actualizar año del footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Cambio de idioma
+        document.querySelectorAll('.footer-lang button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelector('.footer-lang .active').classList.remove('active');
+                this.classList.add('active');
+                // Aquí iría la lógica para cambiar el idioma
+            });
+        });
+    </script>
+    
+    <!-- Estilos para screen readers -->
+    <style>
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+    </style>
 </body>
 </html>
