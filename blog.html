@@ -62,7 +62,7 @@
     </div>
   </footer>
 
-  <script src="./assets/js/main.js"></script>
+  <!-- Script principal -->
   <script>
     const ruta = './articles/';
 
@@ -96,12 +96,21 @@
 
     function cargarArticulo(file) {
       fetch(ruta + file)
-        .then(res => res.text())
+        .then(res => {
+          if (!res.ok) throw new Error(`No se pudo cargar ${file}`);
+          return res.text();
+        })
         .then(md => {
+          console.log('Contenido del archivo:', md);
           blogCards.style.display = 'none';
           blogContent.innerHTML = marked.parse(md);
           blogContent.style.display = 'block';
           window.scrollTo({ top: blogContent.offsetTop, behavior: 'smooth' });
+        })
+        .catch(err => {
+          console.error(err);
+          blogContent.innerHTML = `<p style="color:red">Error: ${err.message}</p>`;
+          blogContent.style.display = 'block';
         });
     }
 
