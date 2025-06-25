@@ -46,7 +46,7 @@
     </nav>
   </aside>
 
-  <!-- Contenido -->
+  <!-- Contenido principal -->
   <main class="section">
     <div class="container">
       <h1 class="section-title">Blog de Flariox</h1>
@@ -57,7 +57,6 @@
 
   <!-- Pie de página -->
   <footer class="main-footer">
-    <!-- Reutiliza el mismo footer que tienes en index.html -->
     <div class="container">
       <div class="footer-bottom">
         <p>&copy; 2025 Flariox. Todos los derechos reservados.</p>
@@ -65,22 +64,20 @@
     </div>
   </footer>
 
-  <!-- Scripts principales -->
+  <!-- Scripts -->
   <script src="./assets/js/main.js"></script>
-
-  <!-- Script del blog -->
   <script>
     const ruta = './articles/';
-    const archivos = ['bienvenido.md', 'instalacion.md', 'personaliza.md']; // O genera esta lista dinámicamente desde un JSON
+    const archivos = ['bienvenido.md', 'instalacion.md', 'personaliza.md'];
 
     const blogCards = document.getElementById('blog-cards');
     const blogContent = document.getElementById('blog-content');
 
     function parseFrontmatter(md) {
       const fm = {};
-      const match = md.match(/^---\n([\s\S]*?)\n---/);
+      const match = md.match(/^---\n([\\s\\S]*?)\n---/);
       if (match) {
-        const lines = match[1].split('\n');
+        const lines = match[1].split('\\n');
         lines.forEach(line => {
           const [key, ...rest] = line.split(':');
           fm[key.trim()] = rest.join(':').trim();
@@ -128,7 +125,6 @@
     cargarEntradas();
   </script>
 
-  <!-- Estilos inline para blog -->
   <style>
     .blog-card-grid {
       display: grid;
@@ -188,4 +184,5 @@
   </style>
 </body>
 </html>
+
 
