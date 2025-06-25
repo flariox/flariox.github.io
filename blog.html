@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Blog de Flariox - Novedades, tutoriales y más."/>
+  <meta name="author" content="Flariox Team"/>
+  <title>Blog | Flariox</title>
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="./assets/webfonts/css/all.css" />
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+
+  <!-- Markdown parser -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+
+  <!-- Header idéntico -->
+  <header class="main-header">
+    <nav class="navbar">
+      <a href="index.html" class="logo">
+        <img src="./assets/images/logo/logo.png" alt="FlarioX" class="logo-img" /> Flariox
+      </a>
+      <button class="sidebar-toggle" aria-expanded="false" aria-controls="sidebar">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-list">
+        <li><a href="index.html#about" class="nav-link">Acerca de</a></li>
+        <li><a href="index.html#features" class="nav-link">Características</a></li>
+        <li><a href="index.html#download" class="nav-link">Descargar</a></li>
+        <li><a href="#blog" class="nav-link active">Blog</a></li>
+        <li><a href="index.html#community" class="nav-link">Comunidad</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Sidebar reutilizado -->
+  <div class="sidebar-overlay"></div>
+  <aside id="sidebar" class="sidebar" aria-hidden="true">
+    <button class="close-sidebar"><i class="fas fa-times"></i></button>
+    <nav class="sidebar-nav">
+      <ul class="sidebar-list">
+        <li><a href="index.html#about" class="sidebar-link">Acerca de</a></li>
+        <li><a href="index.html#features" class="sidebar-link">Características</a></li>
+        <li><a href="index.html#download" class="sidebar-link">Descargar</a></li>
+        <li><a href="#blog" class="sidebar-link active">Blog</a></li>
+        <li><a href="index.html#community" class="sidebar-link">Comunidad</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Contenido del blog -->
+  <main>
+    <section class="section">
+      <div class="container blog-wrapper">
+        <h1 class="section-title">Blog de Flariox</h1>
+        <div id="blog-content" class="blog-content">
+          <p>Cargando artículo...</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <!-- Puedes copiar directamente el bloque completo de footer de index.html aquí -->
+  <!-- O si quieres, puedo pasártelo ya adaptado y pegado sin repeticiones innecesarias -->
+
+  <!-- Modales, banner de cookies y Telegram float -->
+  <!-- También puedes copiar estas secciones de index.html o usar un partial si haces modularización -->
+
+  <!-- Script de carga de Markdown -->
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const file = params.get("post") || "bienvenido.md";
+
+    fetch(`./articles/${file}`)
+      .then(res => {
+        if (!res.ok) throw new Error("Artículo no encontrado");
+        return res.text();
+      })
+      .then(md => {
+        const html = marked.parse(md);
+        document.getElementById("blog-content").innerHTML = html;
+      })
+      .catch(() => {
+        document.getElementById("blog-content").innerHTML = "<p>No se pudo cargar el artículo solicitado.</p>";
+      });
+  </script>
+
+  <!-- Tu JS principal -->
+  <script src="./assets/js/main.js"></script>
+</body>
+</html>
