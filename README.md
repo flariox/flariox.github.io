@@ -2,7 +2,7 @@
 
 Flariox es una distribución Linux diseñada para ofrecer un entorno moderno, ágil y productivo tanto para desarrolladores como para usuarios avanzados. Su objetivo es combinar un rendimiento optimizado con una experiencia visual agradable y herramientas esenciales preinstaladas.
 
-![Flariox Preview](assets/logo/flariox-logo.png)
+![Flariox Preview](./assets/logo/flariox-logo.png)
 
 ## ✨ Características principales
 
