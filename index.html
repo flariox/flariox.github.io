@@ -482,6 +482,23 @@
 <!-- Este contenedor mostrará el menú de idiomas -->
 <div id="google_translate_element"></div>
 
+    <script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    // 1. Cambia 'es' por el código del idioma original de tu web si no está en español
+    pageLanguage: 'es', 
+    
+    // 2. Escribe aquí ABAJO los códigos de los idiomas específicos que quieres permitir, separados por comas
+    includedLanguages: 'en,fr,pt,it,de', 
+    
+    // Mantiene un diseño limpio y compacto
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+  }, 'google_translate_element');
+}
+</script>
+
+<script type="text/javascript" src="//://google.com"></script>
+
 <!-- Overlays -->
 <div class="modal-overlay" id="overlay-licencia"></div>
 <div class="modal-overlay" id="overlay-privacidad"></div>
