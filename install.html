@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Instalación de Arch Linux</title>
+    <style>
+        :root {
+            --bg-color: #1a1a1a;
+            --container-bg: #2d2d2d;
+            --text-color: #e0e0e0;
+            --primary-color: #1793d1; /* Azul Arch Linux */
+            --code-bg: #111111;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--container-bg);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        h1 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        h2 {
+            color: var(--primary-color);
+            margin-top: 30px;
+        }
+        code, pre {
+            background-color: var(--code-bg);
+            font-family: 'Courier New', Courier, monospace;
+            border-radius: 4px;
+        }
+        code {
+            padding: 2px 6px;
+            color: #ff79c6;
+        }
+        pre {
+            padding: 15px;
+            overflow-x: auto;
+            border-left: 4px solid var(--primary-color);
+        }
+        pre code {
+            color: #50fa7b;
+            padding: 0;
+            background-color: transparent;
+        }
+        ul, ol {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .note {
+            background-color: #3a3f44;
+            border-left: 4px solid #f1fa8c;
+            padding: 10px 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Guía de Instalación Base de Arch Linux</h1>
+    <p>Esta es una guía rápida en HTML para realizar una instalación manual y limpia del sistema base de Arch Linux en equipos con arquitectura de 64 bits y UEFI.</p>
+    
+    <div class="note">
+        <strong>Nota importante:</strong> Asegúrate de contar con una conexión a internet estable antes de iniciar el proceso.
+    </div>
+
+    <h2>1. Preparación inicial</h2>
+    <p>Configura la distribución del teclado en español (si aplica) y verifica que el sistema haya arrancado en modo UEFI:</p>
+    <pre><code>loadkeys es
+ls /sys/firmware/efi/efivars</code></pre>
+
+    <h2>2. Conexión a Internet</h2>
+    <p>Verifica que tienes acceso a la red usando el comando ping:</p>
+    <pre><code>ping -c 3 archlinux.org</code></pre>
+
+    <h2>3. Particionado del Disco</h2>
+    <p>Identifica tus unidades de almacenamiento utilizando <code>fdisk -l</code>. Luego usa tu herramienta preferida (como <code>cfdisk</code>) para crear la siguiente estructura sugerida:</p>
+    <ul>
+        <li><strong>Partición EFI:</strong> Al menos 512 MB (Formato: FAT32)</li>
+        <li><strong>Partición Raíz (/):</strong> El resto del espacio disponible (Formato: ext4)</li>
+    </ul>
+    <p>Aplica formato a las particiones recién creadas:</p>
+    <pre><code>mkfs.fat -F 32 /dev/sdX1
+mkfs.ext4 /dev/sdX2</code></pre>
+    <p><em>Sustituye <code>sdX</code> por la nomenclatura correspondiente a tu disco.</em></p>
+
+    <h2>4. Montaje del Sistema</h2>
+    <p>Monta la partición raíz en el directorio <code>/mnt</code> y la partición EFI en su respectiva ruta interna:</p>
+    <pre><code>mount /dev/sdX2 /mnt
+mount --mkdir /dev/sdX1 /mnt/boot</code></pre>
+
+    <h2>5. Instalación del Sistema Base</h2>
+    <p>Utiliza el script <code>pacstrap</code> para descargar e instalar los paquetes esenciales, el kernel de Linux y utilidades del sistema:</p>
+    <pre><code>pacstrap -K /mnt base linux linux-firmware nano grub efibootmgr networkmanager</code></pre>
+
+    <h2>6. Configuración del Sistema (Chroot)</h2>
+    <p>Genera el archivo de la tabla de sistemas de archivos (fstab) y entra en el nuevo sistema raíz con chroot:</p>
+    <pre><code>genfstab -U /mnt >> /mnt/etc/fstab
+arch-chroot /mnt</code></pre>
+
+    <h2>7. Zona Horaria y Localización</h2>
+    <p>Configura la hora local y los idiomas editando el archivo de locales:</p>
+    <pre><code>ln -sf /usr/share/zoneinfo/America/Caracas /etc/localtime
+hwclock --systohc
+nano /etc/locale.gen</code></pre>
+    <p><em>(Descomenta tu idioma, por ejemplo: <code>es_VE.UTF-8 UTF-8</code>, guarda los cambios y ejecuta:)</em></p>
+    <pre><code>locale-gen
+echo "LANG=es_VE.UTF-8" > /etc/locale.conf</code></pre>
+
+    <h2>8. Red y Contraseñas</h2>
+    <p>Define el nombre de tu equipo (hostname) y crea la contraseña para el usuario administrador (root):</p>
+    <pre><code>echo "mi-computadora" > /etc/hostname
+passwd</code></pre>
+
+    <h2>9. Cargador de Arranque (GRUB)</h2>
+    <p>Instala y configura el cargador de arranque GRUB para sistemas UEFI:</p>
+    <pre><code>grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+grub-mkconfig -o /boot/grub/grub.cfg</code></pre>
+
+    <h2>10. Finalización</h2>
+    <p>Habilita el gestor de red, sal del entorno chroot, desmonta las unidades y reinicia tu equipo:</p>
+    <pre><code>systemctl enable NetworkManager
+exit
+umount -R /mnt
+reboot</code></pre>
+</div>
+
+</body>
+</html>
