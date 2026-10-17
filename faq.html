@@ -3,114 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ de Arch Linux</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1c1c1c;
-            color: #e0e0e0;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #2a2a2a;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            border-top: 5px solid #1793d1; /* Azul característico de Arch */
-        }
-        h1 {
-            color: #1793d1;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .faq-item {
-            border-bottom: 1px solid #444;
-            padding: 15px 0;
-        }
-        .faq-item:last-child {
-            border-bottom: none;
-        }
-        summary {
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            color: #5fceff;
-            outline: none;
-            padding: 5px 0;
-        }
-        summary:hover {
-            color: #1793d1;
-        }
-        p {
-            margin: 10px 0 0 20px;
-            color: #cccccc;
-        }
-        code {
-            background-color: #111;
-            color: #ff79c6;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Courier New', Courier, monospace;
-        }
-    </style>
+    <meta name="description" content="Resuelve tus dudas sobre Arch Linux en las preguntas frecuentes de Flariox OS.">
+    <title>Flariox OS | Preguntas frecuentes</title>
+    <link rel="stylesheet" href="./assets/webfonts/css/all.css">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/faq.css">
+    <script src="./assets/js/main.js" defer></script>
 </head>
-<body>
+<body class="faq-page">
+    <header class="main-header">
+        <nav class="navbar container" aria-label="Navegación principal">
+            <a href="index.html" class="logo">
+                <img src="./assets/images/logo/flariox-logo.png" alt="" class="logo-img"> Flariox
+            </a>
+            <button class="sidebar-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
+            <ul class="nav-list">
+                <li><a href="index.html" class="nav-link"><i class="fas fa-home" aria-hidden="true"></i> Inicio</a></li>
+                <li><a href="index.html#download" class="nav-link"><i class="fas fa-download" aria-hidden="true"></i> Descargar</a></li>
+                <li><a href="index.html#community" class="nav-link"><i class="fas fa-users" aria-hidden="true"></i> Comunidad</a></li>
+                <li><a href="blog.html" class="nav-link"><i class="fas fa-blog" aria-hidden="true"></i> Blog</a></li>
+                <li><a href="faq.html" class="nav-link" aria-current="page"><i class="fas fa-question-circle" aria-hidden="true"></i> FAQ</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<div class="container">
-    <h1>Preguntas Frecuentes (FAQ) - Arch Linux</h1>
+    <div class="sidebar-overlay"></div>
+    <aside id="sidebar" class="sidebar" aria-hidden="true">
+        <button class="close-sidebar" aria-label="Cerrar menú"><i class="fas fa-times" aria-hidden="true"></i></button>
+        <nav class="sidebar-nav" aria-label="Navegación móvil">
+            <ul class="sidebar-list">
+                <li><a href="index.html" class="sidebar-link"><i class="fas fa-home" aria-hidden="true"></i> Inicio</a></li>
+                <li><a href="index.html#download" class="sidebar-link"><i class="fas fa-download" aria-hidden="true"></i> Descargar</a></li>
+                <li><a href="index.html#community" class="sidebar-link"><i class="fas fa-users" aria-hidden="true"></i> Comunidad</a></li>
+                <li><a href="blog.html" class="sidebar-link"><i class="fas fa-blog" aria-hidden="true"></i> Blog</a></li>
+                <li><a href="faq.html" class="sidebar-link" aria-current="page"><i class="fas fa-question-circle" aria-hidden="true"></i> FAQ</a></li>
+            </ul>
+        </nav>
+    </aside>
 
-    <!-- Pregunta 1 -->
-    <div class="faq-item">
-        <details>
-            <summary>¿Qué es Arch Linux?</summary>
-            <p>Arch Linux es una distribución GNU/Linux independiente optimizada para la arquitectura x86_64. Se enfoca en la simplicidad, el minimalismo y el control absoluto del usuario bajo la filosofía <strong>KISS</strong> (Keep It Simple, Stupid).</p>
-        </details>
-    </div>
+    <main>
+        <section class="hero faq-hero" aria-labelledby="faq-title">
+            <div class="container">
+                <p class="subtitle">Flariox OS · Arch Linux</p>
+                <h1 id="faq-title">Preguntas frecuentes</h1>
+                <p class="hero-text">Conoce las bases de Arch Linux y encuentra respuestas para dar tus primeros pasos.</p>
+            </div>
+        </section>
 
-    <!-- Pregunta 2 -->
-    <div class="faq-item">
-        <details>
-            <summary>¿Por qué preferiría usar Arch?</summary>
-            <p>Porque te permite construir tu sistema operativo desde cero, instalando únicamente lo que necesitas. Además, utiliza un modelo de desarrollo continuo (<strong>Rolling Release</strong>), lo que significa que el sistema se actualiza constantemente sin necesidad de reinstalar versiones de manera periódica.</p>
-        </details>
-    </div>
+        <section class="section faq-section" aria-labelledby="questions-title">
+            <div class="container faq-container">
+                <h2 id="questions-title" class="section-title">Todo sobre Arch Linux</h2>
+                <p class="section-subtitle">Selecciona una pregunta para ver la respuesta.</p>
+                <div class="faq-list">
+                    <!-- Pregunta 1 -->
+                    <div class="faq-item">
+                        <details>
+                            <summary>¿Qué es Arch Linux?</summary>
+                            <p>Arch Linux es una distribución GNU/Linux independiente optimizada para la arquitectura x86_64. Se enfoca en la simplicidad, el minimalismo y el control absoluto del usuario bajo la filosofía <strong>KISS</strong> (Keep It Simple, Stupid).</p>
+                        </details>
+                    </div>
 
-    <!-- Pregunta 3 -->
-    <div class="faq-item">
-        <details>
-            <summary>¿Es Arch Linux adecuada para principiantes?</summary>
-            <p>Por lo general, no. Requiere un nivel moderado a avanzado de conocimientos informáticos, ya que la instalación es manual y se gestiona mediante la línea de comandos, lo que demanda leer y comprender la documentación técnica.</p>
-        </details>
-    </div>
+                    <!-- Pregunta 2 -->
+                    <div class="faq-item">
+                        <details>
+                            <summary>¿Por qué preferiría usar Arch?</summary>
+                            <p>Porque te permite construir tu sistema operativo desde cero, instalando únicamente lo que necesitas. Además, utiliza un modelo de desarrollo continuo (<strong>Rolling Release</strong>), lo que significa que el sistema se actualiza constantemente sin necesidad de reinstalar versiones de manera periódica.</p>
+                        </details>
+                    </div>
 
-    <!-- Pregunta 4 -->
-    <div class="faq-item">
-        <details>
-            <summary>¿Arch Linux tiene un instalador gráfico?</summary>
-            <p>No de manera oficial por defecto. Sin embargo, cuenta con un instalador guiado por texto integrado llamado <code>archinstall</code> que facilita el proceso si no deseas configurar de manera completamente manual las particiones y servicios de red.</p>
-        </details>
-    </div>
+                    <!-- Pregunta 3 -->
+                    <div class="faq-item">
+                        <details>
+                            <summary>¿Es Arch Linux adecuada para principiantes?</summary>
+                            <p>Por lo general, no. Requiere un nivel moderado a avanzado de conocimientos informáticos, ya que la instalación es manual y se gestiona mediante la línea de comandos, lo que demanda leer y comprender la documentación técnica.</p>
+                        </details>
+                    </div>
 
-    <!-- Pregunta 5 -->
-    <div class="faq-item">
-        <details>
-            <summary>¿Qué es el AUR (Arch User Repository)?</summary>
-            <p>El AUR es un repositorio comunitario mantenido por los usuarios. Contiene descripciones de paquetes (PKGBUILDs) que permiten compilar e instalar software que no se encuentra en los repositorios oficiales de Arch.</p>
-        </details>
-    </div>
+                    <!-- Pregunta 4 -->
+                    <div class="faq-item">
+                        <details>
+                            <summary>¿Arch Linux tiene un instalador gráfico?</summary>
+                            <p>No de manera oficial por defecto. Sin embargo, cuenta con un instalador guiado por texto integrado llamado <code>archinstall</code> que facilita el proceso si no deseas configurar de manera completamente manual las particiones y servicios de red.</p>
+                        </details>
+                    </div>
 
-    <!-- Pregunta 6 -->
-    <div class="faq-item">
-        <details>
-            <summary>¿Cómo actualizo mi sistema en Arch?</summary>
-            <p>Para actualizar por completo el sistema y todos los paquetes instalados, debes ejecutar en tu terminal el comando principal del gestor Pacman: <code>sudo pacman -Syu</code>.</p>
-        </details>
-    </div>
-</div>
+                    <!-- Pregunta 5 -->
+                    <div class="faq-item">
+                        <details>
+                            <summary>¿Qué es el AUR (Arch User Repository)?</summary>
+                            <p>El AUR es un repositorio comunitario mantenido por los usuarios. Contiene descripciones de paquetes (PKGBUILDs) que permiten compilar e instalar software que no se encuentra en los repositorios oficiales de Arch.</p>
+                        </details>
+                    </div>
 
+                    <!-- Pregunta 6 -->
+                    <div class="faq-item">
+                        <details>
+                            <summary>¿Cómo actualizo mi sistema en Arch?</summary>
+                            <p>Para actualizar por completo el sistema y todos los paquetes instalados, debes ejecutar en tu terminal el comando principal del gestor Pacman: <code>sudo pacman -Syu</code>.</p>
+                        </details>
+                    </div>
+                </div>
+                <div class="faq-help">
+                    <h2>¿Necesitas más ayuda?</h2>
+                    <p>Descubre cómo instalar el sistema o encuentra apoyo en nuestra comunidad.</p>
+                    <div class="hero-buttons">
+                        <a href="install.html" class="cta-button">Guía de instalación</a>
+                        <a href="index.html#community" class="cta-button secondary">Comunidad</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer faq-footer">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="./assets/images/logo/flariox-logo.png" alt="" class="logo-img"> Flariox
+            </a>
+            <p>Potente. Elegante. Libre.</p>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year">2026</span> Flariox OS. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

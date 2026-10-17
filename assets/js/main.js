@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const cookieBanner = document.getElementById('cookie-banner');
   const acceptCookiesBtn = document.getElementById('accept-cookies');
 
-  if (!localStorage.getItem('cookiesAccepted')) {
+  if (cookieBanner && !localStorage.getItem('cookiesAccepted')) {
     cookieBanner.classList.add('show');
     cookieBanner.setAttribute('aria-hidden', 'false');
   }
