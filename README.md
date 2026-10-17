@@ -6,7 +6,7 @@ Flariox OS es una distribución Linux diseñada para ofrecer un entorno moderno,
 
 ## ✨ Características principales
 
-- Entorno de escritorio ligero (XFCE personalizado)
+- Entorno de escritorio KDE Plasma personalizado
 - Interfaz moderna con transparencia y modo oscuro
 - Terminal avanzada con Zsh + Oh My Zsh
 - Actualizaciones OTA automáticas y sin interrupciones

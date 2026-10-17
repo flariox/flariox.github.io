@@ -24,6 +24,11 @@
   box-sizing: border-box;
 }
 
+/* Contenido pendiente: oculto también para teclado y lectores de pantalla. */
+[hidden] {
+  display: none !important;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -676,6 +681,13 @@ ul {
   margin-bottom: 3rem;
 }
 
+.available-downloads {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .download-card {
   background-color: var(--card-bg);
   border-radius: var(--border-radius);
@@ -829,6 +841,14 @@ ul {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.5rem;
+}
+
+.community-grid-links {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.community-grid-links .community-info {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .info-item {
@@ -1089,6 +1109,10 @@ ul {
 }
 
 @media (max-width: 768px) {
+  .community-grid-links .community-info {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   /* Navegación */
   .nav-list {
     display: none;

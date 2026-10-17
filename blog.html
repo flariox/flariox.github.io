@@ -5,56 +5,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Blog de Flariox: Tutoriales, anuncios y novedades." />
   <title>Flariox | Blog</title>
-  <link rel="stylesheet" href="/assets/css/styles.css" />
-  <link rel="stylesheet" href="/assets/webfonts/css/all.css" />
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+  <link rel="stylesheet" href="./assets/css/blog.css" />
+  <link rel="stylesheet" href="./assets/webfonts/css/all.css" />
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
-<body>
-  <!-- Barra de navegación -->
-  <header class="main-header">
-    <nav class="navbar">
-        <a href="index.html" class="logo">
-            <img src="./assets/images/logo/flariox-logo.png" alt="Flariox" class="logo-img"> Flariox
-        </a>
-        <button class="sidebar-toggle" aria-expanded="false" aria-controls="sidebar">
-            <i class="fas fa-bars"></i>
-        </button>
-        <ul class="nav-list">
-            <li><a href="index.html#about" class="nav-link"><i class="fas fa-info-circle"></i> Acerca de</a></li>
-            <li><a href="index.html#features" class="nav-link"><i class="fas fa-star"></i> Características</a></li>
-            <li><a href="index.html#download" class="nav-link"><i class="fas fa-download"></i> Descargar</a></li>
-            <li><a href="index.html#screenshots" class="nav-link"><i class="fas fa-image"></i> Capturas</a></li>
-            <li><a href="index.html#community" class="nav-link"><i class="fas fa-users"></i> Comunidad</a></li>
-            <li><a href="blog.html" class="nav-link active"><i class="fas fa-blog"></i> Blog</a></li>
-        </ul>
-    </nav>
-  </header>
+<body class="blog-page">
+    <header class="main-header">
+        <nav class="navbar container" aria-label="Navegación principal">
+            <a href="index.html" class="logo">
+                <img src="./assets/images/logo/flariox-logo.png" alt="" class="logo-img"> Flariox
+            </a>
+            <button class="sidebar-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
+            <ul class="nav-list">
+                <li hidden><a href="index.html#screenshots" class="nav-link"><i class="fas fa-image" aria-hidden="true"></i> Capturas</a></li>
+                <li><a href="index.html" class="nav-link"><i class="fas fa-home" aria-hidden="true"></i> Inicio</a></li>
+                <li><a href="index.html#download" class="nav-link"><i class="fas fa-download" aria-hidden="true"></i> Descargar</a></li>
+                <li><a href="index.html#community" class="nav-link"><i class="fas fa-users" aria-hidden="true"></i> Comunidad</a></li>
+                <li><a href="blog.html" class="nav-link" aria-current="page"><i class="fas fa-blog" aria-hidden="true"></i> Blog</a></li>
+                <li><a href="faq.html" class="nav-link"><i class="fas fa-question-circle" aria-hidden="true"></i> FAQ</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <!-- Sidebar -->
-  <div class="sidebar-overlay"></div>
-  <aside id="sidebar" class="sidebar" aria-hidden="true">
-    <button class="close-sidebar"><i class="fas fa-times"></i></button>
-    <nav class="sidebar-nav">
-        <ul class="sidebar-list">
-            <li><a href="index.html#about" class="sidebar-link"><i class="fas fa-info-circle"></i> Acerca de</a></li>
-            <li><a href="index.html#features" class="sidebar-link"><i class="fas fa-star"></i> Características</a></li>
-            <li><a href="index.html#download" class="sidebar-link"><i class="fas fa-download"></i> Descargar</a></li>
-            <li><a href="index.html#screenshots" class="sidebar-link"><i class="fas fa-image"></i> Capturas</a></li>
-            <li><a href="index.html#community" class="sidebar-link"><i class="fas fa-users"></i> Comunidad</a></li>
-            <li><a href="blog.html" class="sidebar-link"><i class="fas fa-blog"></i> Blog</a></li>
-        </ul>
-    </nav>
-  </aside>
+    <div class="sidebar-overlay"></div>
+    <aside id="sidebar" class="sidebar" aria-hidden="true">
+        <button class="close-sidebar" aria-label="Cerrar menú"><i class="fas fa-times" aria-hidden="true"></i></button>
+        <nav class="sidebar-nav" aria-label="Navegación móvil">
+            <ul class="sidebar-list">
+                <li hidden><a href="index.html#screenshots" class="sidebar-link"><i class="fas fa-image" aria-hidden="true"></i> Capturas</a></li>
+                <li><a href="index.html" class="sidebar-link"><i class="fas fa-home" aria-hidden="true"></i> Inicio</a></li>
+                <li><a href="index.html#download" class="sidebar-link"><i class="fas fa-download" aria-hidden="true"></i> Descargar</a></li>
+                <li><a href="index.html#community" class="sidebar-link"><i class="fas fa-users" aria-hidden="true"></i> Comunidad</a></li>
+                <li><a href="blog.html" class="sidebar-link" aria-current="page"><i class="fas fa-blog" aria-hidden="true"></i> Blog</a></li>
+                <li><a href="faq.html" class="sidebar-link"><i class="fas fa-question-circle" aria-hidden="true"></i> FAQ</a></li>
+            </ul>
+        </nav>
+    </aside>
 
-  <main class="section">
+  <main>
+    <section class="hero blog-hero" aria-labelledby="blog-title">
+      <div class="container">
+        <p class="subtitle">Flariox OS · Noticias y guías</p>
+        <h1 id="blog-title">Blog de Flariox</h1>
+        <p class="hero-text">Descubre las novedades del proyecto y aprende con nuestra comunidad.</p>
+      </div>
+    </section>
+    <section class="section blog-section" aria-label="Artículos del blog">
     <div class="container">
-      <h1 class="section-title">Blog de Flariox</h1>
       
       <!-- Barra de búsqueda -->
       <div class="search-container">
         <div class="search-box">
           <i class="fas fa-search"></i>
-          <input type="text" id="search-input" placeholder="Buscar artículos..." />
+          <input type="search" id="search-input" aria-label="Buscar artículos" placeholder="Buscar artículos..." />
         </div>
         <div class="search-filters">
           <label><input type="checkbox" id="filter-title" checked /> Título</label>
@@ -64,9 +70,10 @@
         </div>
       </div>
       
-      <div id="blog-cards" class="blog-card-grid"></div>
+      <div id="blog-cards" class="blog-card-grid" aria-live="polite"></div>
       <div id="blog-content" class="article-content" style="display: none;"></div>
     </div>
+    </section>
   </main>
 
   <script>
@@ -100,7 +107,7 @@
           <h3>Error al cargar los artículos</h3>
           <p>${message}</p>
           ${details && `<p>${details}</p>`}
-          <button onclick="loadArticles()" class="retry-button">
+          <button onclick="loadArticles()" class="retry-button cta-button">
             <i class="fas fa-sync-alt"></i> Reintentar
           </button>
         </div>
@@ -189,7 +196,7 @@
             <span class="date"><i class="far fa-calendar-alt"></i> ${article.date}</span>
             ${article.author ? `<span class="author"><i class="fas fa-user"></i> ${article.author}</span>` : ''}
           </div>
-          <button class="read-more" onclick="event.stopPropagation(); showArticle('${article.file}')">
+          <button class="read-more cta-button secondary" onclick="event.stopPropagation(); showArticle('${article.file}')">
             Leer más <i class="fas fa-arrow-right"></i>
           </button>
         `;
@@ -211,7 +218,7 @@
         const htmlContent = marked.parse(content.replace(/^---[\s\S]+?---/, ''));
         
         blogContent.innerHTML = `
-          <button class="back-button" onclick="showArticlesList()">
+          <button class="back-button cta-button secondary" onclick="showArticlesList()">
             <i class="fas fa-arrow-left"></i> Volver al blog
           </button>
           <div class="article-markdown">${htmlContent}</div>
@@ -222,13 +229,13 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } catch (error) {
         blogContent.innerHTML = `
-          <button class="back-button" onclick="showArticlesList()">
+          <button class="back-button cta-button secondary" onclick="showArticlesList()">
             <i class="fas fa-arrow-left"></i> Volver al blog
           </button>
           <div class="error-message">
             <h3>Error al cargar el artículo</h3>
             <p>${error.message}</p>
-            <button onclick="showArticle('${filename}')" class="retry-button">
+            <button onclick="showArticle('${filename}')" class="retry-button cta-button">
               <i class="fas fa-sync-alt"></i> Reintentar
             </button>
           </div>
@@ -315,216 +322,6 @@
     loadArticles();
   </script>
 
-  <style>
-    .blog-card-grid {
-      display: grid;
-      gap: 1.5rem;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      margin: 2rem 0;
-    }
-
-    .blog-card {
-      background: #1e1e1e;
-      border: 1px solid #2a2a2a;
-      border-radius: 8px;
-      padding: 1.5rem;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .blog-card:hover {
-      border-color: #0af;
-      transform: translateY(-3px);
-      box-shadow: 0 4px 12px rgba(0, 170, 255, 0.1);
-    }
-
-    .blog-card h3 {
-      color: #0af;
-      margin-top: 0;
-      margin-bottom: 0.8rem;
-    }
-
-    .article-excerpt {
-      color: #ccc;
-      margin: 0.5rem 0 1.2rem;
-      font-size: 0.95rem;
-      line-height: 1.5;
-    }
-
-    .article-meta {
-      display: flex;
-      gap: 1rem;
-      margin: 1rem 0;
-      font-size: 0.85rem;
-      color: #888;
-      flex-wrap: wrap;
-    }
-
-    .article-meta i {
-      margin-right: 0.3rem;
-    }
-
-    .read-more {
-      background: rgba(0, 170, 255, 0.1);
-      color: #0af;
-      border: 1px solid #0af;
-      border-radius: 4px;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .read-more:hover {
-      background: rgba(0, 170, 255, 0.2);
-      transform: translateX(3px);
-    }
-
-    .article-content {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-
-    .article-markdown {
-      background: #1a1a1a;
-      padding: 2rem;
-      border-radius: 8px;
-      line-height: 1.6;
-    }
-
-    .search-container {
-      margin: 2rem 0;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .search-box {
-      display: flex;
-      align-items: center;
-      background: #1e1e1e;
-      border-radius: 4px;
-      padding: 0.5rem 1rem;
-      border: 1px solid #2a2a2a;
-    }
-
-    .search-box i {
-      color: #888;
-      margin-right: 0.5rem;
-    }
-
-    .search-box input {
-      flex: 1;
-      background: transparent;
-      border: none;
-      color: white;
-      outline: none;
-    }
-
-    .search-filters {
-      display: flex;
-      gap: 1rem;
-      margin-top: 0.5rem;
-      font-size: 0.9rem;
-      flex-wrap: wrap;
-    }
-
-    .search-filters label {
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-      cursor: pointer;
-      color: #ccc;
-    }
-
-    .no-results {
-      text-align: center;
-      padding: 2rem;
-      grid-column: 1 / -1;
-      color: #888;
-    }
-
-    .no-results i {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .back-button {
-      background: #0af;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-bottom: 1.5rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: background 0.2s ease;
-    }
-
-    .back-button:hover {
-      background: #08c;
-    }
-
-    .retry-button {
-      background: #4CAF50;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-top: 1rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: background 0.2s ease;
-    }
-
-    .retry-button:hover {
-      background: #3e8e41;
-    }
-
-    .loading-spinner {
-      text-align: center;
-      padding: 2rem;
-      color: #0af;
-      font-size: 1.2rem;
-    }
-
-    .error-message {
-      background: #2a1a1a;
-      border-left: 4px solid #f33;
-      padding: 1.5rem;
-      border-radius: 0 4px 4px 0;
-      margin: 1rem 0;
-    }
-
-    .error-message h3 {
-      color: #f77;
-      margin-top: 0;
-    }
-
-    @media (max-width: 768px) {
-      .blog-card-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .article-markdown {
-        padding: 1rem;
-      }
-      
-      .search-filters {
-        flex-wrap: wrap;
-      }
-    }
-  </style>
 
   <!-- Footer -->
   <footer class="main-footer">
@@ -535,10 +332,10 @@
           <img src="./assets/images/logo/flariox-logo.png" alt="Flariox" class="footer-logo">
           <p>Una distribución Linux potente y elegante para todos los usuarios.</p>
           <div class="footer-social">
-            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#" hidden><i class="fab fa-twitter"></i></a>
             <a href="https://github.com/flariox/"><i class="fab fa-github"></i></a>
-            <a href="#"><i class="fab fa-discord"></i></a>
-            <a href="#"><i class="fab fa-reddit"></i></a>
+            <a href="#" hidden><i class="fab fa-discord"></i></a>
+            <a href="#" hidden><i class="fab fa-reddit"></i></a>
           </div>
         </div>
 
@@ -548,7 +345,7 @@
             <li><a href="index.html#about">Acerca de</a></li>
             <li><a href="index.html#features">Características</a></li>
             <li><a href="index.html#download">Descargar</a></li>
-            <li><a href="index.html#screenshots">Capturas</a></li>
+            <li hidden><a href="index.html#screenshots">Capturas</a></li>
             <li><a href="index.html#community">Comunidad</a></li>
           </ul>
         </div>
@@ -556,11 +353,11 @@
         <div class="footer-resources">
           <h3>Recursos</h3>
           <ul>
-            <li><a href="#">Documentación</a></li>
+            <li hidden><a href="#">Documentación</a></li>
             <li><a href="install.html">Guía de instalación</a></li>
             <li><a href="faq.html">FAQ</a></li>
             <li><a href="blog.html">Blog</a></li>
-            <li><a href="#">Roadmap</a></li>
+            <li hidden><a href="#">Roadmap</a></li>
           </ul>
         </div>
 
@@ -789,7 +586,7 @@
 </div>
 <!-- Banner de Cookies -->
 <div id="cookie-banner" class="cookie-banner" aria-hidden="true">
-  <p>Este sitio utiliza cookies para mejorar tu experiencia. <a href="#">Saber más</a></p>
+  <p>Este sitio utiliza cookies para mejorar tu experiencia. <a href="#" hidden>Saber más</a></p>
   <button id="accept-cookies" class="accept-button">Aceptar</button>
 </div>
 

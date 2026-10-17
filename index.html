@@ -28,7 +28,7 @@
             <li><a href="#about" class="nav-link"><i class="fas fa-info-circle"></i> Acerca de</a></li>
             <li><a href="#features" class="nav-link"><i class="fas fa-star"></i> Características</a></li>
             <li><a href="#download" class="nav-link"><i class="fas fa-download"></i> Descargar</a></li>
-            <li><a href="#screenshots" class="nav-link"><i class="fas fa-image"></i> Capturas</a></li>
+            <li hidden><a href="#screenshots" class="nav-link"><i class="fas fa-image"></i> Capturas</a></li>
             <li><a href="#community" class="nav-link"><i class="fas fa-users"></i> Comunidad</a></li>
             <li><a href="blog.html" class="nav-link"><i class="fas fa-blog"></i> Blog</a></li>
         </ul>
@@ -47,7 +47,7 @@
             <li><a href="#about" class="sidebar-link"><i class="fas fa-info-circle"></i> Acerca de</a></li>
             <li><a href="#features" class="sidebar-link"><i class="fas fa-star"></i> Características</a></li>
             <li><a href="#download" class="sidebar-link"><i class="fas fa-download"></i> Descargar</a></li>
-            <li><a href="#screenshots" class="sidebar-link"><i class="fas fa-image"></i> Capturas</a></li>
+            <li hidden><a href="#screenshots" class="sidebar-link"><i class="fas fa-image"></i> Capturas</a></li>
             <li><a href="#community" class="sidebar-link"><i class="fas fa-users"></i> Comunidad</a></li>
             <li><a href="blog.html" class="sidebar-link"><i class="fas fa-blog"></i> Blog</a></li>
         </ul>
@@ -180,7 +180,7 @@
     <div class="team-member">
         <div class="member-image">
             <img src="./assets/images/team/leonardo.jpg" alt="Miembro del equipo 1">
-            <div class="member-social">
+            <div class="member-social" hidden>
                 <a href="#"><i class="fab fa-github"></i></a>
                 <a href="#"><i class="fab fa-twitter"></i></a>
                 <a href="#"><i class="fab fa-linkedin"></i></a>
@@ -194,7 +194,7 @@
     <div class="team-member">
         <div class="member-image">
             <img src="./assets/images/team/edisbel.jpg" alt="Miembro del equipo 2">
-            <div class="member-social">
+            <div class="member-social" hidden>
                 <a href="#"><i class="fab fa-github"></i></a>
                 <a href="#"><i class="fab fa-twitter"></i></a>
                 <a href="#"><i class="fab fa-linkedin"></i></a>
@@ -208,7 +208,7 @@
     <div class="team-member">
         <div class="member-image">
             <img src="./assets/images/team/kenneth.jpg" alt="Miembro del equipo 3">
-            <div class="member-social">
+            <div class="member-social" hidden>
                 <a href="#"><i class="fab fa-github"></i></a>
                 <a href="#"><i class="fab fa-twitter"></i></a>
                 <a href="#"><i class="fab fa-linkedin"></i></a>
@@ -222,7 +222,7 @@
     <div class="team-member">
         <div class="member-image">
             <img src="./assets/images/team/williams.jpg" alt="Miembro del equipo 4">
-            <div class="member-social">
+            <div class="member-social" hidden>
                 <a href="#"><i class="fab fa-github"></i></a>
                 <a href="#"><i class="fab fa-twitter"></i></a>
                 <a href="#"><i class="fab fa-linkedin"></i></a>
@@ -243,7 +243,7 @@
                 <h2 class="section-title">Descargar Flariox OS</h2>
                 <p class="section-subtitle">Elige la versión adecuada para ti</p>
                 
-                <div class="download-options">
+                <div class="download-options available-downloads">
                     <div class="download-card">
                         <div class="download-header">
                             <h3>Flariox OS Standard</h3>
@@ -284,7 +284,7 @@
                         </div>
                     </div>
                     
-                    <div class="download-card">
+                    <div class="download-card" hidden>
                         <div class="download-header">
                             <h3>Flariox OS Developer</h3>
                             <p>Para programadores y creadores</p>
@@ -318,7 +318,7 @@
         </section>
 
         <!-- Capturas de pantalla -->
-        <section id="screenshots" class="section projects-section">
+        <section id="screenshots" class="section projects-section" hidden>
             <div class="container">
                 <h2 class="section-title">Capturas de Pantalla</h2>
                 <p class="section-subtitle">Echa un vistazo a Flariox en acción</p>
@@ -358,7 +358,7 @@
                 <h2 class="section-title">Únete a Nuestra Comunidad</h2>
                 <p class="section-subtitle">Conecta con otros usuarios y contribuidores</p>
                 
-                <div class="community-grid">
+                <div class="community-grid community-grid-links">
                     <div class="community-info">
                         <div class="info-item">
                             <i class="fab fa-discord"></i>
@@ -397,7 +397,7 @@
                         </div>
                     </div>
                     
-                    <div class="newsletter-form">
+                    <div class="newsletter-form" hidden>
                         <h3>Suscríbete a nuestro boletín</h3>
                         <p>Recibe las últimas noticias y actualizaciones sobre Flariox OS</p>
                         <form id="newsletterForm">
@@ -439,7 +439,7 @@
           <li><a href="#about">Acerca de</a></li>
           <li><a href="#features">Características</a></li>
           <li><a href="#download">Descargar</a></li>
-          <li><a href="#screenshots">Capturas</a></li>
+          <li hidden><a href="#screenshots">Capturas</a></li>
           <li><a href="#community">Comunidad</a></li>
         </ul>
       </div>
@@ -447,11 +447,11 @@
       <div class="footer-resources">
         <h3>Recursos</h3>
         <ul>
-          <li><a href="#">Documentación</a></li>
+          <li hidden><a href="#">Documentación</a></li>
           <li><a href="install.html">Guía de instalación</a></li>
           <li><a href="faq.html">FAQ</a></li>
           <li><a href="blog.html">Blog</a></li>
-          <li><a href="#">Roadmap</a></li>
+          <li hidden><a href="#">Roadmap</a></li>
         </ul>
       </div>
 
@@ -701,7 +701,7 @@ function googleTranslateElementInit() {
 </div>
 <!-- Banner de Cookies -->
 <div id="cookie-banner" class="cookie-banner" aria-hidden="true">
-  <p>Este sitio utiliza cookies para mejorar tu experiencia. <a href="#">Saber más</a></p>
+  <p>Este sitio utiliza cookies para mejorar tu experiencia. <a href="#" hidden>Saber más</a></p>
   <button id="accept-cookies" class="accept-button">Aceptar</button>
 </div>
 
