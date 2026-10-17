@@ -23,7 +23,7 @@ Está pensado para quienes desean un entorno donde todo esté optimizado y visua
 - Basado en tecnologías abiertas y confiables.
 - Escritorio limpio, elegante y sin distracciones.
 - Configuraciones pensadas para ser prácticas, no abrumadoras.
-- Integración con herramientas como Git, Samba, y gestores LDAP.
+- Integración con herramientas como Git, Samba y gestores LDAP.
 
 ## ¿Para quién es Flariox?
 

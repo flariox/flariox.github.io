@@ -24,3 +24,4 @@ description: "Esta es una descripción de ejemplo"
 date: "2025-07-05"
 author: "Tu Nombre"
 ---
+```

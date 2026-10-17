@@ -14,7 +14,7 @@
   <header class="main-header">
     <nav class="navbar">
         <a href="index.html" class="logo">
-            <img src="./assets/images/logo/flariox-logo.png" alt="FlarioX" class="logo-img"> Flariox
+            <img src="./assets/images/logo/flariox-logo.png" alt="Flariox" class="logo-img"> Flariox
         </a>
         <button class="sidebar-toggle" aria-expanded="false" aria-controls="sidebar">
             <i class="fas fa-bars"></i>
@@ -80,7 +80,7 @@
     const filterDate = document.getElementById('filter-date');
     const filterAuthor = document.getElementById('filter-author');
     
-    // Cache para almacenar los datos de los artículos
+    // Caché para almacenar los datos de los artículos
     let articlesData = [];
     let currentArticle = null;
 
@@ -292,7 +292,7 @@
         if (articlesData.length > 0) {
           showArticlesList();
         } else {
-          showError('No se encontraron artículos', 'Verifica que hay archivos .md en el directorio articles');
+          showError('No se encontraron artículos', 'Verifica que haya archivos .md en el directorio articles');
         }
       } catch (error) {
         showError('Error al cargar los artículos', error.message);
@@ -528,7 +528,7 @@
       <div class="footer-grid">
         
         <div class="footer-about">
-          <img src="./assets/images/logo/flariox-white.png" alt="FlarioX" class="footer-logo">
+          <img src="./assets/images/logo/flariox-logo.png" alt="Flariox" class="footer-logo">
           <p>Una distribución Linux potente y elegante para todos los usuarios.</p>
           <div class="footer-social">
             <a href="#"><i class="fab fa-twitter"></i></a>
@@ -553,8 +553,8 @@
           <h3>Recursos</h3>
           <ul>
             <li><a href="#">Documentación</a></li>
-            <li><a href="#">Guía de instalación</a></li>
-            <li><a href="#">FAQ</a></li>
+            <li><a href="install.html">Guía de instalación</a></li>
+            <li><a href="faq.html">FAQ</a></li>
             <li><a href="blog.html">Blog</a></li>
             <li><a href="#">Roadmap</a></li>
           </ul>
@@ -573,7 +573,7 @@
       </div>
 
       <div class="footer-bottom">
-        <p>&copy; 2025 Flariox. Todos los derechos reservados.</p>
+        <p>&copy; <span id="current-year">2026</span> Flariox. Todos los derechos reservados.</p>
         <p>Flariox ® es una marca registrada de Flariox Community.</p>
       </div>
     </div>
@@ -598,7 +598,7 @@
       <h3>LICENCIA PÚBLICA GENERAL GNU</h3>
       <p><strong>Versión 3, 29 de junio de 2007</strong></p>
 
-      <p>Copyright © 2025 FlarioX Community<br>
+      <p>Copyright © 2025 Flariox Community<br>
       Este programa es software libre: puede redistribuirlo y/o modificarlo<br>
       bajo los términos de la Licencia Pública General GNU publicada por<br>
       la Free Software Foundation, ya sea la versión 3 de la Licencia, o<br>
@@ -608,7 +608,7 @@
       <p>La Licencia Pública General GNU es una licencia de copyleft para software libre<br>
       y otro tipo de trabajos. Esta versión ha sido actualizada para reflejar<br>
       los estándares modernos de desarrollo de software libre y las necesidades<br>
-      específicas del proyecto FlarioX.</p>
+      específicas del proyecto Flariox.</p>
 
       <h4>Términos y Condiciones</h4>
 
@@ -648,7 +648,7 @@
       </ol>
 
       <h5>5. Compatibilidad con Otras Licencias</h5>
-      <p>FlarioX permite enlazado con:</p>
+      <p>Flariox permite enlazado con:</p>
       <ul>
         <li>Bibliotecas licenciadas bajo GNU LGPL</li>
         <li>Componentes bajo licencias Apache 2.0, MIT o BSD</li>
@@ -661,16 +661,16 @@
       INCLUYENDO LAS GARANTÍAS IMPLÍCITAS DE COMERCIALIZACIÓN E IDONEIDAD PARA UN<br>
       PROPÓSITO PARTICULAR.</p>
 
-      <h5>7. Cláusulas Específicas de FlarioX</h5>
+      <h5>7. Cláusulas Específicas de Flariox</h5>
       <ol type="a">
-        <li><strong>Atribución:</strong> Las distribuciones deben reconocer adecuadamente a FlarioX Community</li>
-        <li><strong>Marcas Registradas:</strong> El nombre "FlarioX" es una marca registrada que no puede usarse para promocionar versiones modificadas sin permiso</li>
+        <li><strong>Atribución:</strong> Las distribuciones deben reconocer adecuadamente a Flariox Community</li>
+        <li><strong>Marcas Registradas:</strong> El nombre "Flariox" es una marca registrada que no puede usarse para promocionar versiones modificadas sin permiso</li>
         <li><strong>Integridad:</strong> Las modificaciones no deben comprometer la seguridad o estabilidad del sistema</li>
         <li><strong>Documentación:</strong> Los cambios significativos deben documentarse en el archivo CHANGELOG</li>
       </ol>
 
       <h5>8. Aceptación de la Licencia</h5>
-      <p>Al usar, modificar o distribuir FlarioX, usted acepta los términos de esta licencia.<br>
+      <p>Al usar, modificar o distribuir Flariox, usted acepta los términos de esta licencia.<br>
       Si no está de acuerdo con estos términos, no puede usar ni distribuir el software.</p>
 
       <h4>Texto Completo</h4>
@@ -689,7 +689,7 @@
     <button class="modal-close" data-target="privacidad">&times;</button>
     <h2>Política de Privacidad</h2>
     <div class="policy-text">
-      <h3>Política de Privacidad de FlarioX</h3>
+      <h3>Política de Privacidad de Flariox</h3>
       <p><strong>Última actualización:</strong> 25 de junio de 2025</p>
       
       <h4>1. Información que recopilamos</h4>
@@ -727,25 +727,25 @@
     <button class="modal-close" data-target="terminos">&times;</button>
     <h2>Términos de Uso</h2>
     <div class="terms-text">
-      <h3>Términos de Uso de FlarioX</h3>
+      <h3>Términos de Uso de Flariox</h3>
       <p><strong>Vigente desde:</strong> 25 de junio de 2025</p>
       
       <h4>1. Aceptación de términos</h4>
-      <p>Al acceder y usar FlarioX, aceptas cumplir con estos términos.</p>
+      <p>Al acceder y usar Flariox, aceptas cumplir con estos términos.</p>
       
       <h4>2. Uso del software</h4>
-      <p>FlarioX se proporciona bajo licencia GPLv3. Debes cumplir con sus términos.</p>
+      <p>Flariox se proporciona bajo licencia GPLv3. Debes cumplir con sus términos.</p>
       
       <h4>3. Limitaciones</h4>
       <p>No puedes:</p>
       <ul>
-        <li>Usar FlarioX para actividades ilegales</li>
+        <li>Usar Flariox para actividades ilegales</li>
         <li>Modificar y redistribuir sin cumplir la licencia</li>
         <li>Usar nuestra marca sin autorización</li>
       </ul>
       
       <h4>4. Responsabilidad</h4>
-      <p>FlarioX se proporciona "tal cual" sin garantías explícitas.</p>
+      <p>Flariox se proporciona "tal cual" sin garantías explícitas.</p>
       
       <h4>5. Modificaciones</h4>
       <p>Nos reservamos el derecho de modificar estos términos cuando sea necesario.</p>
@@ -758,7 +758,7 @@
     <button class="modal-close" data-target="conducta">&times;</button>
     <h2>Código de Conducta</h2>
     <div class="conduct-text">
-      <h3>Código de Conducta de la Comunidad FlarioX</h3>
+      <h3>Código de Conducta de la Comunidad Flariox</h3>
       <p><strong>Aplicable a:</strong> Foros, chats, eventos y cualquier espacio comunitario</p>
       
       <h4>1. Respeto mutuo</h4>
