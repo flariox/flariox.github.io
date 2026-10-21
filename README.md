@@ -38,6 +38,12 @@ Flariox OS es una distribución Linux diseñada para ofrecer un entorno moderno,
 
 ¿Tienes preguntas o sugerencias? Únete a la comunidad Flariox o abre un issue en el repositorio oficial.
 
+## 🌐 Sitio web
+
+Este repositorio contiene el sitio estático publicado en GitHub Pages para `www.flariox.com`. GitHub Pages sirve HTML, CSS y JavaScript, pero no ejecuta PHP del lado del servidor.
+
+El contacto del sitio utiliza los enlaces `mailto:support@flariox.com`, que abren el cliente de correo del visitante; no hay un formulario de contacto con backend PHP. La mención de PHP en las herramientas de Flariox OS se refiere a la distribución, no al alojamiento de este sitio.
+
 ---
 
 **Flariox OS** — Hecho con pasión por el software libre 🚀🐧
