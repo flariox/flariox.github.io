@@ -260,7 +260,7 @@ ul {
   display: flex;
   align-items: center;
   position: relative;
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/hero-bg.jpg') no-repeat center center/cover;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
   color: white;
   text-align: center;
   padding-top: 80px;

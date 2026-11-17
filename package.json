@@ -1,0 +1,25 @@
+{
+  "name": "flariox-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sitio estático de Flariox OS",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "vendor": "node tools/vendor.mjs",
+    "check": "node tools/check.mjs",
+    "test": "playwright test",
+    "audit:dependencies": "npm audit --audit-level=moderate",
+    "serve": "node tools/serve.mjs"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "6.7.2",
+    "dompurify": "3.4.18",
+    "marked": "15.0.12"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.1"
+  }
+}

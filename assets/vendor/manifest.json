@@ -1,0 +1,108 @@
+{
+  "dependencies": [
+    {
+      "name": "marked",
+      "version": "15.0.12",
+      "source": "https://registry.npmjs.org/marked/-/marked-15.0.12.tgz",
+      "license": "MIT",
+      "files": [
+        {
+          "path": "assets/vendor/marked/marked.umd.js",
+          "source": "lib/marked.umd.js",
+          "sha256": "d7931d1cd7bf727dd756c871637edcc9e0f8538003b927368400ec1ee47a9dd9"
+        },
+        {
+          "path": "assets/vendor/marked/marked.umd.js.map",
+          "source": "lib/marked.umd.js.map",
+          "sha256": "796693c2d76e01b0f8065d5516e366de2b828812fb0f57bc2c78c9d761fba738"
+        },
+        {
+          "path": "assets/vendor/marked/LICENSE.md",
+          "source": "LICENSE.md",
+          "sha256": "8e3a3f82f59a60958f56ca08f445647c32a4733dc7ca6c2c46f6eb898471ab9c"
+        }
+      ]
+    },
+    {
+      "name": "dompurify",
+      "version": "3.4.18",
+      "source": "https://registry.npmjs.org/dompurify/-/dompurify-3.4.18.tgz",
+      "license": "(MPL-2.0 OR Apache-2.0)",
+      "files": [
+        {
+          "path": "assets/vendor/dompurify/purify.min.js",
+          "source": "dist/purify.min.js",
+          "sha256": "8053ee2a6a09f9d50f7fcd6fb7f07072f52c7f3fa9aa12147cab4feaf65ee970"
+        },
+        {
+          "path": "assets/vendor/dompurify/purify.min.js.map",
+          "source": "dist/purify.min.js.map",
+          "sha256": "e565dcc29492aa486364f05fbae2afb797a37918b4a36a079c1e0933499cc92a"
+        },
+        {
+          "path": "assets/vendor/dompurify/LICENSE",
+          "source": "LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        }
+      ]
+    },
+    {
+      "name": "@fortawesome/fontawesome-free",
+      "version": "6.7.2",
+      "source": "https://registry.npmjs.org/@fortawesome/fontawesome-free/-/fontawesome-free-6.7.2.tgz",
+      "license": "(CC-BY-4.0 AND OFL-1.1 AND MIT)",
+      "files": [
+        {
+          "path": "assets/webfonts/css/all.css",
+          "source": "css/all.css",
+          "sha256": "05e004a9125ff6d5d4882a2936de99e7817002714322c7359641c00b66f781c8"
+        },
+        {
+          "path": "assets/webfonts/LICENSE.txt",
+          "source": "LICENSE.txt",
+          "sha256": "9b914eae88817d63b576eab5aafde7068c7a1abae125d7cdfb034f1da43a9afc"
+        },
+        {
+          "path": "assets/webfonts/webfonts/fa-brands-400.woff2",
+          "source": "webfonts/fa-brands-400.woff2",
+          "sha256": "d7236a19bf23cbb2027280e8f51dc99d6c45976a2ed60de73382b034b18a2b68"
+        },
+        {
+          "path": "assets/webfonts/webfonts/fa-brands-400.ttf",
+          "source": "webfonts/fa-brands-400.ttf",
+          "sha256": "808443ae6c8204395add8543da8a90a60b9376fb0f87ed8e8ea37d109596d805"
+        },
+        {
+          "path": "assets/webfonts/webfonts/fa-regular-400.woff2",
+          "source": "webfonts/fa-regular-400.woff2",
+          "sha256": "e3456d1283b9d75337a773dfd147bf908fd02c01b4bf48576d8603a69b13cbe5"
+        },
+        {
+          "path": "assets/webfonts/webfonts/fa-regular-400.ttf",
+          "source": "webfonts/fa-regular-400.ttf",
+          "sha256": "54cf6086f7bb21f9d072ad494a19b4681fa516dd0a14cee52da01d3651a913a3"
+        },
+        {
+          "path": "assets/webfonts/webfonts/fa-solid-900.woff2",
+          "source": "webfonts/fa-solid-900.woff2",
+          "sha256": "aa75998623a391e61c6901794ace832e3ecdd288b56d608f21bea0411acc0b8e"
+        },
+        {
+          "path": "assets/webfonts/webfonts/fa-solid-900.ttf",
+          "source": "webfonts/fa-solid-900.ttf",
+          "sha256": "d2f0593540b0e33ba6de255a54f272d466e31144806956bea8cfdbf7edffc9bd"
+        },
+        {
+          "path": "assets/webfonts/webfonts/fa-v4compatibility.woff2",
+          "source": "webfonts/fa-v4compatibility.woff2",
+          "sha256": "0ce9033c69dc714f5f45ef9bf17d55e4c46bcdfad6799a4e92b38e7781bf86bd"
+        },
+        {
+          "path": "assets/webfonts/webfonts/fa-v4compatibility.ttf",
+          "source": "webfonts/fa-v4compatibility.ttf",
+          "sha256": "30f6abf6baa425825828793d6dfad1fb63765d0e5abaa7af6feafb9bfcece5a0"
+        }
+      ]
+    }
+  ]
+}

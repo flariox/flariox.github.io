@@ -2,13 +2,16 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://static.cloudflareinsights.com; script-src-attr 'none'; object-src 'none'; base-uri 'self'; form-action 'self'" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Blog de Flariox: Tutoriales, anuncios y novedades." />
   <title>Flariox | Blog</title>
   <link rel="stylesheet" href="./assets/css/styles.css" />
   <link rel="stylesheet" href="./assets/css/blog.css" />
   <link rel="stylesheet" href="./assets/webfonts/css/all.css" />
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="./assets/vendor/marked/marked.umd.js" defer></script>
+  <script src="./assets/vendor/dompurify/purify.min.js" defer></script>
+  <script src="./assets/js/blog.js" defer></script>
 </head>
 <body class="blog-page">
     <header class="main-header">
@@ -71,256 +74,12 @@
       </div>
       
       <div id="blog-cards" class="blog-card-grid" aria-live="polite"></div>
-      <div id="blog-content" class="article-content" style="display: none;"></div>
+      <div id="blog-content" class="article-content" aria-live="polite" style="display: none;"></div>
     </div>
     </section>
   </main>
 
-  <script>
-    // Configuración de rutas
-    const articlesPath = 'https://raw.githubusercontent.com/flariox/flariox.github.io/main/articles/';
-    const blogCards = document.getElementById('blog-cards');
-    const blogContent = document.getElementById('blog-content');
-    const searchInput = document.getElementById('search-input');
-    const filterTitle = document.getElementById('filter-title');
-    const filterDescription = document.getElementById('filter-description');
-    const filterDate = document.getElementById('filter-date');
-    const filterAuthor = document.getElementById('filter-author');
-    
-    // Caché para almacenar los datos de los artículos
-    let articlesData = [];
-    let currentArticle = null;
 
-    // Mostrar estado de carga
-    function showLoading() {
-      blogCards.innerHTML = `
-        <div class="loading-spinner">
-          <i class="fas fa-spinner fa-spin"></i> Cargando artículos...
-        </div>
-      `;
-    }
-
-    // Mostrar mensaje de error
-    function showError(message, details = '') {
-      blogCards.innerHTML = `
-        <div class="error-message">
-          <h3>Error al cargar los artículos</h3>
-          <p>${message}</p>
-          ${details && `<p>${details}</p>`}
-          <button onclick="loadArticles()" class="retry-button cta-button">
-            <i class="fas fa-sync-alt"></i> Reintentar
-          </button>
-        </div>
-      `;
-    }
-
-    // Parsear el frontmatter de los artículos
-    function parseFrontmatter(content) {
-      const frontmatter = {};
-      const match = content.match(/^---\n([\s\S]+?)\n---/);
-      
-      if (match) {
-        match[1].split('\n').forEach(line => {
-          const separatorIndex = line.indexOf(':');
-          if (separatorIndex > -1) {
-            const key = line.substring(0, separatorIndex).trim();
-            const value = line.substring(separatorIndex + 1).trim().replace(/^['"]|['"]$/g, '');
-            frontmatter[key] = value;
-          }
-        });
-      }
-      
-      return frontmatter;
-    }
-
-    // Filtrar artículos según la búsqueda
-    function filterArticles() {
-      const searchTerm = searchInput.value.toLowerCase();
-      const searchInTitle = filterTitle.checked;
-      const searchInDescription = filterDescription.checked;
-      const searchInDate = filterDate.checked;
-      const searchInAuthor = filterAuthor.checked;
-      
-      if (!searchTerm) {
-        return articlesData;
-      }
-      
-      return articlesData.filter(article => {
-        let matches = false;
-        
-        if (searchInTitle && article.title.toLowerCase().includes(searchTerm)) {
-          matches = true;
-        }
-        
-        if (!matches && searchInDescription && article.description.toLowerCase().includes(searchTerm)) {
-          matches = true;
-        }
-        
-        if (!matches && searchInDate && article.date.toLowerCase().includes(searchTerm)) {
-          matches = true;
-        }
-        
-        if (!matches && searchInAuthor && article.author && article.author.toLowerCase().includes(searchTerm)) {
-          matches = true;
-        }
-        
-        return matches;
-      });
-    }
-
-    // Mostrar el listado de artículos (filtrados o no)
-    function showArticlesList() {
-      const filteredArticles = filterArticles();
-      
-      blogCards.innerHTML = '';
-      blogContent.style.display = 'none';
-      blogCards.style.display = 'grid';
-      
-      if (filteredArticles.length === 0) {
-        blogCards.innerHTML = `
-          <div class="no-results">
-            <i class="fas fa-search"></i>
-            <p>No se encontraron artículos que coincidan con tu búsqueda</p>
-          </div>
-        `;
-        return;
-      }
-      
-      filteredArticles.forEach(article => {
-        const card = document.createElement('div');
-        card.className = 'blog-card';
-        card.innerHTML = `
-          <h3>${article.title}</h3>
-          <p class="article-excerpt">${article.description}</p>
-          <div class="article-meta">
-            <span class="date"><i class="far fa-calendar-alt"></i> ${article.date}</span>
-            ${article.author ? `<span class="author"><i class="fas fa-user"></i> ${article.author}</span>` : ''}
-          </div>
-          <button class="read-more cta-button secondary" onclick="event.stopPropagation(); showArticle('${article.file}')">
-            Leer más <i class="fas fa-arrow-right"></i>
-          </button>
-        `;
-        card.addEventListener('click', () => showArticle(article.file));
-        blogCards.appendChild(card);
-      });
-    }
-
-    // Mostrar un artículo específico
-    async function showArticle(filename) {
-      try {
-        currentArticle = filename;
-        blogCards.innerHTML = '<div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> Cargando artículo...</div>';
-        
-        const response = await fetch(`${articlesPath}${filename}`);
-        if (!response.ok) throw new Error(`Error ${response.status}: ${response.statusText}`);
-        
-        const content = await response.text();
-        const htmlContent = marked.parse(content.replace(/^---[\s\S]+?---/, ''));
-        
-        blogContent.innerHTML = `
-          <button class="back-button cta-button secondary" onclick="showArticlesList()">
-            <i class="fas fa-arrow-left"></i> Volver al blog
-          </button>
-          <div class="article-markdown">${htmlContent}</div>
-        `;
-        
-        blogCards.style.display = 'none';
-        blogContent.style.display = 'block';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } catch (error) {
-        blogContent.innerHTML = `
-          <button class="back-button cta-button secondary" onclick="showArticlesList()">
-            <i class="fas fa-arrow-left"></i> Volver al blog
-          </button>
-          <div class="error-message">
-            <h3>Error al cargar el artículo</h3>
-            <p>${error.message}</p>
-            <button onclick="showArticle('${filename}')" class="retry-button cta-button">
-              <i class="fas fa-sync-alt"></i> Reintentar
-            </button>
-          </div>
-        `;
-        blogCards.style.display = 'none';
-        blogContent.style.display = 'block';
-      }
-    }
-
-    // Cargar la lista de artículos
-    async function loadArticles() {
-      showLoading();
-      
-      try {
-        // 1. Intentar cargar index.json
-        let articlesList = [];
-        try {
-          const response = await fetch(`${articlesPath}index.json`);
-          if (response.ok) {
-            const data = await response.json();
-            if (Array.isArray(data)) {
-              articlesList = data;
-            }
-          }
-        } catch (e) {
-          console.log('index.json no encontrado, usando lista predeterminada');
-        }
-
-        // 2. Si no hay index.json, usar lista predeterminada
-        if (articlesList.length === 0) {
-          articlesList = [
-            'que-es-flariox.md',
-            'como-escribir-articulos.md',
-            'bienvenidos-a-flariox.md'
-          ];
-        }
-
-        // 3. Procesar cada artículo
-        articlesData = [];
-        
-        for (const filename of articlesList) {
-          try {
-            const response = await fetch(`${articlesPath}${filename}`);
-            if (!response.ok) continue;
-            
-            const content = await response.text();
-            const frontmatter = parseFrontmatter(content);
-            
-            articlesData.push({
-              file: filename,
-              title: frontmatter.title || filename.replace('.md', ''),
-              description: frontmatter.description || 'Sin descripción',
-              date: frontmatter.date || 'Sin fecha',
-              author: frontmatter.author || 'Equipo Flariox'
-            });
-          } catch (e) {
-            console.error(`Error procesando ${filename}:`, e);
-          }
-        }
-
-        // Ordenar artículos por fecha (más reciente primero)
-        articlesData.sort((a, b) => new Date(b.date) - new Date(a.date));
-        
-        // Mostrar la lista de artículos
-        if (articlesData.length > 0) {
-          showArticlesList();
-        } else {
-          showError('No se encontraron artículos', 'Verifica que haya archivos .md en el directorio articles');
-        }
-      } catch (error) {
-        showError('Error al cargar los artículos', error.message);
-        console.error('Error loading articles:', error);
-      }
-    }
-
-    // Event listeners para el buscador
-    searchInput.addEventListener('input', showArticlesList);
-    filterTitle.addEventListener('change', showArticlesList);
-    filterDescription.addEventListener('change', showArticlesList);
-    filterDate.addEventListener('change', showArticlesList);
-    filterAuthor.addEventListener('change', showArticlesList);
-
-    // Iniciar la carga de artículos
-    loadArticles();
-  </script>
 
 
   <!-- Footer -->
@@ -354,7 +113,7 @@
           <h3>Recursos</h3>
           <ul>
             <li hidden><a href="#">Documentación</a></li>
-            <li><a href="install.html">Guía de instalación</a></li>
+            <li><a href="install.html">Guía avanzada de Arch base</a></li>
             <li><a href="faq.html">FAQ</a></li>
             <li><a href="blog.html">Blog</a></li>
             <li hidden><a href="#">Roadmap</a></li>
